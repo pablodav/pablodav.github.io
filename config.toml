@@ -1,4 +1,4 @@
-baseurl = "https://example.org/"
+baseurl = "https://pablodav.github.io/"
 languageCode = "en-us"
 title = "Pablo Estigarribia's personal blog"
 theme = "hugo-material-docs"
@@ -6,8 +6,6 @@ metadataformat = "yaml"
 canonifyurls = true
 # Enable Google Analytics by entering your tracking id
 googleAnalytics = "UA-93334116-1"
-
-publishDir: "docs"
 
 
 [params]
