@@ -17,7 +17,7 @@ deploy:
     #    domain: pablodav.github.io
     #    basedir: public
 
-    - ysqi/git-push@0.7.15:
+    - git-push:
        gh_oauth: $GIT_TOKEN
        gh_pages_domain: pablodav.github.io
        gh_pages: true
