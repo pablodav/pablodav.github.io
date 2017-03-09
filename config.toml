@@ -7,7 +7,6 @@ canonifyurls = true
 # Enable Google Analytics by entering your tracking id
 googleAnalytics = "UA-93334116-1"
 
-
 [params]
 	# General information
 	author = "pablodav"
