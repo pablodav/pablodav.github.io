@@ -17,10 +17,9 @@ deploy:
     #    domain: pablodav.github.io
     #    basedir: public
 
-    - git-push:
-       gh_oauth: $GIT_TOKEN
-       gh_pages_domain: pablodav.github.io
-       gh_pages: true
+    - sf-zhou/gh-pages@0.2.5:
+       token: $GIT_TOKEN
+       domain: pablodav.github.io
        #repo: pablodav/pablodav.github.io.git
        #branch: master
        basedir: public
