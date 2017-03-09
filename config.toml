@@ -1,0 +1,83 @@
+baseurl = "https://example.org/"
+languageCode = "en-us"
+title = "Pablo Estigarribia's personal blog"
+theme = "hugo-material-docs"
+metadataformat = "yaml"
+canonifyurls = true
+# Enable Google Analytics by entering your tracking id
+googleAnalytics = "UA-93334116-1"
+
+[params]
+	# General information
+	author = "pablodav"
+	description = "Pablo Estigarribia's personal blog for sharing sysadmin and devops works"
+	copyright = "Released under the MIT license with content licensed with CC BY"
+
+	# Repository
+	provider = "GitHub"
+	repo_url = "https://github.com/pablodav/pablodav.github.io"
+
+	version = "1.0.0"
+	logo = "images/logo.png"
+	favicon = ""
+
+	permalink = "#"
+
+	# Custom assets
+	custom_css = []
+	custom_js  = []
+
+	# Syntax highlighting theme
+	highlight_css  = ""
+
+	[params.palette]
+    	primary = "green"
+    	accent  = "teal"
+
+    [params.font]
+    	text = "Ubuntu"
+    	code = "Ubuntu Mono"
+
+
+[social]
+	twitter = "p4blod4v"
+	github  = "pablodav"
+	email   = "pablodav@gmail.com"
+
+
+[[menu.main]]
+	name   = "Material"
+	url    = "/"
+	weight = 0
+
+[[menu.main]]
+	name   = "Posts"
+	url    = "post/"
+	weight = 0
+
+#[[menu.main]]
+#	name   = "Getting started"
+#	url    = "getting-started/"
+#	weight = 10
+
+[[menu.main]]
+	name   = "Adding content"
+	url    = "adding-content/"
+	weight = 20
+
+[[menu.main]]
+	name   = "Roadmap"
+	url    = "roadmap/"
+	weight = 30
+
+[[menu.main]]
+	name   = "License"
+	url    = "license/"
+	weight = 40
+
+
+[blackfriday]
+	smartypants	= true
+	fractions = true
+	smartDashes = true
+	plainIDAnchors = true
