@@ -2,7 +2,17 @@ box: debian
 build:
   steps:
     - arjen/hugo-build:
-        version: "0.17"
+        version: "0.19"
         theme: hugo-material-docs
         flags: --disableSitemap=true --buildDrafts=true
 
+deploy:
+  steps:
+
+    - install-packages:
+        packages: git ssh-client
+
+    - lukevivier/gh-pages:
+        token: $GIT_TOKEN
+        domain: pablodav.github.io
+        basedir: public
