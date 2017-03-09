@@ -17,8 +17,7 @@ deploy:
     #    domain: pablodav.github.io
     #    basedir: public
 
-
-    - leipert/git-push:
+    - keanemind/git-push:
        gh_oauth: $GIT_TOKEN
        repo: pablodav/pablodav.github.io
        branch: master
