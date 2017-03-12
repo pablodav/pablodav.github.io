@@ -21,4 +21,5 @@ deployment:
   staging:
     branch: master
     commands:
-      - ./scripts/deploy-ghpages.sh build
+      - ./scripts/deploy-ghpages.sh public
+
