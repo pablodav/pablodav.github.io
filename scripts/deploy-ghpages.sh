@@ -7,7 +7,6 @@ set -e
 # show where we are on the machine
 pwd
 
-remote=$(git config remote.origin.url)
 
 siteSource="$1"
 
@@ -16,6 +15,11 @@ then
     echo "Usage: $0 <site source dir>"
     exit 1
 fi
+
+# read the remote config from submodule
+cd $siteSource
+remote=$(git config remote.origin.url)
+cd ..
 
 # make a directory to put the gh-pages branch
 #mkdir gh-pages-branch
@@ -44,6 +48,8 @@ git submodule update --init --recursive
 # cp -a "../${siteSource}/." .
 
 hugo --buildDrafts
+
+sleep 4
 
 # move to pulic directory
 cd public
