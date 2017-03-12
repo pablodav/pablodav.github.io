@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://pablodav.github.io/adding-material/newblog/</loc>
+    <lastmod>2017-03-09T00:39:04-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/post/testnew/</loc>
+    <lastmod>2017-03-08T23:26:51-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/post/</loc>
+    <lastmod>2017-03-08T23:23:42-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/license/</loc>
+    <lastmod>2017-03-08T23:01:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/adding-material/</loc>
+    <lastmod>2017-03-09T00:39:04-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/license/</loc>
+    <lastmod>2017-03-08T23:01:27-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/</loc>
+    <lastmod>2017-03-09T00:39:04-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/post/</loc>
+    <lastmod>2017-03-08T23:26:51-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

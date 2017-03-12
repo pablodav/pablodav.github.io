@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Adding-materials on Pablo Estigarribia&#39;s personal blog</title>
+    <link>https://pablodav.github.io/adding-material/index.xml</link>
+    <description>Recent content in Adding-materials on Pablo Estigarribia&#39;s personal blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license with content licensed with CC BY</copyright>
+    <lastBuildDate>Thu, 09 Mar 2017 00:39:04 -0300</lastBuildDate>
+    <atom:link href="https://pablodav.github.io/adding-material/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>newblog</title>
+      <link>https://pablodav.github.io/adding-material/newblog/</link>
+      <pubDate>Thu, 09 Mar 2017 00:39:04 -0300</pubDate>
+      
+      <guid>https://pablodav.github.io/adding-material/newblog/</guid>
+      <description>&lt;p&gt;Reference: &lt;a href=&#34;http://whipperstacker.com/2015/11/27/deploying-a-stand-alone-hugo-site-to-github-pages-mapped-to-a-custom-domain/&#34;&gt;http://whipperstacker.com/2015/11/27/deploying-a-stand-alone-hugo-site-to-github-pages-mapped-to-a-custom-domain/&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
