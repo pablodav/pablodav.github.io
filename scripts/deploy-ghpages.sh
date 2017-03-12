@@ -43,7 +43,12 @@ git config --global user.name "$GH_NAME" > /dev/null 2>&1
 #fi
 
 # Update your submodules with public dir and also themes
+rm -rf $siteSource
 git submodule update --init --recursive
+cd $siteSource
+git checkout master
+git pull origin master
+cd ..
 
 # copy over or recompile the new site
 # cp -a "../${siteSource}/." .
