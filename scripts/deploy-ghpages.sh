@@ -26,8 +26,17 @@ cd ..
 #mkdir gh-pages-branch
 #cd gh-pages-branch
 # now lets setup a new repo so we can update the gh-pages branch
-git config --global user.email "$GH_EMAIL" > /dev/null 2>&1
-git config --global user.name "$GH_NAME" > /dev/null 2>&1
+
+# if GH_EMAIL is set, use it:
+if [ ! -z "${GH_EMAIL}" ]; then
+    git config --global user.email "$GH_EMAIL" > /dev/null 2>&1
+fi
+
+# if GH_NAME is set, use it:
+if [ ! -z "$GH_NAME" ]; then
+    git config --global user.name "$GH_NAME" > /dev/null 2>&1
+fi
+
 # Thes are original steps not necesary when you are not using gh-pages branch
 #git init
 #git remote add --fetch origin "$remote"
