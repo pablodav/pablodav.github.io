@@ -1,5 +1,6 @@
 #!/bin/sh
 # ideas used from https://gist.github.com/motemen/8595451
+# https://github.com/DevProgress/onboarding/wiki/Using-Circle-CI-with-Github-Pages-for-Continuous-Delivery
 
 # abort the script if there is a non-zero error
 set -e
