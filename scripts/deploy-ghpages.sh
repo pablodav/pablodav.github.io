@@ -43,7 +43,7 @@ git submodule update --init --recursive
 # copy over or recompile the new site
 # cp -a "../${siteSource}/." .
 
-hugo --builDrafts
+hugo --buildDrafts
 
 # move to pulic directory
 cd public
