@@ -1,0 +1,24 @@
+machine:
+  environment:
+    CIRCLE_BUILD_DIR: $HOME/$CIRCLE_PROJECT_REPONAME
+    PATH: $PATH:$CIRCLE_BUILD_DIR/bin
+  post:
+    - mkdir -p $CIRCLE_BUILD_DIR/bin
+
+dependencies:
+  pre:
+    - bash scripts/ci-install-hugo.sh
+
+  cache_directories:
+    - bin
+
+test:
+  override:
+    - exit 0
+
+deployment:
+
+  staging:
+    branch: master
+    commands:
+      - ./scripts/deploy-ghpages.sh build
