@@ -2,18 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://pablodav.github.io/adding-material/newblog/</loc>
-    <lastmod>2017-03-09T00:39:04-03:00</lastmod>
+    <loc>https://pablodav.github.io/getting-started/</loc>
+    <lastmod>2016-03-09T00:11:02+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pablodav.github.io/post/testnew/</loc>
-    <lastmod>2017-03-08T23:26:51-03:00</lastmod>
+    <loc>https://pablodav.github.io/adding-material/</loc>
+    <lastmod>2016-03-09T19:56:50+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://pablodav.github.io/post/</loc>
-    <lastmod>2017-03-08T23:23:42-03:00</lastmod>
+    <loc>https://pablodav.github.io/post/graylog/graylog_ansible/</loc>
+    <lastmod>2017-03-14T07:31:51-03:00</lastmod>
   </url>
   
   <url>
@@ -23,7 +23,13 @@
   
   <url>
     <loc>https://pablodav.github.io/adding-material/</loc>
-    <lastmod>2017-03-09T00:39:04-03:00</lastmod>
+    <lastmod>2016-03-09T19:56:50+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/getting-started/</loc>
+    <lastmod>2016-03-09T00:11:02+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -35,13 +41,13 @@
   
   <url>
     <loc>https://pablodav.github.io/</loc>
-    <lastmod>2017-03-09T00:39:04-03:00</lastmod>
+    <lastmod>2016-03-09T00:11:02+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pablodav.github.io/post/</loc>
-    <lastmod>2017-03-08T23:26:51-03:00</lastmod>
+    <lastmod>2017-03-14T07:31:51-03:00</lastmod>
     <priority>0</priority>
   </url>
   

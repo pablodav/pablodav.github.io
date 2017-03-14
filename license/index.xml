@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Licenses on Pablo Estigarribia&#39;s personal blog</title>
+    <title>Licenses on Pablo Estigarribia&#39;s docs</title>
     <link>https://pablodav.github.io/license/index.xml</link>
-    <description>Recent content in Licenses on Pablo Estigarribia&#39;s personal blog</description>
+    <description>Recent content in Licenses on Pablo Estigarribia&#39;s docs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license with content licensed with CC BY</copyright>

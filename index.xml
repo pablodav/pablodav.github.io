@@ -1,44 +1,667 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Pablo Estigarribia&#39;s personal blog</title>
+    <title>Pablo Estigarribia&#39;s docs</title>
     <link>https://pablodav.github.io/index.xml</link>
-    <description>Recent content on Pablo Estigarribia&#39;s personal blog</description>
+    <description>Recent content on Pablo Estigarribia&#39;s docs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Released under the MIT license with content licensed with CC BY</copyright>
-    <lastBuildDate>Thu, 09 Mar 2017 00:39:04 -0300</lastBuildDate>
+    <lastBuildDate>Wed, 09 Mar 2016 00:11:02 +0100</lastBuildDate>
     <atom:link href="https://pablodav.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>newblog</title>
-      <link>https://pablodav.github.io/adding-material/newblog/</link>
-      <pubDate>Thu, 09 Mar 2017 00:39:04 -0300</pubDate>
+      <title>Getting started</title>
+      <link>https://pablodav.github.io/getting-started/</link>
+      <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
       
-      <guid>https://pablodav.github.io/adding-material/newblog/</guid>
-      <description>&lt;p&gt;Reference: &lt;a href=&#34;http://whipperstacker.com/2015/11/27/deploying-a-stand-alone-hugo-site-to-github-pages-mapped-to-a-custom-domain/&#34;&gt;http://whipperstacker.com/2015/11/27/deploying-a-stand-alone-hugo-site-to-github-pages-mapped-to-a-custom-domain/&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>testnew</title>
-      <link>https://pablodav.github.io/post/testnew/</link>
-      <pubDate>Wed, 08 Mar 2017 23:26:51 -0300</pubDate>
-      
-      <guid>https://pablodav.github.io/post/testnew/</guid>
-      <description>&lt;p&gt;Testing this new post&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>index</title>
-      <link>https://pablodav.github.io/post/</link>
-      <pubDate>Wed, 08 Mar 2017 23:23:42 -0300</pubDate>
-      
-      <guid>https://pablodav.github.io/post/</guid>
-      <description>&lt;p&gt;Index for posts&lt;/p&gt;
+      <guid>https://pablodav.github.io/getting-started/</guid>
+      <description>
 
-&lt;p&gt;&lt;a href=&#34;testnew&#34;&gt;testnew&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+
+&lt;h3 id=&#34;installing-hugo&#34;&gt;Installing Hugo&lt;/h3&gt;
+
+&lt;p&gt;Hugo itself is just a single binary without dependencies on expensive runtimes like Ruby, Python or PHP and without dependencies on any databases. You just need to download the &lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;latest version&lt;/a&gt;. For more information read the official &lt;a href=&#34;http://gohugo.io/overview/installing/&#34;&gt;installation guides&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s make sure Hugo is set up as expected. You should see a similar version number in your terminal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;hugo version
+# Hugo Static Site Generator v0.15 BuildDate: 2016-01-03T12:47:47+01:00
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;installing-material&#34;&gt;Installing Material&lt;/h3&gt;
+
+&lt;p&gt;Next, assuming you have Hugo up and running the &lt;code&gt;hugo-material-docs&lt;/code&gt; theme can be installed with &lt;code&gt;git&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# create a new Hugo website
+hugo new site my-awesome-docs
+
+# move into the themes folder of your website
+cd my-awesome-docs/themes/
+
+# download the theme
+git clone git@github.com:digitalcraftsman/hugo-material-docs.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+
+&lt;p&gt;Next, take a look in the &lt;code&gt;exampleSite&lt;/code&gt; folder at &lt;code&gt;themes/hugo-material-docs/&lt;/code&gt;. This directory contains an example config file and the content that you are currently reading. It serves as an example setup for your documentation.&lt;/p&gt;
+
+&lt;p&gt;Copy at least the &lt;code&gt;config.toml&lt;/code&gt; in the root directory of your website. Overwrite the existing config file if necessary.&lt;/p&gt;
+
+&lt;p&gt;Hugo includes a development server, so you can view your changes as you go -
+very handy. Spin it up with the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;hugo server
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now you can go to &lt;a href=&#34;http://localhost:1313&#34;&gt;localhost:1313&lt;/a&gt; and the Material
+theme should be visible. You can now start writing your documentation, or read
+on and customize the theme through some options.&lt;/p&gt;
+
+&lt;h2 id=&#34;configuration&#34;&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;Before you are able to deploy your documentation you should take a few minute to adjust some information in the &lt;code&gt;config.toml&lt;/code&gt;. Open the file in an editor:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;baseurl = &amp;quot;https://example.com/&amp;quot;
+languageCode = &amp;quot;en-us&amp;quot;
+title = &amp;quot;Material Docs&amp;quot;
+
+[params]
+  # General information
+  author = &amp;quot;Digitalcraftsman&amp;quot;
+  description = &amp;quot;A material design theme for documentations.&amp;quot;
+  copyright = &amp;quot;Released under the MIT license&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;options&#34;&gt;Options&lt;/h2&gt;
+
+&lt;h3 id=&#34;github-integration&#34;&gt;Github integration&lt;/h3&gt;
+
+&lt;p&gt;If your project is hosted on GitHub, add the repository link to the
+configuration. If the &lt;code&gt;provider&lt;/code&gt; equals &lt;strong&gt;GitHub&lt;/strong&gt;, the Material theme will
+add a download and star button, and display the number of stars:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[params]
+  # Repository
+  provider = &amp;quot;GitHub&amp;quot;
+  repo_url = &amp;quot;https://github.com/digitalcraftsman/hugo-material-docs&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;adding-a-version&#34;&gt;Adding a version&lt;/h3&gt;
+
+&lt;p&gt;In order to add the current version next to the project banner inside the
+drawer, you can set the variable &lt;code&gt;version&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[params]
+  version = &amp;quot;1.0.0&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will also change the link behind the download button to point to the
+archive with the respective version on GitHub, assuming a release tagged with
+this exact version identifier.&lt;/p&gt;
+
+&lt;h3 id=&#34;adding-a-logo&#34;&gt;Adding a logo&lt;/h3&gt;
+
+&lt;p&gt;If your project has a logo, you can add it to the drawer/navigation by defining
+the variable &lt;code&gt;logo&lt;/code&gt;. Ideally, the image of your logo should have
+rectangular shape with a minimum resolution of 128x128 and leave some room
+towards the edges. The logo will also be used as a web application icon on iOS.
+Either save your logo somewhere in the &lt;code&gt;static/&lt;/code&gt; folder and reference the file relative to this location or use an external URL:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[params]
+  logo = &amp;quot;images/logo.png&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;adding-a-custom-favicon&#34;&gt;Adding a custom favicon&lt;/h3&gt;
+
+&lt;p&gt;Favicons are small small icons that are displayed in the tabs right next to the title of the current page. As with the logo above you need to save your favicon in &lt;code&gt;static/&lt;/code&gt; and link it relative to this folder or use an external URL:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[params]
+  favicon = &amp;quot;favicon.ico&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;google-analytics&#34;&gt;Google Analytics&lt;/h3&gt;
+
+&lt;p&gt;You can enable Google Analytics by replacing &lt;code&gt;UA-XXXXXXXX-X&lt;/code&gt; with your own tracking code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;googleAnalytics = &amp;quot;UA-XXXXXXXX-X&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;small-tweaks&#34;&gt;Small tweaks&lt;/h3&gt;
+
+&lt;p&gt;This theme provides a simple way for making small adjustments, that is changing
+some margins, centering text, etc. The &lt;code&gt;custom_css&lt;/code&gt; and &lt;code&gt;custom_js&lt;/code&gt; option allow you to add further CSS and JS files. They can either reside locally in the &lt;code&gt;/static&lt;/code&gt; folder or on an external server, e.g. a CDN. In both cases use either the relative path to &lt;code&gt;/static&lt;/code&gt; or the absolute URL to the external ressource.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[params]
+  # Custom assets
+  custom_css = [
+    &amp;quot;foo.css&amp;quot;,
+    &amp;quot;bar.css&amp;quot;
+  ]
+
+  custom_js  = [&amp;quot;buzz.js&amp;quot;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;changing-the-color-palette&#34;&gt;Changing the color palette&lt;/h3&gt;
+
+&lt;p&gt;Material defines a default hue for every primary and accent color on Google&amp;rsquo;s
+material design [color palette][]. This makes it very easy to change the overall look of the theme. Just set the variables &lt;code&gt;palette.primary&lt;/code&gt; and &lt;code&gt;palette.accent&lt;/code&gt; to one of the colors defined in the palette:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[params.palette]
+  primary = &amp;quot;red&amp;quot;
+  accent  = &amp;quot;light-green&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Color names can be written upper- or lowercase but must match the names of the
+material design &lt;a href=&#34;http://www.materialui.co/colors&#34;&gt;color palette&lt;/a&gt;. Valid values are: &lt;em&gt;red&lt;/em&gt;, &lt;em&gt;pink&lt;/em&gt;, &lt;em&gt;purple&lt;/em&gt;, &lt;em&gt;deep purple&lt;/em&gt;, &lt;em&gt;indigo&lt;/em&gt;, &lt;em&gt;blue&lt;/em&gt;, &lt;em&gt;light-blue&lt;/em&gt;, &lt;em&gt;cyan&lt;/em&gt;, &lt;em&gt;teal&lt;/em&gt;, &lt;em&gt;green&lt;/em&gt;, &lt;em&gt;light-green&lt;/em&gt;,
+&lt;em&gt;lime&lt;/em&gt;, &lt;em&gt;yellow&lt;/em&gt;, &lt;em&gt;amber&lt;/em&gt;, &lt;em&gt;orange&lt;/em&gt;, &lt;em&gt;deep-orange&lt;/em&gt;, &lt;em&gt;brown&lt;/em&gt;, &lt;em&gt;grey&lt;/em&gt; and
+&lt;em&gt;blue-grey&lt;/em&gt;. The last three colors can only be used as a primary color.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/images/colors.png&#34; alt=&#34;Color palette&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If the color is set via this configuration, an additional CSS file called
+&lt;code&gt;palettes.css&lt;/code&gt; is included that defines the color palettes.&lt;/p&gt;
+
+&lt;h3 id=&#34;changing-the-font-family&#34;&gt;Changing the font family&lt;/h3&gt;
+
+&lt;p&gt;Material uses the &lt;a href=&#34;http://font.ubuntu.com&#34;&gt;Ubuntu font family&lt;/a&gt; by default, specifically the regular sans-serif type for text and the monospaced type for code. Both fonts are loaded from &lt;a href=&#34;https://www.google.com/fonts&#34;&gt;Google Fonts&lt;/a&gt; and can be easily changed to other fonts, like for example Google&amp;rsquo;s own &lt;a href=&#34;https://www.google.com/fonts/specimen/Roboto&#34;&gt;Roboto font&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[params.font]
+  text = &amp;quot;Roboto&amp;quot;
+  code = &amp;quot;Roboto Mono&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The text font will be loaded in font-weights 400 and &lt;strong&gt;700&lt;/strong&gt;, the monospaced
+font in regular weight.&lt;/p&gt;
+
+&lt;h3 id=&#34;syntax-highlighting&#34;&gt;Syntax highlighting&lt;/h3&gt;
+
+&lt;p&gt;This theme uses the popular &lt;a href=&#34;https://highlightjs.org/&#34;&gt;Highlight.js&lt;/a&gt; library to colorize code examples. The default theme is called &lt;code&gt;Github&lt;/code&gt; with a few small tweaks. You can link our own theme if you like. Again, store your stylesheet in the &lt;code&gt;static/&lt;/code&gt; folder and set the relative path in the config file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[params]
+  # Syntax highlighting theme
+  highlight_css  = &amp;quot;path/to/theme.css&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;adding-a-github-and-twitter-account&#34;&gt;Adding a GitHub and Twitter account&lt;/h3&gt;
+
+&lt;p&gt;If you have a GitHub and/or Twitter account, you can add links to your
+accounts to the drawer by setting the variables &lt;code&gt;github&lt;/code&gt; and
+&lt;code&gt;twitter&lt;/code&gt; respectively:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[social]
+  twitter = &amp;quot;&amp;quot;
+  github  = &amp;quot;digitalcraftsman&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;adding-menu-entries&#34;&gt;Adding menu entries&lt;/h3&gt;
+
+&lt;p&gt;Once you created your first content files you can link them manually in the sidebar on the left. A menu entry has the following schema:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[[menu.main]]
+  name   = &amp;quot;Material&amp;quot;
+  url    = &amp;quot;/&amp;quot;
+  weight = 0
+  pre    = &amp;quot;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;name&lt;/code&gt; is the title displayed in the menu and &lt;code&gt;url&lt;/code&gt; the relative URL to the content. The &lt;code&gt;weight&lt;/code&gt; attribute allows you to modify the order of the menu entries. A menu entry appears further down the more weight you add. The &lt;code&gt;pre&lt;/code&gt; attribute is optional and allows you to *pre*pend elements to a menu link, e.g. an icon.&lt;/p&gt;
+
+&lt;p&gt;Instead of just linking a single file you can enhance the sidebar by creating a nested menu. This way you can list all pages of a section instead of linking them one by one (without nesting).&lt;/p&gt;
+
+&lt;p&gt;You need extend the frontmatter of each file content file in a section slightly. The snippet below registers this content file as &amp;lsquo;child&amp;rsquo; of a menu entry that already exists.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;menu:
+  main:
+    parent: Material
+    identifier: &amp;lt;link name&amp;gt;
+    weight: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;main&lt;/code&gt; specifies to which menu the content file should be added. &lt;code&gt;main&lt;/code&gt; is the only menu in this theme by default. &lt;code&gt;parent&lt;/code&gt; let&amp;rsquo;s you register this content file to an existing menu entry, in this case the &lt;code&gt;Material&lt;/code&gt; link. Note that the parent in the frontmatter needs to match the name in &lt;code&gt;config.toml&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;identifier&lt;/code&gt; is the link that is shown in the menu. Ideally you choose the same name for the &lt;code&gt;identifier&lt;/code&gt; and the &lt;code&gt;title&lt;/code&gt; of the page. Again, &lt;code&gt;weight&lt;/code&gt; allows you to change the order of the nested links in a section.&lt;/p&gt;
+
+&lt;h3 id=&#34;markdown-extensions&#34;&gt;Markdown extensions&lt;/h3&gt;
+
+&lt;p&gt;Hugo uses &lt;a href=&#34;https://github.com/russross/blackfriday&#34;&gt;Blackfriday&lt;/a&gt; to process your content. For a detailed description of all options take a look at the &lt;a href=&#34;http://gohugo.io/overview/configuration/#configure-blackfriday-rendering&#34;&gt;Blackfriday configuration&lt;/a&gt; section in the Hugo documentation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;[blackfriday]
+  smartypants = true
+  fractions = true
+  smartDashes = true
+  plainIDAnchors = true
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Adding content</title>
+      <link>https://pablodav.github.io/adding-material/</link>
+      <pubDate>Wed, 09 Mar 2016 19:56:50 +0100</pubDate>
+      
+      <guid>https://pablodav.github.io/adding-material/</guid>
+      <description>
+
+&lt;h2 id=&#34;hello-world&#34;&gt;Hello world&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s create our first content file for your documentation. Open a terminal and add the following command for each new file you want to add. Replace &lt;code&gt;&amp;lt;section-name&amp;gt;&lt;/code&gt; with a general term that describes your document in detail.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;hugo new &amp;lt;section-name&amp;gt;/filename.md
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Visitors of your website will find the final document under &lt;code&gt;www.example.com/&amp;lt;section-name&amp;gt;/filename/&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Since it&amp;rsquo;s possible to have multiple content files in the same section I recommend to create at least one &lt;code&gt;index.md&lt;/code&gt; file per section. This ensures that users will find an index page under &lt;code&gt;www.example.com/&amp;lt;section-name&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;homepage&#34;&gt;Homepage&lt;/h2&gt;
+
+&lt;p&gt;To add content to the homepage you need to add a small indicator to the frontmatter of the content file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-toml&#34;&gt;type: index
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Otherwise the theme will not be able to find the corresponding content file.&lt;/p&gt;
+
+&lt;h2 id=&#34;table-of-contents&#34;&gt;Table of contents&lt;/h2&gt;
+
+&lt;p&gt;You maybe noticed that the menu on the left contains a small table of contents of the current page. All &lt;code&gt;&amp;lt;h2&amp;gt;&lt;/code&gt; tags (&lt;code&gt;## Headline&lt;/code&gt; in Markdown) will be added automatically.&lt;/p&gt;
+
+&lt;h2 id=&#34;admonitions&#34;&gt;Admonitions&lt;/h2&gt;
+
+&lt;p&gt;Admonition is a handy feature that adds block-styled side content to your documentation, for example hints, notes or warnings. It can be enabled by using the corresponding &lt;a href=&#34;http://gohugo.io/extras/shortcodes/&#34;&gt;shortcodes&lt;/a&gt; inside your content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;{{&amp;lt; note title=&amp;quot;Note&amp;quot; &amp;gt;}}
+Nothing to see here, move along.
+{{&amp;lt; /note &amp;gt;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will print the following block:&lt;/p&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;
+&lt;p class=&#34;admonition-title&#34;&gt;Note&lt;/p&gt;
+&lt;p&gt;Nothing to see here, move along.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The shortcode adds a neutral color for the note class and a red color for the warning class. You can also add a custom title:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;{{&amp;lt; warning title=&amp;quot;Don&#39;t try this at home&amp;quot; &amp;gt;}}
+Nothing to see here, move along.
+{{&amp;lt; /warning &amp;gt;}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will print the following block:&lt;/p&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+&lt;p class=&#34;admonition-title&#34;&gt;Don&amp;#39;t try this at home&lt;/p&gt;
+&lt;p&gt;Nothing to see here, move along.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Graylog2 ansible</title>
+      <link>https://pablodav.github.io/post/graylog/graylog_ansible/</link>
+      <pubDate>Tue, 14 Mar 2017 07:31:51 -0300</pubDate>
+      
+      <guid>https://pablodav.github.io/post/graylog/graylog_ansible/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.graylog.org/&#34;&gt;Graylog2&lt;/a&gt; is an excelent log management and server, with many features and nice GUI interface
+to use and configure streams, inputs, alerts, searchs, dashboards, etc.&lt;/p&gt;
+
+&lt;p&gt;This document will explain how setup &lt;a href=&#34;https://github.com/Graylog2/graylog-ansible-role&#34;&gt;graylog2 using ansible&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This document will be base for future documents that explain how to add more
+customizations with other roles:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Upgrading practice example. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Input from &lt;a href=&#34;https://github.com/mrlesmithjr/ansible-logstash&#34;&gt;logstash&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Receive &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts&#34;&gt;azure alarms&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Configure commands to send alarms to &lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca&#34;&gt;nagios with nsca&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios&#34;&gt;Configure nagios&lt;/a&gt; to receive them. &lt;strong&gt;TODO&lt;/strong&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Explain more about graylog with more links to graylog documentation. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+
+&lt;p&gt;You need to know some basics from &lt;a href=&#34;http://docs.ansible.com/ansible/quickstart.html&#34;&gt;ansible&lt;/a&gt;, and ofcourse &lt;a href=&#34;http://docs.ansible.com/ansible/intro_installation.html&#34;&gt;install ansible&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Don&amp;rsquo;t be scared about it, ansible is the most simple IT automation tool and you will get benefits learing this to manage
+any other thing on your servers. Check also &lt;a href=&#34;https://www.ansible.com/how-ansible-works&#34;&gt;how ansible works&lt;/a&gt;, and &lt;a href=&#34;https://www.ansible.com/get-started&#34;&gt;get-started&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;installing-roles&#34;&gt;Installing roles&lt;/h2&gt;
+
+&lt;p&gt;Before starting to define the usage of our roles, we need them installed on our
+&lt;strong&gt;&lt;a href=&#34;http://docs.ansible.com/ansible/intro_installation.html#control-machine-requirements&#34;&gt;ansible-control-machine&lt;/a&gt;&lt;/strong&gt;.
+ As we will use this machine to actively connect and push configurations to our &lt;strong&gt;graylog2 server&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;We will use &lt;code&gt;requirements.yml&lt;/code&gt; file to make the installation of roles faster.&lt;/p&gt;
+
+&lt;p&gt;Add/create your &lt;code&gt;requirements.yml&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;
+# graylog2 
+
+- src: graylog2.graylog
+  version: master
+
+# graylog2 dependency
+
+- src: lesmyrmidons.mongodb
+  version: master
+
+- src: geerlingguy.java
+  version: master
+
+# 0.2 is required version to use elasticsearch 2.x
+- src: elastic.elasticsearch
+  version: &amp;quot;0.2&amp;quot;
+
+- src: jdauphant.nginx
+  version: master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As written in the &lt;code&gt;requirements.yml&lt;/code&gt; file, &lt;strong&gt;elasticsearch&lt;/strong&gt; must be version &lt;strong&gt;2&lt;/strong&gt;. So we need to use the branch for 0.2 of the role.&lt;/p&gt;
+
+&lt;h3 id=&#34;install-from-requirements-yml&#34;&gt;Install from &lt;code&gt;requirements.yml&lt;/code&gt;&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo ansible-galaxy install -r requirements.yml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;
+&lt;p class=&#34;admonition-title&#34;&gt;Note&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;graylog2 server&lt;/strong&gt; can be also your &lt;strong&gt;ansible-control-machine&lt;/strong&gt; if you don&amp;rsquo;t have other,
+using &lt;strong&gt;localhost&lt;/strong&gt; as node in your &lt;strong&gt;inventory&lt;/strong&gt; as shown below.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+&lt;p class=&#34;admonition-title&#34;&gt;Elasticsearch and java version matters&lt;/p&gt;
+&lt;p&gt;You must ensure to be using elasticsearch 2, and java from openjdk-8, we will cover these
+steps below, but this note will help you to know and remmember that.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&#34;preparing-the-inventory&#34;&gt;Preparing the inventory&lt;/h2&gt;
+
+&lt;p&gt;We will setup a group called &lt;strong&gt;graylog2_servers&lt;/strong&gt; with the hosts added to it.&lt;/p&gt;
+
+&lt;p&gt;You need to create/edit your &lt;a href=&#34;http://docs.ansible.com/ansible/intro_inventory.html&#34;&gt;inventory&lt;/a&gt; to tell ansible which server is on &lt;strong&gt;graylog2_servers&lt;/strong&gt; group.&lt;/p&gt;
+
+&lt;p&gt;We will create a folder called &lt;code&gt;inventory&lt;/code&gt; and a file called &lt;code&gt;production&lt;/code&gt; on it.&lt;/p&gt;
+
+&lt;p&gt;file: &lt;code&gt;inventory/production&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;content:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;[location1]
+server1     ansible_host=192.168.1.50
+
+[graylog2_servers]
+server1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this example I have added &lt;code&gt;server1&lt;/code&gt; to groups &lt;strong&gt;location1&lt;/strong&gt;  and &lt;strong&gt;graylog2_servers&lt;/strong&gt;.
+Note also I have added &lt;code&gt;ansible_host&lt;/code&gt; variable with the IP address of &lt;code&gt;server1&lt;/code&gt;, so ansible will use automatically this
+to connect to the host.&lt;/p&gt;
+
+&lt;p&gt;other generic example: &lt;a href=&#34;https://github.com/CoffeeITWorks/ansible-generic-help/blob/master/example1/inventory/test&#34;&gt;example1/inventory/test&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;preparing-the-playbook-to-run-the-roles&#34;&gt;Preparing the playbook to run the roles&lt;/h2&gt;
+
+&lt;p&gt;We will define a playbook to include our &lt;a href=&#34;http://docs.ansible.com/ansible/playbooks_roles.html#roles&#34;&gt;roles&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;We will prepare a file called &lt;code&gt;roles.graylog2.yml&lt;/code&gt; with this definition:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
+---
+# This --- defines that this yaml file will have 2 spaces for indentation.
+
+
+# In case you use Ubuntu trusty we will add ppa for java-jdk8
+# as noticed on warning above we need to take care of it. 
+
+- name: Add java-jdk-8 ppa for Ubuntu trusty
+  hosts: graylog2_servers
+  become: yes
+  
+  # You can specify a proxy_env var with your proxy settings here
+  # check example: https://github.com/CoffeeITWorks/ansible-generic-help/blob/master/example1/group_vars/all/vars#L14
+  #environment: &amp;quot;{{ proxy_env }}&amp;quot;
+
+  tasks:
+    - name: installing repo for Java 8 in Ubuntu 14.04
+      apt_repository: repo=&#39;ppa:openjdk-r/ppa&#39;
+      when: ansible_distribution_release == &#39;trusty&#39;
+
+# Now we will apply all roles to our graylog2_servers:
+
+- name: Apply roles for graylog2 servers
+  hosts: graylog2_servers
+  become: yes
+  
+  # You can specify a proxy_env var with your proxy settings here
+  # check example: https://github.com/CoffeeITWorks/ansible-generic-help/blob/master/example1/group_vars/all/vars#L14
+  #environment: &amp;quot;{{ proxy_env }}&amp;quot;
+
+  roles:
+
+    - role: lesmyrmidons.mongodb
+      tags:
+        - role::mongodb
+        - graylog2_servers
+    
+    # This step is important as described in waring above
+    - role: geerlingguy.java
+      when: ansible_distribution_release == &#39;trusty&#39;
+      java_packages:
+        - openjdk-8-jdk
+      tags:
+        - role::elasticsearch
+        - graylog2_servers
+    
+    # This step is important as described in waring above
+    - role: geerlingguy.java
+      when: ansible_os_family == &amp;quot;RedHat&amp;quot; and ansible_lsb.major_release|int &amp;gt;= 7
+      java_packages:
+        - java-1.8-openjdk
+      tags:
+        - role::elasticsearch
+        - graylog2_servers
+    
+    # ensure you have installed 0.2 branch for elasticsearch 2.x
+    - role: elastic.elasticsearch
+      tags:
+        - role::elasticsearch
+        - graylog2_servers
+
+    - role: jdauphant.nginx
+      tags:
+        - role::nginx
+        - graylog2_servers
+    
+    # Here we will install graylog
+    - role: graylog2.graylog
+      tags:
+        - role::graylog
+        - graylog2_servers
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;preparing-the-variables&#34;&gt;Preparing the variables&lt;/h2&gt;
+
+&lt;p&gt;We have an &lt;strong&gt;inventory&lt;/strong&gt; and a &lt;strong&gt;playbook&lt;/strong&gt; to call the roles, but we must customize the [variables]( ) before running
+ the playbook.&lt;/p&gt;
+
+&lt;p&gt;Here we will organize the variables files into the &lt;code&gt;group_vars&lt;/code&gt; directory:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p group_vars/graylog2_servers 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then add a file to have organized the variables for &lt;strong&gt;elasticsearch&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;group_vars/graylog2_servers/elasticsearch2_vars&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;p&gt;In this file we will define &lt;strong&gt;es cluster&lt;/strong&gt;, bind address, version, memory, etc.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
+---
+# https://github.com/Graylog2/graylog-ansible-role
+
+es_instance_name: &#39;graylog&#39;
+es_scripts: False
+es_templates: False
+es_version_lock: False
+es_heap_size: 1g
+
+# Graylog2 doesn&#39;t support elasticsearch 5, so must install elasticsearch 2.x
+es_major_version: &amp;quot;2.x&amp;quot;
+es_version: &amp;quot;2.4.4&amp;quot;
+
+es_config: {
+  node.name: &amp;quot;graylog&amp;quot;,
+  cluster.name: &amp;quot;graylog&amp;quot;,
+  discovery.zen.ping.unicast.hosts: &amp;quot;localhost:9301&amp;quot;,
+  http.port: 9200,
+  transport.tcp.port: 9300,
+  network.host: 0.0.0.0,
+  node.data: true,
+  node.master: true,
+  bootstrap.mlockall: false,
+  discovery.zen.ping.multicast.enabled: false
+}
+
+# Ensure to add this option if not added elastic.elasticsearch will install openjdk-7 that will break graylog2
+es_java_install:               False
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then add a file to have organized the variables for &lt;strong&gt;graylog role&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;group_vars/graylog2_servers/graylog2_vars&lt;/code&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
+---
+
+# Disable autoinstall of elasticsearch, java, mongodb, etc, as we will use our own playbook to call the roles:
+# And ensure correct java version is installed in this way
+graylog_install_elasticsearch: False
+graylog_install_mongodb:       False
+graylog_install_nginx:         False
+graylog_install_java:          False
+
+# Basic server settings (seems that this should go per host)
+graylog_is_master:          &#39;True&#39;
+
+# generate with: pwgen -s 96 1
+graylog_password_secret:    &#39;putyourhashhere&#39; 
+
+# generate with: echo -n yourpassword | shasum -a 256
+graylog_root_password_sha2: &#39;putyourhashhere&#39; 
+
+# Elasticsearch message retention
+# Specify your retention here
+graylog_elasticsearch_max_docs_per_index:    20000000
+graylog_elasticsearch_max_number_of_indices: 20
+graylog_elasticsearch_shards:                4
+graylog_elasticsearch_replicas:              0
+
+graylog_rest_listen_uri:  &#39;http://0.0.0.0:9000/api/&#39;
+graylog_web_listen_uri:   &#39;http://0.0.0.0:9000/&#39;
+
+nginx_sites:
+
+  graylog:
+    - listen 80
+    - server_name graylog
+    - location / {
+      proxy_pass http://localhost:9000/;
+      proxy_set_header Host $host;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_pass_request_headers on;
+      proxy_connect_timeout 150;
+      proxy_send_timeout 100;
+      proxy_read_timeout 100;
+      proxy_buffers 4 32k;
+      client_max_body_size 8m;
+      client_body_buffer_size 128k; }
+
+# Setup per host on host_vars:
+graylog_web_endpoint_uri: &#39;http://{{ ansible_host }}:9000/api/&#39;
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Not all the variables are required, but I prefer to be explicit on these settings. The documentation of these vars are
+on the readme of each role, also the defaults used are on the &lt;code&gt;defaults/main.yml file&lt;/code&gt; of each role (we are overriding the
+defaults when assigning the vars on &lt;code&gt;group_vars&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;See &lt;a href=&#34;http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable&#34;&gt;playbook_variables&lt;/a&gt;
+for more information&lt;/p&gt;
+
+&lt;h2 id=&#34;review-what-s-done-until-now&#34;&gt;Review what&amp;rsquo;s done until now&lt;/h2&gt;
+
+&lt;p&gt;We have created:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;requirements.yml&lt;/code&gt; file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;inventory/production&lt;/code&gt; file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;roles.graylog2.yml&lt;/code&gt; file&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;group_vars/graylog2_servers&lt;/code&gt; dir with &lt;code&gt;elasticsearch_vars&lt;/code&gt; and &lt;code&gt;graylog2_vars&lt;/code&gt; files&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So, our tree looks:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;├── requirements.yml
+├── group_vars
+│   ├── graylog2_servers
+│   │   ├── graylog2_vars
+│   │   ├── elasticsearch_vars
+├── inventory
+│   ├── production
+├── roles.graylog2.yml
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;With this structure we have all required to call our roles with correct parameters.
+As seen on the roles.graylog2.yml, we have associated the roles to run to &lt;strong&gt;graylog2_servers&lt;/strong&gt; group.&lt;/p&gt;
+
+&lt;h2 id=&#34;run-the-playbook&#34;&gt;Run the playbook&lt;/h2&gt;
+
+&lt;p&gt;We will execute here:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To understand some of the parameters used here:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-l SUBSET, --limit=SUBSET
+                    further limit selected hosts to an additional pattern
+-i PATH, --inventory=PATH
+                    The PATH to the inventory hosts file, which defaults to /etc/ansible/hosts. 
+-k, --ask-pass
+                    Prompt for the SSH password instead of assuming key-based authentication with ssh-agent. 
+-K, --ask-sudo-pass
+                    Prompt for the password to use for playbook plays that request sudo access, if any. 
+-b, --become
+                    run operations with become (does not imply password prompting) 
+-u USERNAME, --remote-user=USERNAME
+                    Use this remote user name on playbook steps that do not indicate a user name to run as. 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As seen on the command, we use &lt;code&gt;-i inventory&lt;/code&gt; directory instead of the file, you can change it to point to the file directly.&lt;/p&gt;
+
+&lt;p&gt;You can also check &lt;a href=&#34;http://docs.ansible.com/ansible/playbooks_vault.html&#34;&gt;ansible-vault&lt;/a&gt; to save password.&lt;/p&gt;
+
+&lt;p&gt;You can also check variables to use in &lt;code&gt;group_vars/all&lt;/code&gt; or some other group using &lt;a href=&#34;http://docs.ansible.com/ansible/intro_inventory.html#list-of-behavioral-inventory-parameters&#34;&gt;inventory_parameters&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ansible connections are done by default with ssh, you can change them using &lt;code&gt;inventory_parameters&lt;/code&gt; and also disable &lt;a href=&#34;http://docs.ansible.com/ansible/intro_getting_started.html#host-key-checking&#34;&gt;host-key-checking&lt;/a&gt;.
+Create ansible.cfg file on same dir where you run &lt;code&gt;ansible-playbook&lt;/code&gt; command and it will read that parameters.&lt;/p&gt;
 </description>
     </item>
     
