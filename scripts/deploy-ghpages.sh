@@ -62,7 +62,8 @@ cd ..
 # copy over or recompile the new site
 # cp -a "../${siteSource}/." .
 
-hugo --buildDrafts
+# build hugo static site into public dir without drafts
+hugo
 
 sleep 4
 

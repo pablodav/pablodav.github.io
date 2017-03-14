@@ -1,24 +1,27 @@
 baseurl = "https://pablodav.github.io/"
 languageCode = "en-us"
-title = "Pablo Estigarribia's personal blog"
+title = "Pablo Estigarribia's docs"
 theme = "hugo-material-docs"
 metadataformat = "yaml"
 canonifyurls = true
 # Enable Google Analytics by entering your tracking id
 googleAnalytics = "UA-93334116-1"
 
+# true: use pygments-css or false: color-codes directly
+pygmentsuseclasses = false
+
 [params]
 	# General information
 	author = "pablodav"
-	description = "Pablo Estigarribia's personal blog for sharing sysadmin and devops works"
+	description = "Pablo Estigarribia's personal docs for sharing sysadmin and devops works"
 	copyright = "Released under the MIT license with content licensed with CC BY"
 
 	# Repository
 	provider = "GitHub"
-	repo_url = "https://github.com/pablodav/pablodav.github.io"
+	repo_url = "https://github.com/pablodav/blog"
 
-	version = "1.0.0"
-	logo = "images/logo.png"
+	#version = "0.1.0"
+	#logo = "images/logo.png"
 	favicon = ""
 
 	permalink = "#"
@@ -36,7 +39,7 @@ googleAnalytics = "UA-93334116-1"
 
     [params.font]
     	text = "Ubuntu"
-    	code = "Ubuntu Mono"
+    	code = "Ubuntu mono"
 
 
 [social]
@@ -50,25 +53,25 @@ googleAnalytics = "UA-93334116-1"
 	url    = "/"
 	weight = 0
 
-[[menu.main]]
-	name   = "Posts"
-	url    = "post/"
-	weight = 0
+#[[menu.main]]
+#	name   = "Posts"
+#	url    = "post/"
+#	weight = 0
 
 #[[menu.main]]
 #	name   = "Getting started"
 #	url    = "getting-started/"
 #	weight = 10
 
-[[menu.main]]
-	name   = "Adding content"
-	url    = "adding-content/"
-	weight = 20
+#[[menu.main]]
+#	name   = "Adding content"
+#	url    = "adding-content/"
+#	weight = 20
 
-[[menu.main]]
-	name   = "Roadmap"
-	url    = "roadmap/"
-	weight = 30
+#[[menu.main]]
+#	name   = "Roadmap"
+#	url    = "roadmap/"
+#	weight = 30
 
 [[menu.main]]
 	name   = "License"
@@ -76,6 +79,7 @@ googleAnalytics = "UA-93334116-1"
 	weight = 40
 
 
+# https://gohugo.io/overview/configuration#configure-blackfriday-rendering
 [blackfriday]
 	smartypants	= true
 	fractions = true
