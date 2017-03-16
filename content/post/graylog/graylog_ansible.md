@@ -20,7 +20,7 @@ This document will explain how setup [graylog2 using ansible](https://github.com
 This document will be base for future documents that explain how to add more 
 customizations with other roles:  
 
-* Upgrading practice example. **TODO**
+* [Upgrading practice example.](#upgrading-graylog) 
 * Input from [logstash](https://github.com/mrlesmithjr/ansible-logstash). **TODO** 
 * Receive [azure alarms](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts). **TODO** 
 * Configure commands to send alarms to [nagios with nsca](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca). **TODO**
@@ -371,3 +371,41 @@ You can also check variables to use in `group_vars/all` or some other group usin
 
 Ansible connections are done by default with ssh, you can change them using `inventory_parameters` and also disable [host-key-checking](http://docs.ansible.com/ansible/intro_getting_started.html#host-key-checking). 
 Create ansible.cfg file on same dir where you run `ansible-playbook` command and it will read that parameters. 
+
+Upgrading Graylog
+-----------------
+
+As ansible role is updated every time graylog is update too (check [graylog_version](https://github.com/Graylog2/graylog-ansible-role/blob/master/defaults/main.yml#L8)). 
+You only need to update the role installed, ex: 
+
+    sudo rm -rf /etc/ansible/roles/graylog2.graylog
+    sudo ansible-galaxy install -r requirements.yml 
+
+Then [run the playbook](#run-the-playbook) again.
+
+This will update your graylog repository, for example in my output I have: 
+
+```bash
+TASK [graylog2.graylog : Graylog repository package should be downloaded] ******
+changed: [server1] => {"changed": true, "checksum_dest": null, "checksum_src": "ddc77cda9473f6556844c19d68c2c8de05d9dedc", "dest
+": "/tmp/graylog_repository.deb", "gid": 0, "group": "root", "md5sum": "df0ded30076548179772cd23bfff869f", "mode": "0644", "msg":
+"OK (2056 bytes)", "owner": "root", "size": 2056, "src": "/tmp/tmpjrGQFl", "state": "file", "uid": 0, "url": "https://packages.gra
+ylog2.org/repo/packages/graylog-2.2-repository_latest.deb"}
+```
+
+Then just upgrade on your server: 
+
+    sudo apt-get upgrade
+
+Or with yum: 
+
+    sudo yum update
+
+If for some reason the role is not updated, you can add to your `group_vars/graylog2_servers/graylog2_vars`, ex:
+
+    graylog_version: 2.2
+    
+It should make same effect but without the fixes and improvements added to the role. 
+**It's recommended to update the role**, and also **check the release notes** of both: role and graylog2.
+
+Ensure you are not upgrading elasticsearch to 5.x, to not break graylog. (should not do that if you did all steps in this page)
