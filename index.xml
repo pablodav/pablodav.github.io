@@ -320,7 +320,7 @@ to use and configure streams, inputs, alerts, searchs, dashboards, etc.&lt;/p&gt
 customizations with other roles:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Upgrading practice example. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#upgrading-graylog&#34;&gt;Upgrading practice example.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Input from &lt;a href=&#34;https://github.com/mrlesmithjr/ansible-logstash&#34;&gt;logstash&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;Receive &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts&#34;&gt;azure alarms&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;Configure commands to send alarms to &lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca&#34;&gt;nagios with nsca&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
@@ -662,6 +662,46 @@ As seen on the roles.graylog2.yml, we have associated the roles to run to &lt;st
 
 &lt;p&gt;Ansible connections are done by default with ssh, you can change them using &lt;code&gt;inventory_parameters&lt;/code&gt; and also disable &lt;a href=&#34;http://docs.ansible.com/ansible/intro_getting_started.html#host-key-checking&#34;&gt;host-key-checking&lt;/a&gt;.
 Create ansible.cfg file on same dir where you run &lt;code&gt;ansible-playbook&lt;/code&gt; command and it will read that parameters.&lt;/p&gt;
+
+&lt;h2 id=&#34;upgrading-graylog&#34;&gt;Upgrading Graylog&lt;/h2&gt;
+
+&lt;p&gt;As ansible role is updated every time graylog is update too (check &lt;a href=&#34;https://github.com/Graylog2/graylog-ansible-role/blob/master/defaults/main.yml#L8&#34;&gt;graylog_version&lt;/a&gt;).
+You only need to update the role installed, ex:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo rm -rf /etc/ansible/roles/graylog2.graylog
+sudo ansible-galaxy install -r requirements.yml 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then &lt;a href=&#34;#run-the-playbook&#34;&gt;run the playbook&lt;/a&gt; again.&lt;/p&gt;
+
+&lt;p&gt;This will update your graylog repository, for example in my output I have:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;TASK [graylog2.graylog : Graylog repository package should be downloaded] ******
+changed: [server1] =&amp;gt; {&amp;quot;changed&amp;quot;: true, &amp;quot;checksum_dest&amp;quot;: null, &amp;quot;checksum_src&amp;quot;: &amp;quot;ddc77cda9473f6556844c19d68c2c8de05d9dedc&amp;quot;, &amp;quot;dest
+&amp;quot;: &amp;quot;/tmp/graylog_repository.deb&amp;quot;, &amp;quot;gid&amp;quot;: 0, &amp;quot;group&amp;quot;: &amp;quot;root&amp;quot;, &amp;quot;md5sum&amp;quot;: &amp;quot;df0ded30076548179772cd23bfff869f&amp;quot;, &amp;quot;mode&amp;quot;: &amp;quot;0644&amp;quot;, &amp;quot;msg&amp;quot;:
+&amp;quot;OK (2056 bytes)&amp;quot;, &amp;quot;owner&amp;quot;: &amp;quot;root&amp;quot;, &amp;quot;size&amp;quot;: 2056, &amp;quot;src&amp;quot;: &amp;quot;/tmp/tmpjrGQFl&amp;quot;, &amp;quot;state&amp;quot;: &amp;quot;file&amp;quot;, &amp;quot;uid&amp;quot;: 0, &amp;quot;url&amp;quot;: &amp;quot;https://packages.gra
+ylog2.org/repo/packages/graylog-2.2-repository_latest.deb&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then just upgrade on your server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get upgrade
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Or with yum:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo yum update
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If for some reason the role is not updated, you can add to your &lt;code&gt;group_vars/graylog2_servers/graylog2_vars&lt;/code&gt;, ex:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;graylog_version: 2.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It should make same effect but without the fixes and improvements added to the role.
+&lt;strong&gt;It&amp;rsquo;s recommended to update the role&lt;/strong&gt;, and also &lt;strong&gt;check the release notes&lt;/strong&gt; of both: role and graylog2.&lt;/p&gt;
+
+&lt;p&gt;Ensure you are not upgrading elasticsearch to 5.x, to not break graylog. (should not do that if you did all steps in this page)&lt;/p&gt;
 </description>
     </item>
     
