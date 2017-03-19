@@ -203,7 +203,7 @@ to connect to the host.&lt;/p&gt;
 
 &lt;h2 id=&#34;preparing-the-variables&#34;&gt;Preparing the variables&lt;/h2&gt;
 
-&lt;p&gt;We have an &lt;strong&gt;inventory&lt;/strong&gt; and a &lt;strong&gt;playbook&lt;/strong&gt; to call the roles, but we must customize the [variables]( ) before running
+&lt;p&gt;We have an &lt;strong&gt;inventory&lt;/strong&gt; and a &lt;strong&gt;playbook&lt;/strong&gt; to call the roles, but we must customize the &lt;a href=&#34;http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable&#34;&gt;variables&lt;/a&gt; before running
  the playbook.&lt;/p&gt;
 
 &lt;p&gt;Here we will organize the variables files into the &lt;code&gt;group_vars&lt;/code&gt; directory:&lt;/p&gt;
