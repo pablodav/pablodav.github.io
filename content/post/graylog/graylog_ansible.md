@@ -201,7 +201,7 @@ We will prepare a file called `roles.graylog2.yml` with this definition:
 Preparing the variables
 -----------------------
 
-We have an **inventory** and a **playbook** to call the roles, but we must customize the [variables]( ) before running 
+We have an **inventory** and a **playbook** to call the roles, but we must customize the [variables](http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) before running 
  the playbook. 
  
 Here we will organize the variables files into the `group_vars` directory:
