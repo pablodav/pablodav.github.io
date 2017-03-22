@@ -12,6 +12,11 @@
   </url>
   
   <url>
+    <loc>https://pablodav.github.io/post/graylog/logstash_input/</loc>
+    <lastmod>2017-03-22T14:37:48-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://pablodav.github.io/post/graylog/graylog_ansible/</loc>
     <lastmod>2017-03-14T07:31:51-03:00</lastmod>
   </url>
@@ -24,6 +29,11 @@
   <url>
     <loc>https://pablodav.github.io/adding-material/</loc>
     <lastmod>2016-03-09T19:56:50+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
@@ -47,7 +57,19 @@
   
   <url>
     <loc>https://pablodav.github.io/post/</loc>
-    <lastmod>2017-03-14T07:31:51-03:00</lastmod>
+    <lastmod>2017-03-22T14:37:48-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/categories/x/</loc>
+    <lastmod>2017-03-22T14:37:48-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://pablodav.github.io/categories/y/</loc>
+    <lastmod>2017-03-22T14:37:48-03:00</lastmod>
     <priority>0</priority>
   </url>
   

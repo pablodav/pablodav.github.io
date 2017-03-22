@@ -205,9 +205,22 @@
 
 
 
-<a  title="Graylog2 with ansible" href="https://pablodav.github.io/post/graylog/graylog_ansible/">
+<a  title="Graylog2 1. with ansible" href="https://pablodav.github.io/post/graylog/graylog_ansible/">
 	
-	Graylog2 with ansible
+	Graylog2 1. with ansible
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="Graylog2 2. logstash input http" href="https://pablodav.github.io/post/graylog/logstash_input/">
+	
+	Graylog2 2. logstash input http
 </a>
 
 
@@ -261,7 +274,172 @@
 	<article class="article">
 		<div class="wrapper">
 			
-				<h1>Graylog2 with ansible </h1>
+				<h1>Graylog2 2. logstash input http </h1>
+
+				
+
+<h2 id="introduction">Introduction</h2>
+
+<ul>
+<li>Configure <a href="http://docs.graylog.org/en/latest/pages/gelf.html"><strong>GELF</strong></a> input in graylog.</li>
+<li>Prepare <strong>logstash</strong> to input data from any <a href="https://www.elastic.co/blog/introducing-logstash-input-http-plugin">http</a> post.</li>
+<li>Send data to <strong>GELF</strong> input in graylog using <a href="https://www.elastic.co/guide/en/logstash/current/plugins-outputs-gelf.html">plugins_output_gelf</a>.</li>
+</ul>
+
+<p><img src="https://pablodav.github.io/img/graylog_gelf_logstash.png" alt="graylog_gelf_logstash" /></p>
+
+<h2 id="requirements-ansible">Requirements Ansible</h2>
+
+<p>As explained in <a href="https://github.com/CoffeeITWorks/ansible-generic-help#installing-roles">Generic-help installing roles</a>.
+And at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#installing-roles">Graylog_ansible_installing_roles</a></p>
+
+<p>We will use <code>requirements.yml</code> to add this:</p>
+
+<pre><code>- src: mrlesmithjr.logstash
+  name: ansible-logstash
+  version: master
+</code></pre>
+
+<p>Then install with <code>ansible-galaxy install -r requirements.yml</code></p>
+
+<p>It will install the role with name <code>ansible-logstash</code>, we will use that name in our playbook.</p>
+
+<h2 id="requirements-graylog2">Requirements Graylog2</h2>
+
+<p>Here we need to add an input to receive the messages from <strong>logstash</strong>.</p>
+
+<p>Go to System -&gt; Inputs</p>
+
+<p><img src="https://pablodav.github.io/img/graylog_system_input.png" alt="System_inputs" /></p>
+
+<ul>
+<li>Select <strong>GELF UDP INPUT</strong>.<br /></li>
+<li>We will use port 12201</li>
+<li>save</li>
+<li>Start the input</li>
+</ul>
+
+<p>After done, you could see something like:</p>
+
+<p><img src="https://pablodav.github.io/img/graylog_input_gelf_udp.png" alt="graylog_input_gelf_udp" /></p>
+
+<div class="admonition warning">
+<p class="admonition-title">Port below 1024 will not work</p>
+<p>Graylog2 is running as normal user, linux will not allow port below 1024</p>
+</div>
+
+<h2 id="ansible-inventory">Ansible Inventory</h2>
+
+<p>We will use same inventory as created at: at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-inventory">Graylog_ansible_inventory</a></p>
+
+<h2 id="preparing-the-playbook-to-run-the-roles">Preparing the playbook to run the roles</h2>
+
+<p>Here we will add to <code>roles.graylog2.yml</code> as examplained at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles">Graylog_ansible_playbook</a></p>
+
+<pre><code>
+- name: Apply logstash for graylog2 servers
+  hosts: graylog2_servers
+  become: yes
+
+  roles:
+
+    - role: ansible-logstash
+      tags:
+        - role::logstash
+        - graylog2_servers
+
+</code></pre>
+
+<h2 id="preparing-the-variables">Preparing the variables</h2>
+
+<p>We will create new file <code>group_vars/graylog2_servers/logstash_vars</code></p>
+
+<p>The folder was created during the preparatives at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-variables">Graylog_ansible_variables</a></p>
+
+<p>Variables:</p>
+
+<pre><code class="language-ini">
+# logstash role:
+
+pri_domain_name: 'example.com'
+config_logstash: True
+logstash_install_java: false
+
+# These are the files that will be used and will be created in `/etc/logstash/conf.d/`
+logstash_base_configs:
+  - '000_inputs'
+  - '001_filters'
+  - '999_outputs'
+
+# Plugins required by us
+logstash_plugins:
+  - 'logstash-output-nagios_nsca'
+  - 'logstash-output-gelf'
+
+# see https://github.com/mrlesmithjr/ansible-logstash
+logstash_base_file_inputs: []
+
+
+# We don't need it really, but will add anyway
+logstash_base_inputs:  #define inputs below to configure
+  - prot: 'tcp'
+    port: '10514'  #gets around port &lt; 1024 (Note...Configure clients to send to 10514 instead of default 514)
+    type: 'syslog'
+
+# Here we are creating one input, in this case we will add a tag to make it easier to filter
+# example is with azure tag, but can be any other.
+logstash_custom_inputs:
+  - input: 'http'
+    lines:
+      - 'port =&gt; &quot;51202&quot;'
+      - 'type =&gt; &quot;http&quot;'
+      - 'tags =&gt; &quot;azure&quot;'
+
+# Here we will use the tag to create a filter and apply json module to 
+# transform the message into json format
+logstash_custom_filters:
+  - lines:
+      - 'if &quot;azure&quot; in [tags] {'
+      - '  json {'
+      - '    source =&gt; &quot;message&quot;'
+      - '  }'
+      - '}'
+
+# As we will not use any default output, we will leave it as empty list []
+logstash_base_outputs: []
+
+# Here we will tell ansible role to configure the output to our GELF UDP input.
+logstash_custom_outputs:
+
+  - output: 'gelf'
+    lines:
+      - 'host =&gt; &quot;localhost&quot;'
+      - 'port =&gt; &quot;12201&quot;'
+
+</code></pre>
+
+<p>All these vars will tell what we exactly want from ansible role for logstash.</p>
+
+<h2 id="run-the-playbook">Run the playbook</h2>
+
+<p>use same steps as described in: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#run-the-playbook">Graylog_ansible_run</a></p>
+
+<p>Or run only logstash role calling with tag:</p>
+
+<pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags role::logstash 
+</code></pre>
+
+<h2 id="upgrading-logstash">Upgrading logstash</h2>
+
+<p>Just use normal package upgrade from your distribution.</p>
+
+<h2 id="receive-azure-alarms">Receive Azure alarms</h2>
+
+<p>Just setup your <a href="https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts">azure alarms</a>,
+to your public IP and HTTP Port: <code>51201</code> as done at <a href="#preparing-the-variables">Preparing the variables</a></p>
+
+			
+				<h1>Graylog2 1. with ansible </h1>
 
 				
 
@@ -277,8 +455,8 @@ customizations with other roles:</p>
 
 <ul>
 <li><a href="#upgrading-graylog">Upgrading practice example.</a></li>
-<li>Input from <a href="https://github.com/mrlesmithjr/ansible-logstash">logstash</a>. <strong>TODO</strong></li>
-<li>Receive <a href="https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts">azure alarms</a>. <strong>TODO</strong></li>
+<li>Input from <a href="https://github.com/mrlesmithjr/ansible-logstash">logstash</a>. Done at: <a href="https://pablodav.github.io/post/graylog/logstash_input/">Graylog_ansible_logstash_input</a></li>
+<li>Receive <a href="https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts">azure alarms</a>. Done at: <a href="https://pablodav.github.io/post/graylog/logstash_input/">Graylog_ansible_logstash_input</a></li>
 <li>Configure commands to send alarms to <a href="https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca">nagios with nsca</a>. <strong>TODO</strong></li>
 <li><a href="https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios">Configure nagios</a> to receive them. <strong>TODO</strong><br /></li>
 <li>Explain more about graylog with more links to graylog documentation. <strong>TODO</strong></li>
@@ -683,14 +861,14 @@ ylog2.org/repo/packages/graylog-2.2-repository_latest.deb&quot;}
   
   
   <div class="next">
-      <a href="https://pablodav.github.io/getting-started/" title="Getting-starteds">
+      <a href="https://pablodav.github.io/getting-started/" title="Getting started">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Getting-starteds
+              Getting started
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

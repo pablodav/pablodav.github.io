@@ -302,7 +302,177 @@ Nothing to see here, move along.
     </item>
     
     <item>
-      <title>Graylog2 with ansible</title>
+      <title>Graylog2 2. logstash input http</title>
+      <link>https://pablodav.github.io/post/graylog/logstash_input/</link>
+      <pubDate>Wed, 22 Mar 2017 14:37:48 -0300</pubDate>
+      
+      <guid>https://pablodav.github.io/post/graylog/logstash_input/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Configure &lt;a href=&#34;http://docs.graylog.org/en/latest/pages/gelf.html&#34;&gt;&lt;strong&gt;GELF&lt;/strong&gt;&lt;/a&gt; input in graylog.&lt;/li&gt;
+&lt;li&gt;Prepare &lt;strong&gt;logstash&lt;/strong&gt; to input data from any &lt;a href=&#34;https://www.elastic.co/blog/introducing-logstash-input-http-plugin&#34;&gt;http&lt;/a&gt; post.&lt;/li&gt;
+&lt;li&gt;Send data to &lt;strong&gt;GELF&lt;/strong&gt; input in graylog using &lt;a href=&#34;https://www.elastic.co/guide/en/logstash/current/plugins-outputs-gelf.html&#34;&gt;plugins_output_gelf&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_gelf_logstash.png&#34; alt=&#34;graylog_gelf_logstash&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;requirements-ansible&#34;&gt;Requirements Ansible&lt;/h2&gt;
+
+&lt;p&gt;As explained in &lt;a href=&#34;https://github.com/CoffeeITWorks/ansible-generic-help#installing-roles&#34;&gt;Generic-help installing roles&lt;/a&gt;.
+And at &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#installing-roles&#34;&gt;Graylog_ansible_installing_roles&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We will use &lt;code&gt;requirements.yml&lt;/code&gt; to add this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;- src: mrlesmithjr.logstash
+  name: ansible-logstash
+  version: master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then install with &lt;code&gt;ansible-galaxy install -r requirements.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;It will install the role with name &lt;code&gt;ansible-logstash&lt;/code&gt;, we will use that name in our playbook.&lt;/p&gt;
+
+&lt;h2 id=&#34;requirements-graylog2&#34;&gt;Requirements Graylog2&lt;/h2&gt;
+
+&lt;p&gt;Here we need to add an input to receive the messages from &lt;strong&gt;logstash&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Go to System -&amp;gt; Inputs&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_system_input.png&#34; alt=&#34;System_inputs&#34; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Select &lt;strong&gt;GELF UDP INPUT&lt;/strong&gt;.&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;We will use port 12201&lt;/li&gt;
+&lt;li&gt;save&lt;/li&gt;
+&lt;li&gt;Start the input&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;After done, you could see something like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_input_gelf_udp.png&#34; alt=&#34;graylog_input_gelf_udp&#34; /&gt;&lt;/p&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+&lt;p class=&#34;admonition-title&#34;&gt;Port below 1024 will not work&lt;/p&gt;
+&lt;p&gt;Graylog2 is running as normal user, linux will not allow port below 1024&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&#34;ansible-inventory&#34;&gt;Ansible Inventory&lt;/h2&gt;
+
+&lt;p&gt;We will use same inventory as created at: at &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-inventory&#34;&gt;Graylog_ansible_inventory&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;preparing-the-playbook-to-run-the-roles&#34;&gt;Preparing the playbook to run the roles&lt;/h2&gt;
+
+&lt;p&gt;Here we will add to &lt;code&gt;roles.graylog2.yml&lt;/code&gt; as examplained at: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles&#34;&gt;Graylog_ansible_playbook&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+- name: Apply logstash for graylog2 servers
+  hosts: graylog2_servers
+  become: yes
+
+  roles:
+
+    - role: ansible-logstash
+      tags:
+        - role::logstash
+        - graylog2_servers
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;preparing-the-variables&#34;&gt;Preparing the variables&lt;/h2&gt;
+
+&lt;p&gt;We will create new file &lt;code&gt;group_vars/graylog2_servers/logstash_vars&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;The folder was created during the preparatives at: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-variables&#34;&gt;Graylog_ansible_variables&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Variables:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
+# logstash role:
+
+pri_domain_name: &#39;example.com&#39;
+config_logstash: True
+logstash_install_java: false
+
+# These are the files that will be used and will be created in `/etc/logstash/conf.d/`
+logstash_base_configs:
+  - &#39;000_inputs&#39;
+  - &#39;001_filters&#39;
+  - &#39;999_outputs&#39;
+
+# Plugins required by us
+logstash_plugins:
+  - &#39;logstash-output-nagios_nsca&#39;
+  - &#39;logstash-output-gelf&#39;
+
+# see https://github.com/mrlesmithjr/ansible-logstash
+logstash_base_file_inputs: []
+
+
+# We don&#39;t need it really, but will add anyway
+logstash_base_inputs:  #define inputs below to configure
+  - prot: &#39;tcp&#39;
+    port: &#39;10514&#39;  #gets around port &amp;lt; 1024 (Note...Configure clients to send to 10514 instead of default 514)
+    type: &#39;syslog&#39;
+
+# Here we are creating one input, in this case we will add a tag to make it easier to filter
+# example is with azure tag, but can be any other.
+logstash_custom_inputs:
+  - input: &#39;http&#39;
+    lines:
+      - &#39;port =&amp;gt; &amp;quot;51202&amp;quot;&#39;
+      - &#39;type =&amp;gt; &amp;quot;http&amp;quot;&#39;
+      - &#39;tags =&amp;gt; &amp;quot;azure&amp;quot;&#39;
+
+# Here we will use the tag to create a filter and apply json module to 
+# transform the message into json format
+logstash_custom_filters:
+  - lines:
+      - &#39;if &amp;quot;azure&amp;quot; in [tags] {&#39;
+      - &#39;  json {&#39;
+      - &#39;    source =&amp;gt; &amp;quot;message&amp;quot;&#39;
+      - &#39;  }&#39;
+      - &#39;}&#39;
+
+# As we will not use any default output, we will leave it as empty list []
+logstash_base_outputs: []
+
+# Here we will tell ansible role to configure the output to our GELF UDP input.
+logstash_custom_outputs:
+
+  - output: &#39;gelf&#39;
+    lines:
+      - &#39;host =&amp;gt; &amp;quot;localhost&amp;quot;&#39;
+      - &#39;port =&amp;gt; &amp;quot;12201&amp;quot;&#39;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;All these vars will tell what we exactly want from ansible role for logstash.&lt;/p&gt;
+
+&lt;h2 id=&#34;run-the-playbook&#34;&gt;Run the playbook&lt;/h2&gt;
+
+&lt;p&gt;use same steps as described in: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#run-the-playbook&#34;&gt;Graylog_ansible_run&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Or run only logstash role calling with tag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags role::logstash 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;upgrading-logstash&#34;&gt;Upgrading logstash&lt;/h2&gt;
+
+&lt;p&gt;Just use normal package upgrade from your distribution.&lt;/p&gt;
+
+&lt;h2 id=&#34;receive-azure-alarms&#34;&gt;Receive Azure alarms&lt;/h2&gt;
+
+&lt;p&gt;Just setup your &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts&#34;&gt;azure alarms&lt;/a&gt;,
+to your public IP and HTTP Port: &lt;code&gt;51201&lt;/code&gt; as done at &lt;a href=&#34;#preparing-the-variables&#34;&gt;Preparing the variables&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Graylog2 1. with ansible</title>
       <link>https://pablodav.github.io/post/graylog/graylog_ansible/</link>
       <pubDate>Tue, 14 Mar 2017 07:31:51 -0300</pubDate>
       
@@ -321,8 +491,8 @@ customizations with other roles:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#upgrading-graylog&#34;&gt;Upgrading practice example.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Input from &lt;a href=&#34;https://github.com/mrlesmithjr/ansible-logstash&#34;&gt;logstash&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;Receive &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts&#34;&gt;azure alarms&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Input from &lt;a href=&#34;https://github.com/mrlesmithjr/ansible-logstash&#34;&gt;logstash&lt;/a&gt;. Done at: &lt;a href=&#34;https://pablodav.github.io/post/graylog/logstash_input/&#34;&gt;Graylog_ansible_logstash_input&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Receive &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts&#34;&gt;azure alarms&lt;/a&gt;. Done at: &lt;a href=&#34;https://pablodav.github.io/post/graylog/logstash_input/&#34;&gt;Graylog_ansible_logstash_input&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Configure commands to send alarms to &lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca&#34;&gt;nagios with nsca&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios&#34;&gt;Configure nagios&lt;/a&gt; to receive them. &lt;strong&gt;TODO&lt;/strong&gt;&lt;br /&gt;&lt;/li&gt;
 &lt;li&gt;Explain more about graylog with more links to graylog documentation. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
