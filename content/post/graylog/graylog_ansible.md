@@ -1,6 +1,6 @@
 ---
 date: 2017-03-14T7:31:51-03:00
-title: Graylog2 with ansible
+title: Graylog2 1. with ansible
 type: index
 menu:
   main:
@@ -21,8 +21,8 @@ This document will be base for future documents that explain how to add more
 customizations with other roles:  
 
 * [Upgrading practice example.](#upgrading-graylog) 
-* Input from [logstash](https://github.com/mrlesmithjr/ansible-logstash). **TODO** 
-* Receive [azure alarms](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts). **TODO** 
+* Input from [logstash](https://github.com/mrlesmithjr/ansible-logstash). Done at: [Graylog_ansible_logstash_input]({{< relref "logstash_input.md" >}})
+* Receive [azure alarms](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts). Done at: [Graylog_ansible_logstash_input]({{< relref "logstash_input.md" >}})
 * Configure commands to send alarms to [nagios with nsca](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca). **TODO**
 * [Configure nagios](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios) to receive them. **TODO**  
 * Explain more about graylog with more links to graylog documentation. **TODO**
