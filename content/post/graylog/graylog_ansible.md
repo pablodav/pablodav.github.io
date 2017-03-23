@@ -1,6 +1,6 @@
 ---
 date: 2017-03-14T7:31:51-03:00
-title: Graylog2 1. with ansible
+title: Graylog2 - 1 - with ansible
 type: index
 menu:
   main:

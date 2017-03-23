@@ -1,13 +1,15 @@
 ---
 categories:
-- x
-- "y"
+- "graylog"
+- "logstash"
+- "ansible"
+- "logging"
 date: 2017-03-22T14:37:48-03:00
 menu:
   main:
     parent: Material
     weight: 0
-title: Graylog2 2. logstash input http
+title: Graylog2 - 2 - logstash input http
 type: index
 ---
 
