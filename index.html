@@ -205,9 +205,9 @@
 
 
 
-<a  title="Graylog2 1. with ansible" href="https://pablodav.github.io/post/graylog/graylog_ansible/">
+<a  title="Graylog2 - 1 - with ansible" href="https://pablodav.github.io/post/graylog/graylog_ansible/">
 	
-	Graylog2 1. with ansible
+	Graylog2 - 1 - with ansible
 </a>
 
 
@@ -218,9 +218,22 @@
 
 
 
-<a  title="Graylog2 2. logstash input http" href="https://pablodav.github.io/post/graylog/logstash_input/">
+<a  title="Graylog2 - 2 - logstash input http" href="https://pablodav.github.io/post/graylog/logstash_input/">
 	
-	Graylog2 2. logstash input http
+	Graylog2 - 2 - logstash input http
+</a>
+
+
+
+      
+        
+        
+
+
+
+<a  title="Graylog2 - 3 - Logstash nagios_nsca" href="https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/">
+	
+	Graylog2 - 3 - Logstash nagios_nsca
 </a>
 
 
@@ -274,7 +287,256 @@
 	<article class="article">
 		<div class="wrapper">
 			
-				<h1>Graylog2 2. logstash input http </h1>
+				<h1>Graylog2 - 3 - Logstash nagios_nsca </h1>
+
+				
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Here we will explain howto add notifications to nagios using <strong>Graylog</strong> and <strong>logstash</strong>.</p>
+
+<p>In this case we will send 2 notifications:</p>
+
+<ul>
+<li>from <strong>Graylog</strong> using <strong>Streams</strong> and <strong>commands plugin</strong>.</li>
+<li>From <strong>Logstash</strong> using <strong><a href="https://www.elastic.co/guide/en/logstash/current/plugins-outputs-nagios_nsca.html">plugins-outpus-nagios-nsca</a></strong></li>
+</ul>
+
+<p><img src="https://pablodav.github.io/img/graylog_logstash_nagios_nsca.png" alt="graylog_logstash_nagios_nsca.png" /></p>
+
+<h2 id="requirements">Requirements</h2>
+
+<p>Have read both articles:</p>
+
+<ul>
+<li><a href="https://pablodav.github.io/post/graylog/graylog_ansible/">Graylog_ansible</a></li>
+<li><a href="https://pablodav.github.io/post/graylog/logstash_input/">Graylog_logstash_input</a></li>
+</ul>
+
+<p>We need also 2 new roles to have in our <code>ansible-control-machine</code>.</p>
+
+<p>We will use <code>requirements.yml</code>, and follow same steps: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#installing-roles">Graylog_ansible_installing_roles</a></p>
+
+<p>So add these lines:</p>
+
+<pre><code class="language-yaml">- src: https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca.git
+  name: ansible_nagios_graylog2_nsca
+
+- src: https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios.git
+  name: ansible_nagios_graylog2_nsca_config_nagios
+</code></pre>
+
+<p>And install the roles with <code>ansible-galaxy install -r requirements.yml</code></p>
+
+<h2 id="ansible-inventory">Ansible Inventory</h2>
+
+<p>We will use same inventory as created at: at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-inventory">Graylog_ansible_inventory</a></p>
+
+<h2 id="preparing-the-variables">Preparing the variables</h2>
+
+<p>The folder was created during the preparatives at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-variables">Graylog_ansible_variables</a></p>
+
+<p>We will modify <code>group_vars/graylog2_servers/logstash_vars</code>:</p>
+
+<p>Modify <code>logstash_custom_outputs</code> variable, so it will look like:</p>
+
+<pre><code class="language-ini">
+logstash_custom_outputs:
+
+  - output: 'gelf'
+    lines:
+      - 'host =&gt; &quot;localhost&quot;'
+      - 'port =&gt; &quot;12201&quot;'
+
+  # https://www.elastic.co/guide/en/logstash/current/plugins-outputs-nagios_nsca.html
+  - output: 'nagios_nsca'
+    if_condition: '&quot;Resolved&quot; in [status]'
+    lines:
+      - 'host =&gt; &quot;{{ ansible_nagios_graylog_nagios_server }}&quot;'
+      - 'nagios_service =&gt; &quot;LOGSTASH&quot;'
+      - 'nagios_status =&gt; &quot;0&quot;'
+      - 'nagios_host =&gt; &quot;{{ ansible_nagios_graylog_hostname }}&quot;'
+
+  - output: 'nagios_nsca'
+    if_condition: '&quot;Activated&quot; in [status]'
+    lines:
+      - 'host =&gt; &quot;{{ ansible_nagios_graylog_nagios_server }}&quot;'  # This is the nagios server
+      - 'nagios_service =&gt; &quot;LOGSTASH&quot;'                        # This is the service to send status in nagios.
+      - 'nagios_status =&gt; &quot;2&quot;'                                # The status to send to the service.
+      - 'nagios_host =&gt; &quot;{{ ansible_nagios_graylog_hostname }}&quot;'  # This is the host to send status in nagios.
+
+</code></pre>
+
+<p>As noticed we added 2 output <code>nagios_nsca</code>, with conditions (One for Activated and other for Resolved in <code>[status]</code>). As we have
+filtered (transformed) the data to json, we can us the if condition. See <a href="https://pablodav.github.io/post/graylog/logstash_input/">Graylog_logstash_input</a>.</p>
+
+<p>In this example the json data has <code>[status]</code> var to check, but you can also use without if condition to send nsca check always.</p>
+
+<p>We have also <code>ansible_nagios_graylog_main_server</code> and <code>ansible_nagios_graylog_host</code> vars, you can define here the <code>host</code> and <code>nagios_host</code>
+without vars.</p>
+
+<p>We will define also file with these two vars:</p>
+
+<p><code>group_vars/graylog2_servers/nagios_graylog</code>:</p>
+
+<pre><code class="language-ini">
+---
+
+ansible_nagios_graylog_nagios_server: 'YOURNAGIOSSERVER'
+
+# This variable will be used by ansible_nagios_graylog2_nsca role.
+# Will create an script called  /usr/local/sbin/graylog2-alert.sh
+# This script is by default defined in var ansible_nagios_graylog_nsca_script, but you don't need to change it.
+# It's a list of nagios hosts to send the command nsca
+ansible_nagios_graylog_nagios_servers:
+  - '{{ ansible_nagios_graylog_nagios_server }}'
+
+# The hostname that will be created in nagios to
+# setup nagios_services and then receive the alerts on these nagios_services
+ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
+
+
+</code></pre>
+
+<h2 id="preparing-variables-for-nagios-config">Preparing variables for nagios_config</h2>
+
+<p>We will need to setup <code>inventory</code> with <code>nagios4_servers</code> group and add our nagios host here.</p>
+
+<p>Then add file: <code>group_vars/nagios4_servers/nagios_graylog</code></p>
+
+<pre><code class="language-ini">ansible_nagios_graylog_setup_nagios_host: true
+ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
+ansible_nagios_graylog_parents: 'FRB_CLUSTER'
+ansible_nagios_graylog_address: 'IP.ADD.RE.SS'
+ansible_nagios_graylog_template: 'servers_linux_template'  # Change it to your own template
+
+# nagios configuration (optional settings):
+ansible_nagios_graylog_setup_nagios_service: true
+
+# Nagios Service for each streams to configure:
+ansible_nagios_graylog_nagios_streams:
+
+  - name: &quot;Graylog2-Azure_streams&quot;
+    contact_group: &quot;Graylog2-Azure_streams&quot;
+
+  - name: &quot;LOGSTASH&quot;
+    contact_group: &quot;Graylog2-Azure_streams&quot;
+
+# Nagios contact groups for each streams:
+ansible_nagios_graylog_nagios_streams_contactgroups:
+
+  - contact_group: &quot;Graylog2-Azure_streams&quot;
+    members: &quot;nagiosadmin&quot;
+
+# nagios configuration options:
+nagios_etc: '/usr/local/nagios/etc'
+# Where we will add the nagios configuration
+nagios_config_cfg_dir: &quot;{{ nagios_etc }}/conf.d&quot;
+
+</code></pre>
+
+<h2 id="preparing-the-playbook-to-run-the-roles">Preparing the playbook to run the roles</h2>
+
+<p>Here we will add to <code>roles.graylog2.yml</code> as examplained at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles">Graylog_ansible_playbook</a></p>
+
+<pre><code class="language-ini">
+- name: Apply nagios_nsca for graylog2 servers
+  hosts: graylog2_servers
+  become: yes
+  # environment: &quot;{{ proxy_env }}&quot;
+  roles:
+
+    - role: ansible_nagios_graylog2_nsca
+      tags:
+        - role::ansible_nagios_graylog2_nsca
+        - graylog2_servers
+
+
+- name: Config nagios hosts service and host for graylog nsca stream services
+  hosts: nagios4_servers
+  become: yes
+  # environment: &quot;{{ proxy_env }}&quot;
+  roles:
+
+    - role: ansible_nagios_graylog2_nsca_config_nagios
+      tags:
+        - role::ansible_nagios_graylog2_nsca
+        - role::ansible_nagios_graylog2_nsca_config_nagios
+
+</code></pre>
+
+<h2 id="run-the-playbook">Run the playbook</h2>
+
+<p>use same steps as described in: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#run-the-playbook">Graylog_ansible_run</a></p>
+
+<p>Or run only logstash role calling with tag:</p>
+
+<pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags  
+</code></pre>
+
+<h2 id="what-we-have-done">What we have done</h2>
+
+<ul>
+<li>We have modified <strong>logstash</strong> vars, now we have two outputs sending nsca message to nagios service.</li>
+<li>We have added role: <strong><a href="https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios">ansible_nagios_graylog2_nsca_config_nagios</a></strong>.
+** It will create our configuration in nagios.</li>
+<li>We have added role: **<a href="https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca">ansible_nagios_graylog2_nsca</a>
+** It will add script: /usr/local/sbin/graylog2-alert.sh
+** Also will setup configure <a href="ttps://github.com/nksft/graylog2-plugin-exec">graylog2-plugin-exec</a></li>
+</ul>
+
+<p>You can use your own nagios config to setup the host and server, then not need to use ansible_nagios_graylog2_nsca_config_nagios role if
+ you don&rsquo;t like it. But using this role will make things faster.</p>
+
+<h2 id="configure-graylog-for-exec">Configure graylog for exec</h2>
+
+<p>Now logstash is sending alerts, but we need to setup Graylog <strong>Alerts</strong> to use <strong>Exec callback plugin</strong></p>
+
+<p>Checkout doc: <a href="https://github.com/nksft/graylog2-plugin-exec#usage">https://github.com/nksft/graylog2-plugin-exec#usage</a></p>
+
+<p>First create a <strong><a href="http://docs.graylog.org/en/stable/pages/streams.html">Stream</a></strong></p>
+
+<p>I will create 2 streams for Azure messages:</p>
+
+<p><img src="https://pablodav.github.io/img/graylog_streams_azure_activated.png" alt="graylog_streams_azure_activated" /></p>
+
+<p>And add rule for it:</p>
+
+<p><img src="https://pablodav.github.io/img/graylog_streams_azure_activated_rules.png" alt="graylog_streams_azure_activated_rules.png" /></p>
+
+<p>Now we will create **<a href="http://docs.graylog.org/en/stable/pages/getting_started/stream_alerts.html">Graylog_alert</a> For our stream</p>
+
+<p>create new alert condition like:</p>
+
+<p><img src="https://pablodav.github.io/img/graylog_new_alert_condition.png" alt="graylog_new_alert_condition.png" /></p>
+
+<p>Then add Notifications as <strong>Exec callback plugins</strong></p>
+
+<p><img src="https://pablodav.github.io/img/graylog_new_notification.png" alt="/img/graylog_new_notification.png" /></p>
+
+<p>Add to your notification command:</p>
+
+<ul>
+<li><strong>Title:</strong> <code>Activated Graylog2-Azure-streams</code></li>
+<li><strong>Command:</strong> <code>/usr/local/sbin/graylog2-alert.sh &quot;Graylog2-Azure_streams http://YOURGRAYLOGIP/streams/589c62dedf4b0011fc1232e8/search&quot;</code></li>
+</ul>
+
+<p>Where <code>Graylog2-Azure_streams</code> is the service name on nagios. And second parameter is a message to put in the check</p>
+
+<p><code>589c62dedf4b0011fc1232e8</code> is the id for your stream.</p>
+
+<p>You will then have and will be able to test directly from graylog:</p>
+
+<p><img src="https://pablodav.github.io/img/graylog_notification_commands.png" alt="/img/graylog_notification_commands.png" /></p>
+
+<p>That&rsquo;s it.</p>
+
+<p>Now you can add many streams and more nagios services for each of your streams with your own settings.</p>
+
+<p>These examples are done with Azure alerts, but they apply to any other kind of alert.</p>
+
+			
+				<h1>Graylog2 - 2 - logstash input http </h1>
 
 				
 
@@ -439,7 +701,7 @@ logstash_custom_outputs:
 to your public IP and HTTP Port: <code>51201</code> as done at <a href="#preparing-the-variables">Preparing the variables</a></p>
 
 			
-				<h1>Graylog2 1. with ansible </h1>
+				<h1>Graylog2 - 1 - with ansible </h1>
 
 				
 

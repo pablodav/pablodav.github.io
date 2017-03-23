@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Monitoring on Pablo Estigarribia&#39;s docs</title>
+    <link>https://pablodav.github.io/categories/monitoring/index.xml</link>
+    <description>Recent content in Monitoring on Pablo Estigarribia&#39;s docs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>Released under the MIT license with content licensed with CC BY</copyright>
+    <atom:link href="https://pablodav.github.io/categories/monitoring/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Graylog2 - 3 - Logstash nagios_nsca</title>
+      <link>https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/</link>
+      <pubDate>Thu, 23 Mar 2017 10:54:25 -0300</pubDate>
+      
+      <guid>https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;Here we will explain howto add notifications to nagios using &lt;strong&gt;Graylog&lt;/strong&gt; and &lt;strong&gt;logstash&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;In this case we will send 2 notifications:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;from &lt;strong&gt;Graylog&lt;/strong&gt; using &lt;strong&gt;Streams&lt;/strong&gt; and &lt;strong&gt;commands plugin&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;From &lt;strong&gt;Logstash&lt;/strong&gt; using &lt;strong&gt;&lt;a href=&#34;https://www.elastic.co/guide/en/logstash/current/plugins-outputs-nagios_nsca.html&#34;&gt;plugins-outpus-nagios-nsca&lt;/a&gt;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_logstash_nagios_nsca.png&#34; alt=&#34;graylog_logstash_nagios_nsca.png&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+
+&lt;p&gt;Have read both articles:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/&#34;&gt;Graylog_ansible&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pablodav.github.io/post/graylog/logstash_input/&#34;&gt;Graylog_logstash_input&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We need also 2 new roles to have in our &lt;code&gt;ansible-control-machine&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;We will use &lt;code&gt;requirements.yml&lt;/code&gt;, and follow same steps: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#installing-roles&#34;&gt;Graylog_ansible_installing_roles&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;So add these lines:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;- src: https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca.git
+  name: ansible_nagios_graylog2_nsca
+
+- src: https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios.git
+  name: ansible_nagios_graylog2_nsca_config_nagios
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And install the roles with &lt;code&gt;ansible-galaxy install -r requirements.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;ansible-inventory&#34;&gt;Ansible Inventory&lt;/h2&gt;
+
+&lt;p&gt;We will use same inventory as created at: at &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-inventory&#34;&gt;Graylog_ansible_inventory&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;preparing-the-variables&#34;&gt;Preparing the variables&lt;/h2&gt;
+
+&lt;p&gt;The folder was created during the preparatives at: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-variables&#34;&gt;Graylog_ansible_variables&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We will modify &lt;code&gt;group_vars/graylog2_servers/logstash_vars&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;Modify &lt;code&gt;logstash_custom_outputs&lt;/code&gt; variable, so it will look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
+logstash_custom_outputs:
+
+  - output: &#39;gelf&#39;
+    lines:
+      - &#39;host =&amp;gt; &amp;quot;localhost&amp;quot;&#39;
+      - &#39;port =&amp;gt; &amp;quot;12201&amp;quot;&#39;
+
+  # https://www.elastic.co/guide/en/logstash/current/plugins-outputs-nagios_nsca.html
+  - output: &#39;nagios_nsca&#39;
+    if_condition: &#39;&amp;quot;Resolved&amp;quot; in [status]&#39;
+    lines:
+      - &#39;host =&amp;gt; &amp;quot;{{ ansible_nagios_graylog_nagios_server }}&amp;quot;&#39;
+      - &#39;nagios_service =&amp;gt; &amp;quot;LOGSTASH&amp;quot;&#39;
+      - &#39;nagios_status =&amp;gt; &amp;quot;0&amp;quot;&#39;
+      - &#39;nagios_host =&amp;gt; &amp;quot;{{ ansible_nagios_graylog_hostname }}&amp;quot;&#39;
+
+  - output: &#39;nagios_nsca&#39;
+    if_condition: &#39;&amp;quot;Activated&amp;quot; in [status]&#39;
+    lines:
+      - &#39;host =&amp;gt; &amp;quot;{{ ansible_nagios_graylog_nagios_server }}&amp;quot;&#39;  # This is the nagios server
+      - &#39;nagios_service =&amp;gt; &amp;quot;LOGSTASH&amp;quot;&#39;                        # This is the service to send status in nagios.
+      - &#39;nagios_status =&amp;gt; &amp;quot;2&amp;quot;&#39;                                # The status to send to the service.
+      - &#39;nagios_host =&amp;gt; &amp;quot;{{ ansible_nagios_graylog_hostname }}&amp;quot;&#39;  # This is the host to send status in nagios.
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As noticed we added 2 output &lt;code&gt;nagios_nsca&lt;/code&gt;, with conditions (One for Activated and other for Resolved in &lt;code&gt;[status]&lt;/code&gt;). As we have
+filtered (transformed) the data to json, we can us the if condition. See &lt;a href=&#34;https://pablodav.github.io/post/graylog/logstash_input/&#34;&gt;Graylog_logstash_input&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;In this example the json data has &lt;code&gt;[status]&lt;/code&gt; var to check, but you can also use without if condition to send nsca check always.&lt;/p&gt;
+
+&lt;p&gt;We have also &lt;code&gt;ansible_nagios_graylog_main_server&lt;/code&gt; and &lt;code&gt;ansible_nagios_graylog_host&lt;/code&gt; vars, you can define here the &lt;code&gt;host&lt;/code&gt; and &lt;code&gt;nagios_host&lt;/code&gt;
+without vars.&lt;/p&gt;
+
+&lt;p&gt;We will define also file with these two vars:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;group_vars/graylog2_servers/nagios_graylog&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
+---
+
+ansible_nagios_graylog_nagios_server: &#39;YOURNAGIOSSERVER&#39;
+
+# This variable will be used by ansible_nagios_graylog2_nsca role.
+# Will create an script called  /usr/local/sbin/graylog2-alert.sh
+# This script is by default defined in var ansible_nagios_graylog_nsca_script, but you don&#39;t need to change it.
+# It&#39;s a list of nagios hosts to send the command nsca
+ansible_nagios_graylog_nagios_servers:
+  - &#39;{{ ansible_nagios_graylog_nagios_server }}&#39;
+
+# The hostname that will be created in nagios to
+# setup nagios_services and then receive the alerts on these nagios_services
+ansible_nagios_graylog_hostname: &#39;YOURGRAYLOGHOSTNAME&#39;
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;preparing-variables-for-nagios-config&#34;&gt;Preparing variables for nagios_config&lt;/h2&gt;
+
+&lt;p&gt;We will need to setup &lt;code&gt;inventory&lt;/code&gt; with &lt;code&gt;nagios4_servers&lt;/code&gt; group and add our nagios host here.&lt;/p&gt;
+
+&lt;p&gt;Then add file: &lt;code&gt;group_vars/nagios4_servers/nagios_graylog&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;ansible_nagios_graylog_setup_nagios_host: true
+ansible_nagios_graylog_hostname: &#39;YOURGRAYLOGHOSTNAME&#39;
+ansible_nagios_graylog_parents: &#39;FRB_CLUSTER&#39;
+ansible_nagios_graylog_address: &#39;IP.ADD.RE.SS&#39;
+ansible_nagios_graylog_template: &#39;servers_linux_template&#39;  # Change it to your own template
+
+# nagios configuration (optional settings):
+ansible_nagios_graylog_setup_nagios_service: true
+
+# Nagios Service for each streams to configure:
+ansible_nagios_graylog_nagios_streams:
+
+  - name: &amp;quot;Graylog2-Azure_streams&amp;quot;
+    contact_group: &amp;quot;Graylog2-Azure_streams&amp;quot;
+
+  - name: &amp;quot;LOGSTASH&amp;quot;
+    contact_group: &amp;quot;Graylog2-Azure_streams&amp;quot;
+
+# Nagios contact groups for each streams:
+ansible_nagios_graylog_nagios_streams_contactgroups:
+
+  - contact_group: &amp;quot;Graylog2-Azure_streams&amp;quot;
+    members: &amp;quot;nagiosadmin&amp;quot;
+
+# nagios configuration options:
+nagios_etc: &#39;/usr/local/nagios/etc&#39;
+# Where we will add the nagios configuration
+nagios_config_cfg_dir: &amp;quot;{{ nagios_etc }}/conf.d&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;preparing-the-playbook-to-run-the-roles&#34;&gt;Preparing the playbook to run the roles&lt;/h2&gt;
+
+&lt;p&gt;Here we will add to &lt;code&gt;roles.graylog2.yml&lt;/code&gt; as examplained at: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles&#34;&gt;Graylog_ansible_playbook&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-ini&#34;&gt;
+- name: Apply nagios_nsca for graylog2 servers
+  hosts: graylog2_servers
+  become: yes
+  # environment: &amp;quot;{{ proxy_env }}&amp;quot;
+  roles:
+
+    - role: ansible_nagios_graylog2_nsca
+      tags:
+        - role::ansible_nagios_graylog2_nsca
+        - graylog2_servers
+
+
+- name: Config nagios hosts service and host for graylog nsca stream services
+  hosts: nagios4_servers
+  become: yes
+  # environment: &amp;quot;{{ proxy_env }}&amp;quot;
+  roles:
+
+    - role: ansible_nagios_graylog2_nsca_config_nagios
+      tags:
+        - role::ansible_nagios_graylog2_nsca
+        - role::ansible_nagios_graylog2_nsca_config_nagios
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-the-playbook&#34;&gt;Run the playbook&lt;/h2&gt;
+
+&lt;p&gt;use same steps as described in: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_ansible/#run-the-playbook&#34;&gt;Graylog_ansible_run&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Or run only logstash role calling with tag:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;what-we-have-done&#34;&gt;What we have done&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;We have modified &lt;strong&gt;logstash&lt;/strong&gt; vars, now we have two outputs sending nsca message to nagios service.&lt;/li&gt;
+&lt;li&gt;We have added role: &lt;strong&gt;&lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios&#34;&gt;ansible_nagios_graylog2_nsca_config_nagios&lt;/a&gt;&lt;/strong&gt;.
+** It will create our configuration in nagios.&lt;/li&gt;
+&lt;li&gt;We have added role: **&lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca&#34;&gt;ansible_nagios_graylog2_nsca&lt;/a&gt;
+** It will add script: /usr/local/sbin/graylog2-alert.sh
+** Also will setup configure &lt;a href=&#34;ttps://github.com/nksft/graylog2-plugin-exec&#34;&gt;graylog2-plugin-exec&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can use your own nagios config to setup the host and server, then not need to use ansible_nagios_graylog2_nsca_config_nagios role if
+ you don&amp;rsquo;t like it. But using this role will make things faster.&lt;/p&gt;
+
+&lt;h2 id=&#34;configure-graylog-for-exec&#34;&gt;Configure graylog for exec&lt;/h2&gt;
+
+&lt;p&gt;Now logstash is sending alerts, but we need to setup Graylog &lt;strong&gt;Alerts&lt;/strong&gt; to use &lt;strong&gt;Exec callback plugin&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Checkout doc: &lt;a href=&#34;https://github.com/nksft/graylog2-plugin-exec#usage&#34;&gt;https://github.com/nksft/graylog2-plugin-exec#usage&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;First create a &lt;strong&gt;&lt;a href=&#34;http://docs.graylog.org/en/stable/pages/streams.html&#34;&gt;Stream&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I will create 2 streams for Azure messages:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_streams_azure_activated.png&#34; alt=&#34;graylog_streams_azure_activated&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;And add rule for it:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_streams_azure_activated_rules.png&#34; alt=&#34;graylog_streams_azure_activated_rules.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we will create **&lt;a href=&#34;http://docs.graylog.org/en/stable/pages/getting_started/stream_alerts.html&#34;&gt;Graylog_alert&lt;/a&gt; For our stream&lt;/p&gt;
+
+&lt;p&gt;create new alert condition like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_new_alert_condition.png&#34; alt=&#34;graylog_new_alert_condition.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Then add Notifications as &lt;strong&gt;Exec callback plugins&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_new_notification.png&#34; alt=&#34;/img/graylog_new_notification.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Add to your notification command:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Title:&lt;/strong&gt; &lt;code&gt;Activated Graylog2-Azure-streams&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Command:&lt;/strong&gt; &lt;code&gt;/usr/local/sbin/graylog2-alert.sh &amp;quot;Graylog2-Azure_streams http://YOURGRAYLOGIP/streams/589c62dedf4b0011fc1232e8/search&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Where &lt;code&gt;Graylog2-Azure_streams&lt;/code&gt; is the service name on nagios. And second parameter is a message to put in the check&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;589c62dedf4b0011fc1232e8&lt;/code&gt; is the id for your stream.&lt;/p&gt;
+
+&lt;p&gt;You will then have and will be able to test directly from graylog:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://pablodav.github.io/img/graylog_notification_commands.png&#34; alt=&#34;/img/graylog_notification_commands.png&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s it.&lt;/p&gt;
+
+&lt;p&gt;Now you can add many streams and more nagios services for each of your streams with your own settings.&lt;/p&gt;
+
+&lt;p&gt;These examples are done with Azure alerts, but they apply to any other kind of alert.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
