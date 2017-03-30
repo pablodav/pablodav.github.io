@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cb86fb54-24df-4d6d-bc3a-f6b8f7073911" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/themes/hugo-material-docs" afterPath="$PROJECT_DIR$/themes/hugo-material-docs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/content/post/graylog/graylog_ansible.md" afterPath="$PROJECT_DIR$/content/post/graylog/graylog_ansible.md" />
     </list>
     <ignored path="blog.iws" />
     <ignored path=".idea/workspace.xml" />
