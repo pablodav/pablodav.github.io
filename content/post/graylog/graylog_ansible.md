@@ -23,8 +23,8 @@ customizations with other roles:
 * [Upgrading practice example.](#upgrading-graylog) 
 * Input from [logstash](https://github.com/mrlesmithjr/ansible-logstash). Done at: [Graylog_ansible_logstash_input]({{< relref "logstash_input.md" >}})
 * Receive [azure alarms](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts). Done at: [Graylog_ansible_logstash_input]({{< relref "logstash_input.md" >}})
-* Configure commands to send alarms to [nagios with nsca](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca). Done: [Graylog_ansible_logstash_nagios_nsca]({{< relref "logstash_graylog_logstash_nagios_nsca.md" >}})
-* [Configure nagios](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios) to receive them. Done: [Graylog_ansible_logstash_nagios_nsca]({{< relref "logstash_graylog_logstash_nagios_nsca.md" >}})
+* Configure commands to send alarms to [nagios with nsca](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca). Done: [Graylog_ansible_logstash_nagios_nsca]({{< relref "graylog_logstash_nagios_nsca.md" >}})
+* [Configure nagios](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios) to receive them. Done: [Graylog_ansible_logstash_nagios_nsca]({{< relref "graylog_logstash_nagios_nsca.md" >}})
 * Explain more about graylog with more links to graylog documentation. **TODO**
 
 Requirements
