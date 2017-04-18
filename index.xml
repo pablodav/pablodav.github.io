@@ -747,8 +747,8 @@ customizations with other roles:&lt;/p&gt;
 &lt;li&gt;&lt;a href=&#34;#upgrading-graylog&#34;&gt;Upgrading practice example.&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Input from &lt;a href=&#34;https://github.com/mrlesmithjr/ansible-logstash&#34;&gt;logstash&lt;/a&gt;. Done at: &lt;a href=&#34;https://pablodav.github.io/post/graylog/logstash_input/&#34;&gt;Graylog_ansible_logstash_input&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Receive &lt;a href=&#34;https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts&#34;&gt;azure alarms&lt;/a&gt;. Done at: &lt;a href=&#34;https://pablodav.github.io/post/graylog/logstash_input/&#34;&gt;Graylog_ansible_logstash_input&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Configure commands to send alarms to &lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca&#34;&gt;nagios with nsca&lt;/a&gt;. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios&#34;&gt;Configure nagios&lt;/a&gt; to receive them. &lt;strong&gt;TODO&lt;/strong&gt;&lt;br /&gt;&lt;/li&gt;
+&lt;li&gt;Configure commands to send alarms to &lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca&#34;&gt;nagios with nsca&lt;/a&gt;. Done: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/&#34;&gt;Graylog_ansible_logstash_nagios_nsca&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios&#34;&gt;Configure nagios&lt;/a&gt; to receive them. Done: &lt;a href=&#34;https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/&#34;&gt;Graylog_ansible_logstash_nagios_nsca&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Explain more about graylog with more links to graylog documentation. &lt;strong&gt;TODO&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
