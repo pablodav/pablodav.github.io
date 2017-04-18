@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Graylog2 - 2 - logstash input http - Pablo Estigarribia&#39;s docs</title>
+    <title>Adding content - Pablo Estigarribia&#39;s docs</title>
     <meta name="generator" content="Hugo 0.20.2" />
 
     
     <meta name="description" content="Pablo Estigarribia&#39;s personal docs for sharing sysadmin and devops works">
     
-    <link rel="canonical" href="https://pablodav.github.io/post/graylog/logstash_input/">
+    <link rel="canonical" href="https://pablodav.github.io/adding-material/index/">
     
     <meta name="author" content="pablodav">
     
 
-    <meta property="og:url" content="https://pablodav.github.io/post/graylog/logstash_input/">
+    <meta property="og:url" content="https://pablodav.github.io/adding-material/index/">
     <meta property="og:title" content="Pablo Estigarribia&#39;s docs">
     
     <meta name="apple-mobile-web-app-title" content="Pablo Estigarribia&#39;s docs">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Graylog2 - 2 - logstash input http
+        Adding content
       </div>
     </div>
 
@@ -215,14 +215,11 @@
 
 
 
-<a class="current" title="Graylog2 - 2 - logstash input http" href="https://pablodav.github.io/post/graylog/logstash_input/">
+<a  title="Graylog2 - 2 - logstash input http" href="https://pablodav.github.io/post/graylog/logstash_input/">
 	
 	Graylog2 - 2 - logstash input http
 </a>
 
-
-<ul id="scrollspy">
-</ul>
 
 
       
@@ -286,169 +283,63 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Graylog2 - 2 - logstash input http </h1>
+			<h1>Adding content </h1>
 
 			
 
-<h2 id="introduction">Introduction</h2>
+<h2 id="hello-world">Hello world</h2>
 
-<ul>
-<li>Configure <a href="http://docs.graylog.org/en/latest/pages/gelf.html"><strong>GELF</strong></a> input in graylog.</li>
-<li>Prepare <strong>logstash</strong> to input data from any <a href="https://www.elastic.co/blog/introducing-logstash-input-http-plugin">http</a> post.</li>
-<li>Send data to <strong>GELF</strong> input in graylog using <a href="https://www.elastic.co/guide/en/logstash/current/plugins-outputs-gelf.html">plugins_output_gelf</a>.</li>
-</ul>
+<p>Let&rsquo;s create our first content file for your documentation. Open a terminal and add the following command for each new file you want to add. Replace <code>&lt;section-name&gt;</code> with a general term that describes your document in detail.</p>
 
-<p><img src="https://pablodav.github.io/img/graylog_gelf_logstash.png" alt="graylog_gelf_logstash" /></p>
-
-<h2 id="requirements-ansible">Requirements Ansible</h2>
-
-<p>As explained in <a href="https://github.com/CoffeeITWorks/ansible-generic-help#installing-roles">Generic-help installing roles</a>.
-And at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#installing-roles">Graylog_ansible_installing_roles</a></p>
-
-<p>We will use <code>requirements.yml</code> to add this:</p>
-
-<pre><code>- src: mrlesmithjr.logstash
-  name: ansible-logstash
-  version: master
+<pre><code class="language-sh">hugo new &lt;section-name&gt;/filename.md
 </code></pre>
 
-<p>Then install with <code>ansible-galaxy install -r requirements.yml</code></p>
+<p>Visitors of your website will find the final document under <code>www.example.com/&lt;section-name&gt;/filename/</code>.</p>
 
-<p>It will install the role with name <code>ansible-logstash</code>, we will use that name in our playbook.</p>
+<p>Since it&rsquo;s possible to have multiple content files in the same section I recommend to create at least one <code>index.md</code> file per section. This ensures that users will find an index page under <code>www.example.com/&lt;section-name&gt;</code>.</p>
 
-<h2 id="requirements-graylog2">Requirements Graylog2</h2>
+<h2 id="homepage">Homepage</h2>
 
-<p>Here we need to add an input to receive the messages from <strong>logstash</strong>.</p>
+<p>To add content to the homepage you need to add a small indicator to the frontmatter of the content file:</p>
 
-<p>Go to System -&gt; Inputs</p>
+<pre><code class="language-toml">type: index
+</code></pre>
 
-<p><img src="https://pablodav.github.io/img/graylog_system_input.png" alt="System_inputs" /></p>
+<p>Otherwise the theme will not be able to find the corresponding content file.</p>
 
-<ul>
-<li>Select <strong>GELF UDP INPUT</strong>.<br /></li>
-<li>We will use port 12201</li>
-<li>save</li>
-<li>Start the input</li>
-</ul>
+<h2 id="table-of-contents">Table of contents</h2>
 
-<p>After done, you could see something like:</p>
+<p>You maybe noticed that the menu on the left contains a small table of contents of the current page. All <code>&lt;h2&gt;</code> tags (<code>## Headline</code> in Markdown) will be added automatically.</p>
 
-<p><img src="https://pablodav.github.io/img/graylog_input_gelf_udp.png" alt="graylog_input_gelf_udp" /></p>
+<h2 id="admonitions">Admonitions</h2>
 
-<div class="admonition warning">
-<p class="admonition-title">Port below 1024 will not work</p>
-<p>Graylog2 is running as normal user, linux will not allow port below 1024</p>
+<p>Admonition is a handy feature that adds block-styled side content to your documentation, for example hints, notes or warnings. It can be enabled by using the corresponding <a href="http://gohugo.io/extras/shortcodes/">shortcodes</a> inside your content:</p>
+
+<pre><code class="language-go">{{&lt; note title=&quot;Note&quot; &gt;}}
+Nothing to see here, move along.
+{{&lt; /note &gt;}}
+</code></pre>
+
+<p>This will print the following block:</p>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Nothing to see here, move along.</p>
 </div>
 
-<h2 id="ansible-inventory">Ansible Inventory</h2>
+<p>The shortcode adds a neutral color for the note class and a red color for the warning class. You can also add a custom title:</p>
 
-<p>We will use same inventory as created at: at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-inventory">Graylog_ansible_inventory</a></p>
-
-<h2 id="preparing-the-playbook-to-run-the-roles">Preparing the playbook to run the roles</h2>
-
-<p>Here we will add to <code>roles.graylog2.yml</code> as examplained at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles">Graylog_ansible_playbook</a></p>
-
-<pre><code>
-- name: Apply logstash for graylog2 servers
-  hosts: graylog2_servers
-  become: yes
-
-  roles:
-
-    - role: ansible-logstash
-      tags:
-        - role::logstash
-        - graylog2_servers
-
+<pre><code class="language-go">{{&lt; warning title=&quot;Don't try this at home&quot; &gt;}}
+Nothing to see here, move along.
+{{&lt; /warning &gt;}}
 </code></pre>
 
-<h2 id="preparing-the-variables">Preparing the variables</h2>
+<p>This will print the following block:</p>
 
-<p>We will create new file <code>group_vars/graylog2_servers/logstash_vars</code></p>
-
-<p>The folder was created during the preparatives at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-variables">Graylog_ansible_variables</a></p>
-
-<p>Variables:</p>
-
-<pre><code class="language-ini">
-# logstash role:
-
-pri_domain_name: 'example.com'
-config_logstash: True
-logstash_install_java: false
-
-# These are the files that will be used and will be created in `/etc/logstash/conf.d/`
-logstash_base_configs:
-  - '000_inputs'
-  - '001_filters'
-  - '999_outputs'
-
-# Plugins required by us
-logstash_plugins:
-  - 'logstash-output-nagios_nsca'
-  - 'logstash-output-gelf'
-
-# see https://github.com/mrlesmithjr/ansible-logstash
-logstash_base_file_inputs: []
-
-
-# We don't need it really, but will add anyway
-logstash_base_inputs:  #define inputs below to configure
-  - prot: 'tcp'
-    port: '10514'  #gets around port &lt; 1024 (Note...Configure clients to send to 10514 instead of default 514)
-    type: 'syslog'
-
-# Here we are creating one input, in this case we will add a tag to make it easier to filter
-# example is with azure tag, but can be any other.
-logstash_custom_inputs:
-  - input: 'http'
-    lines:
-      - 'port =&gt; &quot;51202&quot;'
-      - 'type =&gt; &quot;http&quot;'
-      - 'tags =&gt; &quot;azure&quot;'
-
-# Here we will use the tag to create a filter and apply json module to 
-# transform the message into json format
-logstash_custom_filters:
-  - lines:
-      - 'if &quot;azure&quot; in [tags] {'
-      - '  json {'
-      - '    source =&gt; &quot;message&quot;'
-      - '  }'
-      - '}'
-
-# As we will not use any default output, we will leave it as empty list []
-logstash_base_outputs: []
-
-# Here we will tell ansible role to configure the output to our GELF UDP input.
-logstash_custom_outputs:
-
-  - output: 'gelf'
-    lines:
-      - 'host =&gt; &quot;localhost&quot;'
-      - 'port =&gt; &quot;12201&quot;'
-
-</code></pre>
-
-<p>All these vars will tell what we exactly want from ansible role for logstash.</p>
-
-<h2 id="run-the-playbook">Run the playbook</h2>
-
-<p>use same steps as described in: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#run-the-playbook">Graylog_ansible_run</a></p>
-
-<p>Or run only logstash role calling with tag:</p>
-
-<pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags role::logstash 
-</code></pre>
-
-<h2 id="upgrading-logstash">Upgrading logstash</h2>
-
-<p>Just use normal package upgrade from your distribution.</p>
-
-<h2 id="receive-azure-alarms">Receive Azure alarms</h2>
-
-<p>Just setup your <a href="https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts">azure alarms</a>,
-to your public IP and HTTP Port: <code>51201</code> as done at <a href="#preparing-the-variables">Preparing the variables</a></p>
+<div class="admonition warning">
+<p class="admonition-title">Don&#39;t try this at home</p>
+<p>Nothing to see here, move along.</p>
+</div>
 
 
 			<aside class="copyright" role="note">
@@ -467,7 +358,7 @@ to your public IP and HTTP Port: <code>51201</code> as done at <a href="#prepari
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/" title="Graylog2 - 3 - Logstash nagios_nsca">
+      <a href="https://pablodav.github.io/getting-started/index/" title="Getting started">
         <span class="direction">
           Previous
         </span>
@@ -477,7 +368,7 @@ to your public IP and HTTP Port: <code>51201</code> as done at <a href="#prepari
           </div>
           <div class="stretch">
             <div class="title">
-              Graylog2 - 3 - Logstash nagios_nsca
+              Getting started
             </div>
           </div>
         </div>
@@ -487,14 +378,14 @@ to your public IP and HTTP Port: <code>51201</code> as done at <a href="#prepari
 
   <div class="next">
   
-      <a href="https://pablodav.github.io/post/graylog/graylog_ansible/" title="Graylog2 - 1 - with ansible">
+      <a href="https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/" title="Graylog2 - 3 - Logstash nagios_nsca">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Graylog2 - 1 - with ansible
+              Graylog2 - 3 - Logstash nagios_nsca
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">
