@@ -14,10 +14,10 @@
     
     <item>
       <title>Getting started</title>
-      <link>https://pablodav.github.io/getting-started/index/</link>
+      <link>https://pablodav.github.io/getting-started/</link>
       <pubDate>Wed, 09 Mar 2016 00:11:02 +0100</pubDate>
       
-      <guid>https://pablodav.github.io/getting-started/index/</guid>
+      <guid>https://pablodav.github.io/getting-started/</guid>
       <description>Installation Installing Hugo Hugo itself is just a single binary without dependencies on expensive runtimes like Ruby, Python or PHP and without dependencies on any databases. You just need to download the latest version. For more information read the official installation guides.
 Let&amp;rsquo;s make sure Hugo is set up as expected. You should see a similar version number in your terminal:
 hugo version # Hugo Static Site Generator v0.15 BuildDate: 2016-01-03T12:47:47+01:00  Installing Material Next, assuming you have Hugo up and running the hugo-material-docs theme can be installed with git:</description>
@@ -25,10 +25,10 @@ hugo version # Hugo Static Site Generator v0.15 BuildDate: 2016-01-03T12:47:47+0
     
     <item>
       <title>Adding content</title>
-      <link>https://pablodav.github.io/adding-material/index/</link>
+      <link>https://pablodav.github.io/adding-material/</link>
       <pubDate>Wed, 09 Mar 2016 19:56:50 +0100</pubDate>
       
-      <guid>https://pablodav.github.io/adding-material/index/</guid>
+      <guid>https://pablodav.github.io/adding-material/</guid>
       <description>Hello world Let&amp;rsquo;s create our first content file for your documentation. Open a terminal and add the following command for each new file you want to add. Replace &amp;lt;section-name&amp;gt; with a general term that describes your document in detail.
 hugo new &amp;lt;section-name&amp;gt;/filename.md  Visitors of your website will find the final document under www.example.com/&amp;lt;section-name&amp;gt;/filename/.
 Since it&amp;rsquo;s possible to have multiple content files in the same section I recommend to create at least one index.</description>
@@ -62,6 +62,18 @@ It will install the role with name ansible-logstash, we will use that name in ou
     </item>
     
     <item>
+      <title>Ansible win Update and Security patching</title>
+      <link>https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/</link>
+      <pubDate>Sat, 18 Mar 2017 20:06:24 -0300</pubDate>
+      
+      <guid>https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/</guid>
+      <description>Updating windows with ansible Patching windows is a very time consuming task, but working with ansible you could reduce this time significantly.
+Here I will share some playbooks that will help on these tasks.
+First of all, you must ensure to keep all your windows servers updated:
+--- # file: windows-updates-all.yml - hosts: all any_errors_fatal: false serial: - 1 - 5% - 25% max_fail_percentage: 10% tasks: # Check if there are missing updates - name: Check for missing updates.</description>
+    </item>
+    
+    <item>
       <title>Graylog2 - 1 - with ansible</title>
       <link>https://pablodav.github.io/post/graylog/graylog_ansible/</link>
       <pubDate>Tue, 14 Mar 2017 07:31:51 -0300</pubDate>
@@ -75,10 +87,10 @@ This document will be base for future documents that explain how to add more cus
     
     <item>
       <title>index</title>
-      <link>https://pablodav.github.io/license/index/</link>
+      <link>https://pablodav.github.io/license/</link>
       <pubDate>Wed, 08 Mar 2017 23:01:27 -0300</pubDate>
       
-      <guid>https://pablodav.github.io/license/index/</guid>
+      <guid>https://pablodav.github.io/license/</guid>
       <description>creative commons Attribution 4.0 International Creative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information.</description>
     </item>
     

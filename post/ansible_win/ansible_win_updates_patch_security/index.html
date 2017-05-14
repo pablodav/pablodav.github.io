@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Graylog2 - 2 - logstash input http - Pablo Estigarribia&#39;s docs</title>
+    <title>Ansible win Update and Security patching - Pablo Estigarribia&#39;s docs</title>
     <meta name="generator" content="Hugo 0.20.7" />
 
     
     <meta name="description" content="Pablo Estigarribia&#39;s personal docs for sharing sysadmin and devops works">
     
-    <link rel="canonical" href="https://pablodav.github.io/post/graylog/logstash_input/">
+    <link rel="canonical" href="https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/">
     
     <meta name="author" content="pablodav">
     
 
-    <meta property="og:url" content="https://pablodav.github.io/post/graylog/logstash_input/">
+    <meta property="og:url" content="https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/">
     <meta property="og:title" content="Pablo Estigarribia&#39;s docs">
     
     <meta name="apple-mobile-web-app-title" content="Pablo Estigarribia&#39;s docs">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Graylog2 - 2 - logstash input http
+        Ansible win Update and Security patching
       </div>
     </div>
 
@@ -202,11 +202,14 @@
 
 
 
-<a  title="Ansible win Update and Security patching" href="https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/">
+<a class="current" title="Ansible win Update and Security patching" href="https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/">
 	
 	Ansible win Update and Security patching
 </a>
 
+
+<ul id="scrollspy">
+</ul>
 
 
       
@@ -239,14 +242,11 @@
 
 
 
-<a class="current" title="Graylog2 - 2 - logstash input http" href="https://pablodav.github.io/post/graylog/logstash_input/">
+<a  title="Graylog2 - 2 - logstash input http" href="https://pablodav.github.io/post/graylog/logstash_input/">
 	
 	Graylog2 - 2 - logstash input http
 </a>
 
-
-<ul id="scrollspy">
-</ul>
 
 
       
@@ -310,169 +310,159 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Graylog2 - 2 - logstash input http </h1>
+			<h1>Ansible win Update and Security patching </h1>
 
 			
 
-<h2 id="introduction">Introduction</h2>
+<h1 id="updating-windows-with-ansible">Updating windows with ansible</h1>
 
-<ul>
-<li>Configure <a href="http://docs.graylog.org/en/latest/pages/gelf.html"><strong>GELF</strong></a> input in graylog.</li>
-<li>Prepare <strong>logstash</strong> to input data from any <a href="https://www.elastic.co/blog/introducing-logstash-input-http-plugin">http</a> post.</li>
-<li>Send data to <strong>GELF</strong> input in graylog using <a href="https://www.elastic.co/guide/en/logstash/current/plugins-outputs-gelf.html">plugins_output_gelf</a>.</li>
-</ul>
+<p>Patching windows is a very time consuming task, but working with ansible you could
+reduce this time significantly.</p>
 
-<p><img src="https://pablodav.github.io/img/graylog_gelf_logstash.png" alt="graylog_gelf_logstash" /></p>
+<p>Here I will share some playbooks that will help on these tasks.</p>
 
-<h2 id="requirements-ansible">Requirements Ansible</h2>
+<p>First of all, you must ensure to keep all your windows servers updated:</p>
 
-<p>As explained in <a href="https://github.com/CoffeeITWorks/ansible-generic-help#installing-roles">Generic-help installing roles</a>.
-And at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#installing-roles">Graylog_ansible_installing_roles</a></p>
+<pre><code class="language-yaml">---
+# file: windows-updates-all.yml
 
-<p>We will use <code>requirements.yml</code> to add this:</p>
+- hosts: all
+  any_errors_fatal: false
+  serial:
+   - 1
+   - 5%
+   - 25%
+  max_fail_percentage: 10%
+  tasks:
+  # Check if there are missing updates
+  - name: Check for missing updates.
+    win_updates: state=searched
+    register: update_count
+    ignore_errors: yes
 
-<pre><code>- src: mrlesmithjr.logstash
-  name: ansible-logstash
-  version: master
-</code></pre>
+  - name: Reboot if needed
+    win_reboot: 
+      shutdown_timeout_sec: 120
+      reboot_timeout_sec: 120
+    when: update_count.reboot_required
+    ignore_errors: yes
 
-<p>Then install with <code>ansible-galaxy install -r requirements.yml</code></p>
+  - name: Install missing updates.
+    win_updates:
+      category_names:
+        - CriticalUpdates
+        - SecurityUpdates
+    register: update_result
 
-<p>It will install the role with name <code>ansible-logstash</code>, we will use that name in our playbook.</p>
-
-<h2 id="requirements-graylog2">Requirements Graylog2</h2>
-
-<p>Here we need to add an input to receive the messages from <strong>logstash</strong>.</p>
-
-<p>Go to System -&gt; Inputs</p>
-
-<p><img src="https://pablodav.github.io/img/graylog_system_input.png" alt="System_inputs" /></p>
-
-<ul>
-<li>Select <strong>GELF UDP INPUT</strong>.<br /></li>
-<li>We will use port 12201</li>
-<li>save</li>
-<li>Start the input</li>
-</ul>
-
-<p>After done, you could see something like:</p>
-
-<p><img src="https://pablodav.github.io/img/graylog_input_gelf_udp.png" alt="graylog_input_gelf_udp" /></p>
-
-<div class="admonition warning">
-<p class="admonition-title">Port below 1024 will not work</p>
-<p>Graylog2 is running as normal user, linux will not allow port below 1024</p>
-</div>
-
-<h2 id="ansible-inventory">Ansible Inventory</h2>
-
-<p>We will use same inventory as created at: at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-inventory">Graylog_ansible_inventory</a></p>
-
-<h2 id="preparing-the-playbook-to-run-the-roles">Preparing the playbook to run the roles</h2>
-
-<p>Here we will add to <code>roles.graylog2.yml</code> as examplained at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles">Graylog_ansible_playbook</a></p>
-
-<pre><code>
-- name: Apply logstash for graylog2 servers
-  hosts: graylog2_servers
-  become: yes
-
-  roles:
-
-    - role: ansible-logstash
-      tags:
-        - role::logstash
-        - graylog2_servers
+  - name: Reboot if needed
+    win_shell: Restart-Computer -Force
+    when: update_result.reboot_required
+    ignore_errors: yes
 
 </code></pre>
 
-<h2 id="preparing-the-variables">Preparing the variables</h2>
+<h2 id="audit-windows-patches-with-ansible">Audit windows patches with ansible</h2>
 
-<p>We will create new file <code>group_vars/graylog2_servers/logstash_vars</code></p>
+<p>Then you need to test if the important patch is installed.</p>
 
-<p>The folder was created during the preparatives at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-variables">Graylog_ansible_variables</a></p>
+<p>We will use in this case the information about patches for ramsomeware, normally in windows this
+information is obtained in this way:</p>
 
-<p>Variables:</p>
+<pre><code class="language-powershell">
+# Windows7 win2008 ServicePack2:
+get-hotfix -id &quot;kb4012598&quot;
 
-<pre><code class="language-ini">
-# logstash role:
+# win2008R2 hotfix RAMSOMWARE MARCH 2017:
+get-hotfix -id &quot;KB4012212&quot;
 
-pri_domain_name: 'example.com'
-config_logstash: True
-logstash_install_java: false
+# win2012R2 hotfix RAMSOMEWARE MARCH 2017:
+get-hotfix -id &quot;KB4012213&quot;
 
-# These are the files that will be used and will be created in `/etc/logstash/conf.d/`
-logstash_base_configs:
-  - '000_inputs'
-  - '001_filters'
-  - '999_outputs'
+# Windows2012 hotfix RAMSOMEWARE MARCH 2017:
+get-hotfix -id  &quot;KB4012214&quot;
 
-# Plugins required by us
-logstash_plugins:
-  - 'logstash-output-nagios_nsca'
-  - 'logstash-output-gelf'
+# win2003 hotifx RAMWOMEWARE MARCH 2017:
+# KB4012598
+# Windows 2003 doesn't provide get-hotfix and can't be managed with winrm.
+</code></pre>
 
-# see https://github.com/mrlesmithjr/ansible-logstash
-logstash_base_file_inputs: []
+<p>Then we will use this playbook to audit the servers:</p>
 
+<pre><code class="language-yaml">- name: verify windows patches
+  hosts: all
+  any_errors_fatal: false
+  serial:
+   - 100%
+  max_fail_percentage: 10%
+  tasks:
+  # Verify windows updates
+  - name: verify windows patch windows 2008 R2
+    win_shell: get-hotfix {{ item.id }}
+    when: &quot;'Windows Server 2008 R2' in ansible_os_name&quot;
+    with_items:
+      - id: KB4012212
+        description: hotfix RAMSOMWARE MARCH 2017
+    changed_when: false
 
-# We don't need it really, but will add anyway
-logstash_base_inputs:  #define inputs below to configure
-  - prot: 'tcp'
-    port: '10514'  #gets around port &lt; 1024 (Note...Configure clients to send to 10514 instead of default 514)
-    type: 'syslog'
+  # Verify windows updates
+  - name: verify windows patch windows 2008 Standard
+    win_shell: get-hotfix {{ item.id }}
+    when: &quot;'Windows Server 2008 Standard' in ansible_os_name&quot;
+    with_items:
+      - id: kb4012598
+        description: hotfix RAMSOMWARE MARCH 2017
+    changed_when: false
 
-# Here we are creating one input, in this case we will add a tag to make it easier to filter
-# example is with azure tag, but can be any other.
-logstash_custom_inputs:
-  - input: 'http'
-    lines:
-      - 'port =&gt; &quot;51202&quot;'
-      - 'type =&gt; &quot;http&quot;'
-      - 'tags =&gt; &quot;azure&quot;'
+  # Verify windows updates
+  - name: verify windows patch windows 2012 R2
+    win_shell: get-hotfix {{ item.id }}
+    when: &quot;'Windows Server 2012 R2' in ansible_os_name&quot;
+    with_items:
+      - id: KB4012213
+        description: hotfix RAMSOMWARE MARCH 2017
+    changed_when: false
 
-# Here we will use the tag to create a filter and apply json module to 
-# transform the message into json format
-logstash_custom_filters:
-  - lines:
-      - 'if &quot;azure&quot; in [tags] {'
-      - '  json {'
-      - '    source =&gt; &quot;message&quot;'
-      - '  }'
-      - '}'
-
-# As we will not use any default output, we will leave it as empty list []
-logstash_base_outputs: []
-
-# Here we will tell ansible role to configure the output to our GELF UDP input.
-logstash_custom_outputs:
-
-  - output: 'gelf'
-    lines:
-      - 'host =&gt; &quot;localhost&quot;'
-      - 'port =&gt; &quot;12201&quot;'
+  # Verify windows updates
+  - name: verify windows patch windows 2012 Standard
+    win_shell: get-hotfix {{ item.id }}
+    when: &quot;'Windows Server 2012 Standard' in ansible_os_name&quot;
+    with_items:
+      - id: KB4012214
+        description: hotfix RAMSOMWARE MARCH 2017
+    changed_when: false
 
 </code></pre>
 
-<p>All these vars will tell what we exactly want from ansible role for logstash.</p>
+<h2 id="workaround-some-patches">Workaround some patches</h2>
 
-<h2 id="run-the-playbook">Run the playbook</h2>
+<p>In some cases, patching windows is not enough or sometimes windows has some
+undesired errors that doesn&rsquo;t allow to install the KB.</p>
 
-<p>use same steps as described in: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#run-the-playbook">Graylog_ansible_run</a></p>
+<p>For these cases we can workaround over windows, we can do this for example
+to a group or list of hosts.</p>
 
-<p>Or run only logstash role calling with tag:</p>
+<p>I will add an example to workaround ramsomeware:</p>
 
-<pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags role::logstash 
+<pre><code class="language-yaml"># https://technet.microsoft.com/en-us/library/security/ms17-010.aspx
+
+- name: Apply ramsomeware patch disable smb v1
+  hosts: group1,server,server2
+  tasks:
+  - name: apply ramsomeware patch disable smb v1
+    win_regedit: key={{ item.key }} value={{item.value}} data={{ item.data}} datatype={{ item.datatype }} state=present
+    with_items:
+      - key: 'HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters'
+        value: 'SMB1'
+        datatype: 'dword'
+        data: '0'
+    register: apply_patch_ramsomeware
+
+  - name: Reboot if needed
+    win_shell: Restart-Computer -Force
+    when: apply_patch_ramsomeware.changed
+    ignore_errors: yes
+
 </code></pre>
-
-<h2 id="upgrading-logstash">Upgrading logstash</h2>
-
-<p>Just use normal package upgrade from your distribution.</p>
-
-<h2 id="receive-azure-alarms">Receive Azure alarms</h2>
-
-<p>Just setup your <a href="https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts">azure alarms</a>,
-to your public IP and HTTP Port: <code>51201</code> as done at <a href="#preparing-the-variables">Preparing the variables</a></p>
 
 
 			<aside class="copyright" role="note">
@@ -491,7 +481,7 @@ to your public IP and HTTP Port: <code>51201</code> as done at <a href="#prepari
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/" title="Graylog2 - 3 - Logstash nagios_nsca">
+      <a href="https://pablodav.github.io/post/graylog/logstash_input/" title="Graylog2 - 2 - logstash input http">
         <span class="direction">
           Previous
         </span>
@@ -501,7 +491,7 @@ to your public IP and HTTP Port: <code>51201</code> as done at <a href="#prepari
           </div>
           <div class="stretch">
             <div class="title">
-              Graylog2 - 3 - Logstash nagios_nsca
+              Graylog2 - 2 - logstash input http
             </div>
           </div>
         </div>
@@ -511,14 +501,14 @@ to your public IP and HTTP Port: <code>51201</code> as done at <a href="#prepari
 
   <div class="next">
   
-      <a href="https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/" title="Ansible win Update and Security patching">
+      <a href="https://pablodav.github.io/post/graylog/graylog_ansible/" title="Graylog2 - 1 - with ansible">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Ansible win Update and Security patching
+              Graylog2 - 1 - with ansible
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">

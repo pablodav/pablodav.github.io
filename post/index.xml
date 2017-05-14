@@ -40,6 +40,18 @@ It will install the role with name ansible-logstash, we will use that name in ou
     </item>
     
     <item>
+      <title>Ansible win Update and Security patching</title>
+      <link>https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/</link>
+      <pubDate>Sat, 18 Mar 2017 20:06:24 -0300</pubDate>
+      
+      <guid>https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/</guid>
+      <description>Updating windows with ansible Patching windows is a very time consuming task, but working with ansible you could reduce this time significantly.
+Here I will share some playbooks that will help on these tasks.
+First of all, you must ensure to keep all your windows servers updated:
+--- # file: windows-updates-all.yml - hosts: all any_errors_fatal: false serial: - 1 - 5% - 25% max_fail_percentage: 10% tasks: # Check if there are missing updates - name: Check for missing updates.</description>
+    </item>
+    
+    <item>
       <title>Graylog2 - 1 - with ansible</title>
       <link>https://pablodav.github.io/post/graylog/graylog_ansible/</link>
       <pubDate>Tue, 14 Mar 2017 07:31:51 -0300</pubDate>
