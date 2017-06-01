@@ -30,25 +30,27 @@ First of all, you must ensure to keep all your windows servers updated:
    - 5%
    - 25%
   max_fail_percentage: 10%
+  vars:
+    win_updates_categories:
+      - CriticalUpdates
+      - SecurityUpdates
   tasks:
   # Check if there are missing updates
   - name: Check for missing updates.
-    win_updates: state=searched
+    win_updates:
+      state: searched
+      category_names: "{{ win_updates_categories }}"
     register: update_count
     ignore_errors: yes
 
   - name: Reboot if needed
-    win_reboot: 
-      shutdown_timeout_sec: 120
-      reboot_timeout_sec: 120
+    win_shell: Restart-Computer -Force
     when: update_count.reboot_required
     ignore_errors: yes
 
   - name: Install missing updates.
     win_updates:
-      category_names:
-        - CriticalUpdates
-        - SecurityUpdates
+      category_names: "{{ win_updates_categories }}"
     register: update_result
 
   - name: Reboot if needed
