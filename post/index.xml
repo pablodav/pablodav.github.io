@@ -48,7 +48,7 @@ It will install the role with name ansible-logstash, we will use that name in ou
       <description>Updating windows with ansible Patching windows is a very time consuming task, but working with ansible you could reduce this time significantly.
 Here I will share some playbooks that will help on these tasks.
 First of all, you must ensure to keep all your windows servers updated:
---- # file: windows-updates-all.yml - hosts: all any_errors_fatal: false serial: - 1 - 5% - 25% max_fail_percentage: 10% tasks: # Check if there are missing updates - name: Check for missing updates.</description>
+--- # file: windows-updates-all.yml - hosts: all any_errors_fatal: false serial: - 1 - 5% - 25% max_fail_percentage: 10% vars: win_updates_categories: - CriticalUpdates - SecurityUpdates tasks: # Check if there are missing updates - name: Check for missing updates.</description>
     </item>
     
     <item>
