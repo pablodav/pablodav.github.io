@@ -422,7 +422,7 @@ to connect to the host.</p>
 
 <p>We will prepare a file called <code>roles.graylog2.yml</code> with this definition:</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 ---
 # This --- defines that this yaml file will have 2 spaces for indentation.
 
@@ -513,7 +513,7 @@ to connect to the host.</p>
 
 <p>In this file we will define <strong>es cluster</strong>, bind address, version, memory, etc.</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 ---
 # https://github.com/Graylog2/graylog-ansible-role
 
@@ -549,7 +549,7 @@ es_java_install:               False
 
 <p><code>group_vars/graylog2_servers/graylog2_vars</code> file:</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 ---
 
 # Disable autoinstall of elasticsearch, java, mongodb, etc, as we will use our own playbook to call the roles:
@@ -622,7 +622,7 @@ for more information</p>
 
 <p>So, our tree looks:</p>
 
-<pre><code>├── requirements.yml
+<pre><code class="language-bash">├── requirements.yml
 ├── group_vars
 │   ├── graylog2_servers
 │   │   ├── graylog2_vars
@@ -864,7 +864,8 @@ ylog2.org/repo/packages/graylog-2.2-repository_latest.deb&quot;}
       </script>
     
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

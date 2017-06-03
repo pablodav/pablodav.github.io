@@ -364,7 +364,7 @@
 
 <p>Modify <code>logstash_custom_outputs</code> variable, so it will look like:</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 logstash_custom_outputs:
 
   - output: 'gelf'
@@ -403,7 +403,7 @@ without vars.</p>
 
 <p><code>group_vars/graylog2_servers/nagios_graylog</code>:</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 ---
 
 ansible_nagios_graylog_nagios_server: 'YOURNAGIOSSERVER'
@@ -428,7 +428,7 @@ ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
 
 <p>Then add file: <code>group_vars/nagios4_servers/nagios_graylog</code></p>
 
-<pre><code class="language-ini">ansible_nagios_graylog_setup_nagios_host: true
+<pre><code class="language-yaml">ansible_nagios_graylog_setup_nagios_host: true
 ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
 ansible_nagios_graylog_parents: 'FRB_CLUSTER'
 ansible_nagios_graylog_address: 'IP.ADD.RE.SS'
@@ -463,7 +463,7 @@ nagios_config_cfg_dir: &quot;{{ nagios_etc }}/conf.d&quot;
 
 <p>Here we will add to <code>roles.graylog2.yml</code> as examplained at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles">Graylog_ansible_playbook</a></p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 - name: Apply nagios_nsca for graylog2 servers
   hosts: graylog2_servers
   become: yes
@@ -622,7 +622,7 @@ And at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#install
 
 <p>Here we will add to <code>roles.graylog2.yml</code> as examplained at: <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles">Graylog_ansible_playbook</a></p>
 
-<pre><code>
+<pre><code class="language-yaml">
 - name: Apply logstash for graylog2 servers
   hosts: graylog2_servers
   become: yes
@@ -644,7 +644,7 @@ And at <a href="https://pablodav.github.io/post/graylog/graylog_ansible/#install
 
 <p>Variables:</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 # logstash role:
 
 pri_domain_name: 'example.com'
@@ -994,7 +994,7 @@ to connect to the host.</p>
 
 <p>We will prepare a file called <code>roles.graylog2.yml</code> with this definition:</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 ---
 # This --- defines that this yaml file will have 2 spaces for indentation.
 
@@ -1085,7 +1085,7 @@ to connect to the host.</p>
 
 <p>In this file we will define <strong>es cluster</strong>, bind address, version, memory, etc.</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 ---
 # https://github.com/Graylog2/graylog-ansible-role
 
@@ -1121,7 +1121,7 @@ es_java_install:               False
 
 <p><code>group_vars/graylog2_servers/graylog2_vars</code> file:</p>
 
-<pre><code class="language-ini">
+<pre><code class="language-yaml">
 ---
 
 # Disable autoinstall of elasticsearch, java, mongodb, etc, as we will use our own playbook to call the roles:
@@ -1194,7 +1194,7 @@ for more information</p>
 
 <p>So, our tree looks:</p>
 
-<pre><code>├── requirements.yml
+<pre><code class="language-bash">├── requirements.yml
 ├── group_vars
 │   ├── graylog2_servers
 │   │   ├── graylog2_vars
@@ -1420,7 +1420,8 @@ ylog2.org/repo/packages/graylog-2.2-repository_latest.deb&quot;}
       </script>
     
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
