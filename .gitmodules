@@ -2,3 +2,6 @@
 	path = public
 	url = git@github.com:pablodav/pablodav.github.io.git
 	branch = master
+[submodule "themes/hugo-material-docs"]
+	path = themes/hugo-material-docs
+	url = https://github.com/pablodav/hugo-material-docs.git
