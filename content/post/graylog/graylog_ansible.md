@@ -122,7 +122,7 @@ We will define a playbook to include our [roles](http://docs.ansible.com/ansible
 
 We will prepare a file called `roles.graylog2.yml` with this definition: 
 
-```ini
+```yaml
 
 ---
 # This --- defines that this yaml file will have 2 spaces for indentation.
@@ -214,7 +214,7 @@ Then add a file to have organized the variables for **elasticsearch**.
 
 In this file we will define **es cluster**, bind address, version, memory, etc.
 
-```ini
+```yaml
 
 ---
 # https://github.com/Graylog2/graylog-ansible-role
@@ -251,7 +251,7 @@ Then add a file to have organized the variables for **graylog role**.
 
 `group_vars/graylog2_servers/graylog2_vars` file: 
 
-```ini
+```yaml
 
 ---
 
@@ -324,7 +324,7 @@ We have created:
 
 So, our tree looks: 
 
-```
+```bash
 ├── requirements.yml
 ├── group_vars
 │   ├── graylog2_servers
