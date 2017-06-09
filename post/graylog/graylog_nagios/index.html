@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Ansible Vault ES - Pablo Estigarribia&#39;s docs</title>
+    <title>Graylog2 - 4 Nagios Services checks - Pablo Estigarribia&#39;s docs</title>
     <meta name="generator" content="Hugo 0.20.7" />
 
     
     <meta name="description" content="Pablo Estigarribia&#39;s personal docs for sharing sysadmin and devops works">
     
-    <link rel="canonical" href="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
+    <link rel="canonical" href="https://pablodav.github.io/post/graylog/graylog_nagios/">
     
     <meta name="author" content="pablodav">
     
 
-    <meta property="og:url" content="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
+    <meta property="og:url" content="https://pablodav.github.io/post/graylog/graylog_nagios/">
     <meta property="og:title" content="Pablo Estigarribia&#39;s docs">
     
     <meta name="apple-mobile-web-app-title" content="Pablo Estigarribia&#39;s docs">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Ansible Vault ES
+        Graylog2 - 4 Nagios Services checks
       </div>
     </div>
 
@@ -265,11 +265,14 @@
 
 
 
-<a  title="Graylog2 - 4 Nagios Services checks" href="https://pablodav.github.io/post/graylog/graylog_nagios/">
+<a class="current" title="Graylog2 - 4 Nagios Services checks" href="https://pablodav.github.io/post/graylog/graylog_nagios/">
 	
 	Graylog2 - 4 Nagios Services checks
 </a>
 
+
+<ul id="scrollspy">
+</ul>
 
 
       
@@ -289,14 +292,11 @@
 
 
 
-<a class="current" title="Ansible Vault ES" href="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
+<a  title="Ansible Vault ES" href="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
 	
 	Ansible Vault ES
 </a>
 
-
-<ul id="scrollspy">
-</ul>
 
 
       
@@ -347,94 +347,36 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Ansible Vault ES </h1>
+			<h1>Graylog2 - 4 Nagios Services checks </h1>
 
-			
+			<p>After you have all the previous setup done, please don&rsquo;t forget to add additional checks to ensure graylog is always running, examples with nagios:</p>
 
-<h1 id="vault-passwords">Vault passwords</h1>
+<pre><code># file: graylog_servers_services.cfg
 
-<p>Por seguridad utilizamos ansible-vault para guardar algunas contraseñas.</p>
+define service {
+    host_name               GRAYLOG_HOST
+    service_description     logstash_service_running
+    check_command           check_process!logstash
+    use                     generic-service
+    notes                   Some important notes
+}
 
-<p>Referencias:</p>
+define service {
+    host_name               GRAYLOG_HOST
+    service_description     graylog-server_service_running
+    check_command           check_process!graylog-service
+    use                     generic-service
+    notes                   Some important notes
+}
 
-<p><a href="http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html">http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html</a></p>
-
-<p><a href="http://docs.ansible.com/ansible/intro_windows.html">http://docs.ansible.com/ansible/intro_windows.html</a></p>
-
-<h1 id="estructura-para-uso-de-vault-file">Estructura para uso de VAULT_FILE</h1>
-
-<p>Utilizaremos archivos llamados SECRETS_XX, ej:</p>
-
-<pre><code>.
-├── ansible.cfg
-├── group_vars
-│   ├── all
-│   │   ├── credentials_sql
-│   │   ├── SECRETS_SQL
+define service {
+    host_name               GRAYLOG_HOST
+    service_description     graylog_elasticsearch_service_running
+    check_command           check_process!graylog_elasticsearch
+    use                     generic-service
+    notes                   Some important notes
+}
 </code></pre>
-
-<p>Los archivos @SECRETS_ALGO@ tienen las variables con las claves.</p>
-
-<h2 id="variables-definidas-dentro-de-archivo-secrets-xx">Variables definidas dentro de archivo @SECRETS_XX@</h2>
-
-<p>Las variables tendrán la nomenclatura:</p>
-
-<pre><code>VAULT_NOMBRE_VAR
-</code></pre>
-
-<p>De esta forma podemos utilizar la variable dentro de nuestras definiciones, en archivos no cifrados con vault para más facil acceso.</p>
-
-<p>Ejemplo, el archivo credentials_sql contiene:</p>
-
-<pre><code class="language-yaml">---
-#---ommited-lines---
-# Default user and pass:
-ansible_sql_user: &quot;usuario_sql&quot;
-ansible_sql_pass: &quot;{{ VAULT_SQL_PASS }}&quot;  # VAULT_SQL_PASS está dentro de archivo cifrado SECRETS_SQL
-#---ommited-lines---
-</code></pre>
-
-<p>Donde se puede notar claramente que el &ldquo;{{ VAULT_SQL_PASS }}&rdquo; es una variable definida dentro de uno de los archivos @SECRETS_XX@.</p>
-
-<h2 id="configurar-ansible-cfg">Configurar @ansible.cfg@</h2>
-
-<p>Deben tener dentro de <code>[defaults]</code> en el archivo <code>ansible.cfg</code>, la siguiente línea:</p>
-
-<pre><code>vault_password_file = $HOME/.vault-passfile
-</code></pre>
-
-<p>Conviene que <code>ansible.cfg</code> esté en el mismo directorio desde donde se ejecuta ansible-playbook, normalmente usando git lo ponemos en la raíz del repositorio. (Es más flexible que configurarlo por servidor)</p>
-
-<h2 id="creando-el-vault-passfile">Creando el vault-passfile</h2>
-
-<p>Este archivo tiene la contraseña del vault y se usa automáticamente (configurado en @ansible.cfg@), ejemplo:</p>
-
-<pre><code>echo &quot;somepass&quot; &gt; /home/v744989/.vault-passfile
-</code></pre>
-
-<p>También para los servidores que ejecutan ansible, ej jenkins:</p>
-
-<pre><code>echo &quot;somepass&quot; &gt; /var/lib/jenkins_home/.vault-passfile
-</code></pre>
-
-<p>Antes de ejecutarlo conviene cambiar a usuario jenkins, usando ej: @sudo su jenkins@
-Donde jenkins_home es el usuario, ejemplo jenkins</p>
-
-<h2 id="cifrando-archivos">Cifrando archivos</h2>
-
-<pre><code>ansible-vault encrypt group_vars/all/SECRETS_SQL
-</code></pre>
-
-<p>Encryption successful</p>
-
-<p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p>
-
-<h2 id="editar-cifrado">Editar cifrado</h2>
-
-<pre><code>ansible-vault edit group_vars/all/SECRETS_SQL
-</code></pre>
-
-<p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p>
 
 
 			<aside class="copyright" role="note">
@@ -453,7 +395,7 @@ Donde jenkins_home es el usuario, ejemplo jenkins</p>
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
-      <a href="https://pablodav.github.io/adding-material/" title="Adding content">
+      <a href="https://pablodav.github.io/es/post/ansible/ansible_help_vault/" title="Ansible Vault ES">
         <span class="direction">
           Previous
         </span>
@@ -463,7 +405,7 @@ Donde jenkins_home es el usuario, ejemplo jenkins</p>
           </div>
           <div class="stretch">
             <div class="title">
-              Adding content
+              Ansible Vault ES
             </div>
           </div>
         </div>
@@ -473,14 +415,14 @@ Donde jenkins_home es el usuario, ejemplo jenkins</p>
 
   <div class="next">
   
-      <a href="https://pablodav.github.io/post/graylog/graylog_nagios/" title="Graylog2 - 4 Nagios Services checks">
+      <a href="https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/" title="Graylog2 - 3 - Logstash nagios_nsca">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Graylog2 - 4 Nagios Services checks
+              Graylog2 - 3 - Logstash nagios_nsca
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">
