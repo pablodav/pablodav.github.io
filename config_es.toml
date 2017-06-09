@@ -1,0 +1,7 @@
+
+title = "Mi blog"
+contentDir = "content/es"
+publishDir = "public/es"
+
+[params]
+    locale = "es"

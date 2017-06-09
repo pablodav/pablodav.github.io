@@ -10,6 +10,17 @@ googleAnalytics = "UA-93334116-1"
 # true: use pygments-css or false: color-codes directly
 pygmentsuseclasses = false
 
+DefaultContentLanguage = "en"
+
+[Languages]
+[Languages.en]
+title = "Pablo Estigarribia's docs"
+weight = 1
+
+[Languages.es]
+title = "Pablo Estigarribia's docs"
+weight = 2
+
 [params]
 	# General information
 	author = "pablodav"
