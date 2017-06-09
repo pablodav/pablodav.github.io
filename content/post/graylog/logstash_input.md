@@ -73,7 +73,7 @@ Preparing the playbook to run the roles
 
 Here we will add to `roles.graylog2.yml` as examplained at: [Graylog_ansible_playbook]({{< relref "graylog_ansible.md#preparing-the-playbook-to-run-the-roles" >}})
 
-```
+```yaml
 
 - name: Apply logstash for graylog2 servers
   hosts: graylog2_servers
@@ -97,7 +97,7 @@ The folder was created during the preparatives at: [Graylog_ansible_variables]({
 
 Variables:
 
-```ini
+```yaml
 
 # logstash role:
 

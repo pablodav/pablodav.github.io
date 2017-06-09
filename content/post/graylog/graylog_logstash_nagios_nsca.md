@@ -65,7 +65,7 @@ We will modify `group_vars/graylog2_servers/logstash_vars`:
 
 Modify `logstash_custom_outputs` variable, so it will look like: 
 
-```ini
+```yaml
 
 logstash_custom_outputs:
 
@@ -105,7 +105,7 @@ We will define also file with these two vars:
 
 `group_vars/graylog2_servers/nagios_graylog`: 
 
-```ini
+```yaml
 
 ---
 
@@ -132,7 +132,7 @@ We will need to setup `inventory` with `nagios4_servers` group and add our nagio
 
 Then add file: `group_vars/nagios4_servers/nagios_graylog`
 
-```ini
+```yaml
 ansible_nagios_graylog_setup_nagios_host: true
 ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
 ansible_nagios_graylog_parents: 'FRB_CLUSTER'
@@ -169,7 +169,7 @@ Preparing the playbook to run the roles
 
 Here we will add to `roles.graylog2.yml` as examplained at: [Graylog_ansible_playbook]({{< relref "graylog_ansible.md#preparing-the-playbook-to-run-the-roles" >}})
 
-```ini
+```yaml
 
 - name: Apply nagios_nsca for graylog2 servers
   hosts: graylog2_servers
