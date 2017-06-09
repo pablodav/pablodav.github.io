@@ -4,6 +4,7 @@ categories:
 - nagios
 - monitoring
 date: 2017-06-09T14:58:34-03:00
+draft: true
 menu:
   main:
     parent: Material
