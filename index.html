@@ -268,6 +268,30 @@
 </li>
 
 
+
+<li>
+  
+    <span class="section">Ansible</span>
+    <ul>
+      
+        
+        
+
+
+
+<a  title="Ansible Vault ES" href="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
+	
+	Ansible Vault ES
+</a>
+
+
+
+      
+    </ul>
+  
+</li>
+
+
         </ul>
         
 
@@ -310,6 +334,87 @@
 
 	<article class="article">
 		<div class="wrapper">
+			
+				<h1>Ansible Vault ES </h1>
+
+				
+
+<h1 id="vault-passwords">Vault passwords</h1>
+
+<p>Por seguridad utilizamos ansible-vault para guardar algunas contraseñas.</p>
+
+<p>Referencias:</p>
+
+<p><a href="http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html">http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html</a></p>
+
+<p><a href="http://docs.ansible.com/ansible/intro_windows.html">http://docs.ansible.com/ansible/intro_windows.html</a></p>
+
+<h1 id="estructura-para-uso-de-vault-file">Estructura para uso de VAULT_FILE</h1>
+
+<p>Utilizaremos archivos llamados SECRETS_XX, ej:</p>
+
+<pre><code>.
+├── ansible.cfg
+├── group_vars
+│   ├── all
+│   │   ├── credentials_sql
+│   │   ├── SECRETS_SQL
+</code></pre>
+
+<p>Los archivos @SECRETS_ALGO@ tienen las variables con las claves.</p>
+
+<h2 id="variables-definidas-dentro-de-archivo-secrets-xx">Variables definidas dentro de archivo @SECRETS_XX@</h2>
+
+<p>Las variables tendrán la nomenclatura:</p>
+
+<pre><code>VAULT_NOMBRE_VAR
+</code></pre>
+
+<p>De esta forma podemos utilizar la variable dentro de nuestras definiciones, en archivos no cifrados con vault para más facil acceso.</p>
+
+<p>Ejemplo, el archivo credentials_sql contiene:</p>
+
+<pre><code class="language-yaml">---
+#---ommited-lines---
+# Default user and pass:
+ansible_sql_user: &quot;usuario_sql&quot;
+ansible_sql_pass: &quot;{{ VAULT_SQL_PASS }}&quot;  # VAULT_SQL_PASS está dentro de archivo cifrado SECRETS_SQL
+#---ommited-lines---
+</code></pre>
+
+<p>Donde se puede notar claramente que el &ldquo;{{ VAULT_SQL_PASS }}&rdquo; es una variable definida dentro de uno de los archivos @SECRETS_XX@.</p>
+
+<h2 id="creando-el-vault-passfile">Creando el vault-passfile</h2>
+
+<p>Este archivo tiene la contraseña del vault y se usa automáticamente (configurado en @ansible.cfg@), ejemplo:</p>
+
+<pre><code>echo &quot;somepass&quot; &gt; /home/v744989/.vault-passfile
+</code></pre>
+
+<p>También para los servidores que ejecutan ansible, ej jenkins:</p>
+
+<pre><code>echo &quot;somepass&quot; &gt; /var/lib/jenkins_home/.vault-passfile
+</code></pre>
+
+<p>Antes de ejecutarlo conviene cambiar a usuario jenkins, usando ej: @sudo su jenkins@
+Donde jenkins_home es el usuario, ejemplo jenkins</p>
+
+<h2 id="cifrando-archivos">Cifrando archivos</h2>
+
+<pre><code>ansible-vault encrypt group_vars/all/SECRETS_SQL
+</code></pre>
+
+<p>Encryption successful</p>
+
+<p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p>
+
+<h2 id="editar-cifrado">Editar cifrado</h2>
+
+<pre><code>ansible-vault edit group_vars/all/SECRETS_SQL
+</code></pre>
+
+<p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p>
+
 			
 				<h1>Graylog2 - 3 - Logstash nagios_nsca </h1>
 
@@ -1420,8 +1525,7 @@ ylog2.org/repo/packages/graylog-2.2-repository_latest.deb&quot;}
       </script>
     
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

@@ -9,18 +9,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=10" />
-    <title>Getting started - Pablo Estigarribia&#39;s docs</title>
+    <title>Ansible Vault ES - Pablo Estigarribia&#39;s docs</title>
     <meta name="generator" content="Hugo 0.20.7" />
 
     
     <meta name="description" content="Pablo Estigarribia&#39;s personal docs for sharing sysadmin and devops works">
     
-    <link rel="canonical" href="https://pablodav.github.io/getting-started/">
+    <link rel="canonical" href="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
     
     <meta name="author" content="pablodav">
     
 
-    <meta property="og:url" content="https://pablodav.github.io/getting-started/">
+    <meta property="og:url" content="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
     <meta property="og:title" content="Pablo Estigarribia&#39;s docs">
     
     <meta name="apple-mobile-web-app-title" content="Pablo Estigarribia&#39;s docs">
@@ -97,7 +97,7 @@
     </div>
     <div class="stretch">
       <div class="title">
-        Getting started
+        Ansible Vault ES
       </div>
     </div>
 
@@ -276,11 +276,14 @@
 
 
 
-<a  title="Ansible Vault ES" href="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
+<a class="current" title="Ansible Vault ES" href="https://pablodav.github.io/es/post/ansible/ansible_help_vault/">
 	
 	Ansible Vault ES
 </a>
 
+
+<ul id="scrollspy">
+</ul>
 
 
       
@@ -331,226 +334,85 @@
 
 	<article class="article">
 		<div class="wrapper">
-			<h1>Getting started </h1>
+			<h1>Ansible Vault ES </h1>
 
 			
 
-<h2 id="installation">Installation</h2>
+<h1 id="vault-passwords">Vault passwords</h1>
 
-<h3 id="installing-hugo">Installing Hugo</h3>
+<p>Por seguridad utilizamos ansible-vault para guardar algunas contraseñas.</p>
 
-<p>Hugo itself is just a single binary without dependencies on expensive runtimes like Ruby, Python or PHP and without dependencies on any databases. You just need to download the <a href="https://github.com/spf13/hugo/releases">latest version</a>. For more information read the official <a href="http://gohugo.io/overview/installing/">installation guides</a>.</p>
+<p>Referencias:</p>
 
-<p>Let&rsquo;s make sure Hugo is set up as expected. You should see a similar version number in your terminal:</p>
+<p><a href="http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html">http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html</a></p>
 
-<pre><code class="language-sh">hugo version
-# Hugo Static Site Generator v0.15 BuildDate: 2016-01-03T12:47:47+01:00
+<p><a href="http://docs.ansible.com/ansible/intro_windows.html">http://docs.ansible.com/ansible/intro_windows.html</a></p>
+
+<h1 id="estructura-para-uso-de-vault-file">Estructura para uso de VAULT_FILE</h1>
+
+<p>Utilizaremos archivos llamados SECRETS_XX, ej:</p>
+
+<pre><code>.
+├── ansible.cfg
+├── group_vars
+│   ├── all
+│   │   ├── credentials_sql
+│   │   ├── SECRETS_SQL
 </code></pre>
 
-<h3 id="installing-material">Installing Material</h3>
+<p>Los archivos @SECRETS_ALGO@ tienen las variables con las claves.</p>
 
-<p>Next, assuming you have Hugo up and running the <code>hugo-material-docs</code> theme can be installed with <code>git</code>:</p>
+<h2 id="variables-definidas-dentro-de-archivo-secrets-xx">Variables definidas dentro de archivo @SECRETS_XX@</h2>
 
-<pre><code class="language-sh"># create a new Hugo website
-hugo new site my-awesome-docs
+<p>Las variables tendrán la nomenclatura:</p>
 
-# move into the themes folder of your website
-cd my-awesome-docs/themes/
-
-# download the theme
-git clone git@github.com:digitalcraftsman/hugo-material-docs.git
+<pre><code>VAULT_NOMBRE_VAR
 </code></pre>
 
-<h2 id="setup">Setup</h2>
+<p>De esta forma podemos utilizar la variable dentro de nuestras definiciones, en archivos no cifrados con vault para más facil acceso.</p>
 
-<p>Next, take a look in the <code>exampleSite</code> folder at <code>themes/hugo-material-docs/</code>. This directory contains an example config file and the content that you are currently reading. It serves as an example setup for your documentation.</p>
+<p>Ejemplo, el archivo credentials_sql contiene:</p>
 
-<p>Copy at least the <code>config.toml</code> in the root directory of your website. Overwrite the existing config file if necessary.</p>
-
-<p>Hugo includes a development server, so you can view your changes as you go -
-very handy. Spin it up with the following command:</p>
-
-<pre><code class="language-sh">hugo server
+<pre><code class="language-yaml">---
+#---ommited-lines---
+# Default user and pass:
+ansible_sql_user: &quot;usuario_sql&quot;
+ansible_sql_pass: &quot;{{ VAULT_SQL_PASS }}&quot;  # VAULT_SQL_PASS está dentro de archivo cifrado SECRETS_SQL
+#---ommited-lines---
 </code></pre>
 
-<p>Now you can go to <a href="http://localhost:1313">localhost:1313</a> and the Material
-theme should be visible. You can now start writing your documentation, or read
-on and customize the theme through some options.</p>
+<p>Donde se puede notar claramente que el &ldquo;{{ VAULT_SQL_PASS }}&rdquo; es una variable definida dentro de uno de los archivos @SECRETS_XX@.</p>
 
-<h2 id="configuration">Configuration</h2>
+<h2 id="creando-el-vault-passfile">Creando el vault-passfile</h2>
 
-<p>Before you are able to deploy your documentation you should take a few minute to adjust some information in the <code>config.toml</code>. Open the file in an editor:</p>
+<p>Este archivo tiene la contraseña del vault y se usa automáticamente (configurado en @ansible.cfg@), ejemplo:</p>
 
-<pre><code class="language-toml">baseurl = &quot;https://example.com/&quot;
-languageCode = &quot;en-us&quot;
-title = &quot;Material Docs&quot;
-
-[params]
-  # General information
-  author = &quot;Digitalcraftsman&quot;
-  description = &quot;A material design theme for documentations.&quot;
-  copyright = &quot;Released under the MIT license&quot;
+<pre><code>echo &quot;somepass&quot; &gt; /home/v744989/.vault-passfile
 </code></pre>
 
-<h2 id="options">Options</h2>
+<p>También para los servidores que ejecutan ansible, ej jenkins:</p>
 
-<h3 id="github-integration">Github integration</h3>
-
-<p>If your project is hosted on GitHub, add the repository link to the
-configuration. If the <code>provider</code> equals <strong>GitHub</strong>, the Material theme will
-add a download and star button, and display the number of stars:</p>
-
-<pre><code class="language-toml">[params]
-  # Repository
-  provider = &quot;GitHub&quot;
-  repo_url = &quot;https://github.com/digitalcraftsman/hugo-material-docs&quot;
+<pre><code>echo &quot;somepass&quot; &gt; /var/lib/jenkins_home/.vault-passfile
 </code></pre>
 
-<h3 id="adding-a-version">Adding a version</h3>
+<p>Antes de ejecutarlo conviene cambiar a usuario jenkins, usando ej: @sudo su jenkins@
+Donde jenkins_home es el usuario, ejemplo jenkins</p>
 
-<p>In order to add the current version next to the project banner inside the
-drawer, you can set the variable <code>version</code>:</p>
+<h2 id="cifrando-archivos">Cifrando archivos</h2>
 
-<pre><code class="language-toml">[params]
-  version = &quot;1.0.0&quot;
+<pre><code>ansible-vault encrypt group_vars/all/SECRETS_SQL
 </code></pre>
 
-<p>This will also change the link behind the download button to point to the
-archive with the respective version on GitHub, assuming a release tagged with
-this exact version identifier.</p>
+<p>Encryption successful</p>
 
-<h3 id="adding-a-logo">Adding a logo</h3>
+<p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p>
 
-<p>If your project has a logo, you can add it to the drawer/navigation by defining
-the variable <code>logo</code>. Ideally, the image of your logo should have
-rectangular shape with a minimum resolution of 128x128 and leave some room
-towards the edges. The logo will also be used as a web application icon on iOS.
-Either save your logo somewhere in the <code>static/</code> folder and reference the file relative to this location or use an external URL:</p>
+<h2 id="editar-cifrado">Editar cifrado</h2>
 
-<pre><code class="language-toml">[params]
-  logo = &quot;images/logo.png&quot;
+<pre><code>ansible-vault edit group_vars/all/SECRETS_SQL
 </code></pre>
 
-<h3 id="adding-a-custom-favicon">Adding a custom favicon</h3>
-
-<p>Favicons are small small icons that are displayed in the tabs right next to the title of the current page. As with the logo above you need to save your favicon in <code>static/</code> and link it relative to this folder or use an external URL:</p>
-
-<pre><code class="language-toml">[params]
-  favicon = &quot;favicon.ico&quot;
-</code></pre>
-
-<h3 id="google-analytics">Google Analytics</h3>
-
-<p>You can enable Google Analytics by replacing <code>UA-XXXXXXXX-X</code> with your own tracking code.</p>
-
-<pre><code class="language-toml">googleAnalytics = &quot;UA-XXXXXXXX-X&quot;
-</code></pre>
-
-<h3 id="small-tweaks">Small tweaks</h3>
-
-<p>This theme provides a simple way for making small adjustments, that is changing
-some margins, centering text, etc. The <code>custom_css</code> and <code>custom_js</code> option allow you to add further CSS and JS files. They can either reside locally in the <code>/static</code> folder or on an external server, e.g. a CDN. In both cases use either the relative path to <code>/static</code> or the absolute URL to the external ressource.</p>
-
-<pre><code class="language-toml">[params]
-  # Custom assets
-  custom_css = [
-    &quot;foo.css&quot;,
-    &quot;bar.css&quot;
-  ]
-
-  custom_js  = [&quot;buzz.js&quot;]
-</code></pre>
-
-<h3 id="changing-the-color-palette">Changing the color palette</h3>
-
-<p>Material defines a default hue for every primary and accent color on Google&rsquo;s
-material design [color palette][]. This makes it very easy to change the overall look of the theme. Just set the variables <code>palette.primary</code> and <code>palette.accent</code> to one of the colors defined in the palette:</p>
-
-<pre><code class="language-toml">[params.palette]
-  primary = &quot;red&quot;
-  accent  = &quot;light-green&quot;
-</code></pre>
-
-<p>Color names can be written upper- or lowercase but must match the names of the
-material design <a href="http://www.materialui.co/colors">color palette</a>. Valid values are: <em>red</em>, <em>pink</em>, <em>purple</em>, <em>deep purple</em>, <em>indigo</em>, <em>blue</em>, <em>light-blue</em>, <em>cyan</em>, <em>teal</em>, <em>green</em>, <em>light-green</em>,
-<em>lime</em>, <em>yellow</em>, <em>amber</em>, <em>orange</em>, <em>deep-orange</em>, <em>brown</em>, <em>grey</em> and
-<em>blue-grey</em>. The last three colors can only be used as a primary color.</p>
-
-<p><img src="https://pablodav.github.io/images/colors.png" alt="Color palette" /></p>
-
-<p>If the color is set via this configuration, an additional CSS file called
-<code>palettes.css</code> is included that defines the color palettes.</p>
-
-<h3 id="changing-the-font-family">Changing the font family</h3>
-
-<p>Material uses the <a href="http://font.ubuntu.com">Ubuntu font family</a> by default, specifically the regular sans-serif type for text and the monospaced type for code. Both fonts are loaded from <a href="https://www.google.com/fonts">Google Fonts</a> and can be easily changed to other fonts, like for example Google&rsquo;s own <a href="https://www.google.com/fonts/specimen/Roboto">Roboto font</a>:</p>
-
-<pre><code class="language-toml">[params.font]
-  text = &quot;Roboto&quot;
-  code = &quot;Roboto Mono&quot;
-</code></pre>
-
-<p>The text font will be loaded in font-weights 400 and <strong>700</strong>, the monospaced
-font in regular weight.</p>
-
-<h3 id="syntax-highlighting">Syntax highlighting</h3>
-
-<p>This theme uses the popular <a href="https://highlightjs.org/">Highlight.js</a> library to colorize code examples. The default theme is called <code>Github</code> with a few small tweaks. You can link our own theme if you like. Again, store your stylesheet in the <code>static/</code> folder and set the relative path in the config file:</p>
-
-<pre><code class="language-toml">[params]
-  # Syntax highlighting theme
-  highlight_css  = &quot;path/to/theme.css&quot;
-</code></pre>
-
-<h3 id="adding-a-github-and-twitter-account">Adding a GitHub and Twitter account</h3>
-
-<p>If you have a GitHub and/or Twitter account, you can add links to your
-accounts to the drawer by setting the variables <code>github</code> and
-<code>twitter</code> respectively:</p>
-
-<pre><code class="language-toml">[social]
-  twitter = &quot;&quot;
-  github  = &quot;digitalcraftsman&quot;
-</code></pre>
-
-<h3 id="adding-menu-entries">Adding menu entries</h3>
-
-<p>Once you created your first content files you can link them manually in the sidebar on the left. A menu entry has the following schema:</p>
-
-<pre><code class="language-toml">[[menu.main]]
-  name   = &quot;Material&quot;
-  url    = &quot;/&quot;
-  weight = 0
-  pre    = &quot;&quot;
-</code></pre>
-
-<p><code>name</code> is the title displayed in the menu and <code>url</code> the relative URL to the content. The <code>weight</code> attribute allows you to modify the order of the menu entries. A menu entry appears further down the more weight you add. The <code>pre</code> attribute is optional and allows you to *pre*pend elements to a menu link, e.g. an icon.</p>
-
-<p>Instead of just linking a single file you can enhance the sidebar by creating a nested menu. This way you can list all pages of a section instead of linking them one by one (without nesting).</p>
-
-<p>You need extend the frontmatter of each file content file in a section slightly. The snippet below registers this content file as &lsquo;child&rsquo; of a menu entry that already exists.</p>
-
-<pre><code class="language-yaml">menu:
-  main:
-    parent: Material
-    identifier: &lt;link name&gt;
-    weight: 0
-</code></pre>
-
-<p><code>main</code> specifies to which menu the content file should be added. <code>main</code> is the only menu in this theme by default. <code>parent</code> let&rsquo;s you register this content file to an existing menu entry, in this case the <code>Material</code> link. Note that the parent in the frontmatter needs to match the name in <code>config.toml</code>.</p>
-
-<p><code>identifier</code> is the link that is shown in the menu. Ideally you choose the same name for the <code>identifier</code> and the <code>title</code> of the page. Again, <code>weight</code> allows you to change the order of the nested links in a section.</p>
-
-<h3 id="markdown-extensions">Markdown extensions</h3>
-
-<p>Hugo uses <a href="https://github.com/russross/blackfriday">Blackfriday</a> to process your content. For a detailed description of all options take a look at the <a href="http://gohugo.io/overview/configuration/#configure-blackfriday-rendering">Blackfriday configuration</a> section in the Hugo documentation.</p>
-
-<pre><code class="language-toml">[blackfriday]
-  smartypants = true
-  fractions = true
-  smartDashes = true
-  plainIDAnchors = true
-</code></pre>
+<p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p>
 
 
 			<aside class="copyright" role="note">
@@ -569,18 +431,34 @@ accounts to the drawer by setting the variables <code>github</code> and
 <nav class="pagination" aria-label="Footer">
   <div class="previous">
   
+      <a href="https://pablodav.github.io/adding-material/" title="Adding content">
+        <span class="direction">
+          Previous
+        </span>
+        <div class="page">
+          <div class="button button-previous" role="button" aria-label="Previous">
+            <i class="icon icon-back"></i>
+          </div>
+          <div class="stretch">
+            <div class="title">
+              Adding content
+            </div>
+          </div>
+        </div>
+      </a>
+  
   </div>
 
   <div class="next">
   
-      <a href="https://pablodav.github.io/adding-material/" title="Adding content">
+      <a href="https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/" title="Graylog2 - 3 - Logstash nagios_nsca">
         <span class="direction">
           Next
         </span>
         <div class="page">
           <div class="stretch">
             <div class="title">
-              Adding content
+              Graylog2 - 3 - Logstash nagios_nsca
             </div>
           </div>
           <div class="button button-next" role="button" aria-label="Next">
