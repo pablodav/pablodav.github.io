@@ -384,6 +384,15 @@ ansible_sql_pass: &quot;{{ VAULT_SQL_PASS }}&quot;  # VAULT_SQL_PASS está dentr
 
 <p>Donde se puede notar claramente que el &ldquo;{{ VAULT_SQL_PASS }}&rdquo; es una variable definida dentro de uno de los archivos @SECRETS_XX@.</p>
 
+<h2 id="configurar-ansible-cfg">Configurar @ansible.cfg@</h2>
+
+<p>Deben tener dentro de <code>[defaults]</code> en el archivo <code>ansible.cfg</code>, la siguiente línea:</p>
+
+<pre><code>vault_password_file = $HOME/.vault-passfile
+</code></pre>
+
+<p>Conviene que <code>ansible.cfg</code> esté en el mismo directorio desde donde se ejecuta ansible-playbook, normalmente usando git lo ponemos en la raíz del repositorio. (Es más flexible que configurarlo por servidor)</p>
+
 <h2 id="creando-el-vault-passfile">Creando el vault-passfile</h2>
 
 <p>Este archivo tiene la contraseña del vault y se usa automáticamente (configurado en @ansible.cfg@), ejemplo:</p>
