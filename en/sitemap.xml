@@ -17,6 +17,11 @@
   </url>
   
   <url>
+    <loc>https://pablodav.github.io/post/graylog/graylog_nagios/</loc>
+    <lastmod>2017-06-09T14:58:34-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/</loc>
     <lastmod>2017-03-23T10:54:25-03:00</lastmod>
   </url>
@@ -73,7 +78,7 @@
   
   <url>
     <loc>https://pablodav.github.io/categories/graylog/</loc>
-    <lastmod>2017-03-23T10:54:25-03:00</lastmod>
+    <lastmod>2017-06-09T14:58:34-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -97,13 +102,13 @@
   
   <url>
     <loc>https://pablodav.github.io/categories/monitoring/</loc>
-    <lastmod>2017-03-23T10:54:25-03:00</lastmod>
+    <lastmod>2017-06-09T14:58:34-03:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://pablodav.github.io/categories/nagios/</loc>
-    <lastmod>2017-03-23T10:54:25-03:00</lastmod>
+    <lastmod>2017-06-09T14:58:34-03:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -115,7 +120,7 @@
   
   <url>
     <loc>https://pablodav.github.io/post/</loc>
-    <lastmod>2017-03-23T10:54:25-03:00</lastmod>
+    <lastmod>2017-06-09T14:58:34-03:00</lastmod>
     <priority>0</priority>
   </url>
   

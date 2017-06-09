@@ -263,6 +263,19 @@
 
 
       
+        
+        
+
+
+
+<a  title="Graylog2 - 4 Nagios Services checks" href="https://pablodav.github.io/post/graylog/graylog_nagios/">
+	
+	Graylog2 - 4 Nagios Services checks
+</a>
+
+
+
+      
     </ul>
   
 </li>
@@ -423,6 +436,37 @@ Donde jenkins_home es el usuario, ejemplo jenkins</p>
 </code></pre>
 
 <p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p>
+
+			
+				<h1>Graylog2 - 4 Nagios Services checks </h1>
+
+				<p>After you have all the previous setup done, please don&rsquo;t forget to add additional checks to ensure graylog is always running, examples with nagios:</p>
+
+<pre><code># file: graylog_servers_services.cfg
+
+define service {
+    host_name               GRAYLOG_HOST
+    service_description     logstash_service_running
+    check_command           check_service_nrpe!logstash
+    use                     generic-service
+    notes                   Some important notes
+}
+
+define service {
+    host_name               GRAYLOG_HOST
+    service_description     graylog-server_service_running
+    check_command           check_service_nrpe!graylog-server
+    use                     generic-service
+    notes                   Some important notes
+}
+
+</code></pre>
+
+<p>Roles used on Nagios server to setup these commands:</p>
+
+<p><a href="https://github.com/CoffeeITWorks/ansible_nagios4_server_plugins">https://github.com/CoffeeITWorks/ansible_nagios4_server_plugins</a></p>
+
+<p><a href="https://github.com/search?utf8=%E2%9C%93&amp;q=org%3ACoffeeITWorks+nagios&amp;type=">https://github.com/search?utf8=%E2%9C%93&amp;q=org%3ACoffeeITWorks+nagios&amp;type=</a></p>
 
 			
 				<h1>Graylog2 - 3 - Logstash nagios_nsca </h1>
