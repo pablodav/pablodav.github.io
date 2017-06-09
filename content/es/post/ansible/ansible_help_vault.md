@@ -8,16 +8,17 @@ menu:
     identifier: ansible_vault_es
     weight: 0
 ---
-h1. Vault passwords
+# Vault passwords
 
 Por seguridad utilizamos ansible-vault para guardar algunas contraseñas.
 
 Referencias:
 
 http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html 
+
 http://docs.ansible.com/ansible/intro_windows.html
 
-h1. Estructura para uso de VAULT_FILE
+# Estructura para uso de VAULT_FILE
 
 Utilizaremos archivos llamados SECRETS_XX, ej:
 
@@ -32,7 +33,7 @@ Utilizaremos archivos llamados SECRETS_XX, ej:
 
 Los archivos @SECRETS_ALGO@ tienen las variables con las claves.
 
-h2. Variables definidas dentro de archivo @SECRETS_XX@
+## Variables definidas dentro de archivo @SECRETS_XX@
 
 Las variables tendrán la nomenclatura:
 
@@ -53,7 +54,7 @@ ansible_sql_pass: "{{ VAULT_SQL_PASS }}"  # VAULT_SQL_PASS está dentro de archi
 
 Donde se puede notar claramente que el "{{ VAULT_SQL_PASS }}" es una variable definida dentro de uno de los archivos @SECRETS_XX@.
 
-h2. Creando el vault-passfile
+## Creando el vault-passfile
 
 Este archivo tiene la contraseña del vault y se usa automáticamente (configurado en @ansible.cfg@), ejemplo:
 
@@ -66,14 +67,14 @@ También para los servidores que ejecutan ansible, ej jenkins:
 Antes de ejecutarlo conviene cambiar a usuario jenkins, usando ej: @sudo su jenkins@
 Donde jenkins_home es el usuario, ejemplo jenkins
 
-h2. Cifrando archivos
+## Cifrando archivos
 
     ansible-vault encrypt group_vars/all/SECRETS_SQL
 Encryption successful
 
 Si ya tenemos el @vault-passfile@ creado no nos preguntará este.
 
-h2. Editar cifrado:
+## Editar cifrado
 
     ansible-vault edit group_vars/all/SECRETS_SQL
 
