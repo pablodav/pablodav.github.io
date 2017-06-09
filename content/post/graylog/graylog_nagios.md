@@ -4,7 +4,6 @@ categories:
 - nagios
 - monitoring
 date: 2017-06-09T14:58:34-03:00
-draft: true
 menu:
   main:
     parent: Material
@@ -21,7 +20,7 @@ After you have all the previous setup done, please don't forget to add additiona
 define service {
     host_name               GRAYLOG_HOST
     service_description     logstash_service_running
-    check_command           check_process!logstash
+    check_command           check_service_nrpe!logstash
     use                     generic-service
     notes                   Some important notes
 }
@@ -29,16 +28,15 @@ define service {
 define service {
     host_name               GRAYLOG_HOST
     service_description     graylog-server_service_running
-    check_command           check_process!graylog-service
+    check_command           check_service_nrpe!graylog-server
     use                     generic-service
     notes                   Some important notes
 }
 
-define service {
-    host_name               GRAYLOG_HOST
-    service_description     graylog_elasticsearch_service_running
-    check_command           check_process!graylog_elasticsearch
-    use                     generic-service
-    notes                   Some important notes
-}
 ```
+
+Roles used on Nagios server to setup these commands: 
+
+https://github.com/CoffeeITWorks/ansible_nagios4_server_plugins
+
+https://github.com/search?utf8=%E2%9C%93&q=org%3ACoffeeITWorks+nagios&type=
