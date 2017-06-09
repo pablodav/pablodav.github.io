@@ -39,4 +39,6 @@ Roles used on Nagios server to setup these commands:
 
 https://github.com/CoffeeITWorks/ansible_nagios4_server_plugins
 
+https://github.com/pablodav/ansible_nagios_common_nrpe
+
 https://github.com/search?utf8=%E2%9C%93&q=org%3ACoffeeITWorks+nagios&type=
