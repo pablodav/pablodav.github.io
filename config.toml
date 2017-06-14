@@ -39,7 +39,8 @@ weight = 2
 
 	# Custom assets
 	custom_css = []
-	custom_js  = []
+	custom_js  = ["https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/yaml.min.js", 
+	              "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"]
 
 	# Syntax highlighting theme
 	highlight_css  = ""
