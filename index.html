@@ -655,7 +655,7 @@ nagios_config_cfg_dir: &quot;{{ nagios_etc }}/conf.d&quot;
 
 <p>Or run only logstash role calling with tag:</p>
 
-<pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags  
+<pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags
 </code></pre>
 
 <h2 id="what-we-have-done">What we have done</h2>
@@ -873,6 +873,13 @@ logstash_custom_outputs:
 <p>Or run only logstash role calling with tag:</p>
 
 <pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags role::logstash 
+</code></pre>
+
+<h2 id="test-your-logstash-http-input">Test your logstash http input</h2>
+
+<p>Test command:</p>
+
+<pre><code>curl -XPOST http://yourhost:51202/ -p0 -d '{&quot;status&quot;: &quot;Activated&quot;, &quot;host&quot;:&quot;portal.azure.com&quot;, &quot;context&quot;: {&quot;portalLink&quot;: &quot;https://portal.azure.com/#resource/subscriptions/s1/resourceGroups/useast/providers/microsoft.foo/sites/mysite1&quot;},&quot;facility&quot;:&quot;test&quot;, &quot;_foo&quot;:&quot;bar&quot;}'
 </code></pre>
 
 <h2 id="upgrading-logstash">Upgrading logstash</h2>
@@ -1584,8 +1591,7 @@ ylog2.org/repo/packages/graylog-2.2-repository_latest.deb&quot;}
       </script>
     
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
