@@ -168,7 +168,14 @@ use same steps as described in: [Graylog_ansible_run]({{< relref "graylog_ansibl
 Or run only logstash role calling with tag: 
 
     ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags role::logstash 
-    
+
+Test your logstash http input
+-----------------------------
+
+Test command:
+
+    curl -XPOST http://yourhost:51202/ -p0 -d '{"status": "Activated", "host":"portal.azure.com", "context": {"portalLink": "https://portal.azure.com/#resource/subscriptions/s1/resourceGroups/useast/providers/microsoft.foo/sites/mysite1"},"facility":"test", "_foo":"bar"}'
+
 Upgrading logstash
 ------------------
 
@@ -179,4 +186,3 @@ Receive Azure alarms
 
 Just setup your [azure alarms](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts), 
 to your public IP and HTTP Port: `51201` as done at [Preparing the variables](#preparing-the-variables)
-

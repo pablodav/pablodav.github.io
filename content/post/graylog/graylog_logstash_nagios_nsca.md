@@ -39,7 +39,7 @@ We need also 2 new roles to have in our `ansible-control-machine`.
 
 We will use `requirements.yml`, and follow same steps: [Graylog_ansible_installing_roles]({{< relref "graylog_ansible.md#installing-roles" >}})
 
-So add these lines: 
+So add these lines:
 
 ```yaml
 - src: https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca.git
@@ -203,14 +203,13 @@ use same steps as described in: [Graylog_ansible_run]({{< relref "graylog_ansibl
 
 Or run only logstash role calling with tag: 
 
-    ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags  
-
+    ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags
 
 What we have done
 -----------------
 
-* We have modified **logstash** vars, now we have two outputs sending nsca message to nagios service. 
-* We have added role: **[ansible_nagios_graylog2_nsca_config_nagios](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios)**. 
+* We have modified **logstash** vars, now we have two outputs sending nsca message to nagios service.
+* We have added role: **[ansible_nagios_graylog2_nsca_config_nagios](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios)**.
 ** It will create our configuration in nagios. 
 * We have added role: **[ansible_nagios_graylog2_nsca](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca)
 ** It will add script: /usr/local/sbin/graylog2-alert.sh
