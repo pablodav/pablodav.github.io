@@ -15,27 +15,26 @@ type: index
 ---
 
 Introduction
------------- 
+------------
 
-Here we will explain howto add notifications to nagios using **Graylog** and **logstash**. 
+Here we will explain howto add notifications to nagios using **Graylog** and **logstash**.
 
-In this case we will send 2 notifications: 
+In this case we will send 2 notifications:
 
-* from **Graylog** using **Streams** and **commands plugin**. 
+* from **Graylog** using **Streams** and **commands plugin**.
 * From **Logstash** using **[plugins-outpus-nagios-nsca](https://www.elastic.co/guide/en/logstash/current/plugins-outputs-nagios_nsca.html)**
-
 
 ![graylog_logstash_nagios_nsca.png](/img/graylog_logstash_nagios_nsca.png)
 
 Requirements
 ------------
 
-Have read both articles: 
+Have read both articles:
 
 * [Graylog_ansible]({{< relref "graylog_ansible.md" >}})
 * [Graylog_logstash_input]({{< relref "logstash_input.md" >}})
 
-We need also 2 new roles to have in our `ansible-control-machine`. 
+We need also 2 new roles to have in our `ansible-control-machine`.
 
 We will use `requirements.yml`, and follow same steps: [Graylog_ansible_installing_roles]({{< relref "graylog_ansible.md#installing-roles" >}})
 
@@ -63,7 +62,7 @@ The folder was created during the preparatives at: [Graylog_ansible_variables]({
 
 We will modify `group_vars/graylog2_servers/logstash_vars`:
 
-Modify `logstash_custom_outputs` variable, so it will look like: 
+Modify `logstash_custom_outputs` variable, so it will look like:
 
 ```yaml
 
@@ -94,16 +93,17 @@ logstash_custom_outputs:
 ```
 
 As noticed we added 2 output `nagios_nsca`, with conditions (One for Activated and other for Resolved in `[status]`). As we have
-filtered (transformed) the data to json, we can us the if condition. See [Graylog_logstash_input]({{< relref "logstash_input.md" >}}). 
+filtered (transformed) the data to json, we can us the if condition. See [Graylog_logstash_input]({{< relref "logstash_input.md" >}}).
 
 In this example the json data has `[status]` var to check, but you can also use without if condition to send nsca check always.
- 
-We have also `ansible_nagios_graylog_main_server` and `ansible_nagios_graylog_host` vars, you can define here the `host` and `nagios_host`
-without vars. 
 
-We will define also file with these two vars: 
+We have also `ansible_nagios_graylog_main_server` and `ansible_nagios_graylog_host` vars, you can define here the `host` and `nagios_host`.
 
-`group_vars/graylog2_servers/nagios_graylog`: 
+We will define also file with these two vars:
+
+`group_vars/graylog2_servers/nagios_graylog`:
+
+If you have different servers for testing and production you could put these variables on the specific `host_vars/grayloghostname`
 
 ```yaml
 
@@ -128,16 +128,18 @@ ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
 Preparing variables for nagios_config
 -------------------------------------
 
-We will need to setup `inventory` with `nagios4_servers` group and add our nagios host here. 
+We will need to setup `inventory` with `nagios4_servers` group and add our nagios host here.
 
 Then add file: `group_vars/nagios4_servers/nagios_graylog`
 
+If you have different servers for testing and production you could put some of these variables on the specific `host_vars/nagioshostname`
+
 ```yaml
 ansible_nagios_graylog_setup_nagios_host: true
-ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
+ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'  # Your grayloghostname to setup the nagios service
 ansible_nagios_graylog_parents: 'FRB_CLUSTER'
-ansible_nagios_graylog_address: 'IP.ADD.RE.SS'
-ansible_nagios_graylog_template: 'servers_linux_template'  # Change it to your own template
+ansible_nagios_graylog_address: 'IP.ADD.RE.SS'  # Your graylog ip add to setup the nagios host
+ansible_nagios_graylog_template: 'servers_linux_template'  # Change it to your own template or use generic-service
 
 # nagios configuration (optional settings):
 ansible_nagios_graylog_setup_nagios_service: true
@@ -201,7 +203,7 @@ Run the playbook
 
 use same steps as described in: [Graylog_ansible_run]({{< relref "graylog_ansible.md#run-the-playbook" >}})
 
-Or run only logstash role calling with tag: 
+Or run only logstash role calling with tag:
 
     ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags
 

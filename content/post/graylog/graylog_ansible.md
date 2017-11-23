@@ -13,14 +13,14 @@ Introduction
 ------------
 
 [Graylog2](https://www.graylog.org/) is an excelent log management and server, with many features and nice GUI interface 
-to use and configure streams, inputs, alerts, searchs, dashboards, etc. 
+to use and configure streams, inputs, alerts, searchs, dashboards, etc.
 
-This document will explain how setup [graylog2 using ansible](https://github.com/Graylog2/graylog-ansible-role). 
+This document will explain how setup [graylog2 using ansible](https://github.com/Graylog2/graylog-ansible-role).
 
-This document will be base for future documents that explain how to add more 
-customizations with other roles:  
+This document will be base for future documents that explain how to add more
+customizations with other roles:
 
-* [Upgrading practice example.](#upgrading-graylog) 
+* [Upgrading practice example.](#upgrading-graylog)
 * Input from [logstash](https://github.com/mrlesmithjr/ansible-logstash). Done at: [Graylog_ansible_logstash_input]({{< relref "logstash_input.md" >}})
 * Receive [azure alarms](https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts). Done at: [Graylog_ansible_logstash_input]({{< relref "logstash_input.md" >}})
 * Configure commands to send alarms to [nagios with nsca](https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca). Done: [Graylog_ansible_logstash_nagios_nsca]({{< relref "graylog_logstash_nagios_nsca.md" >}})
@@ -52,19 +52,19 @@ Add/create your `requirements.yml` file:
 # graylog2 
 
 - src: graylog2.graylog
-  version: master
+  version: 2.3.0
 
 # graylog2 dependency
 
 - src: lesmyrmidons.mongodb
-  version: master
+  version: v1.2.8
 
 - src: geerlingguy.java
   version: master
 
 # 0.2 is required version to use elasticsearch 2.x
 - src: elastic.elasticsearch
-  version: "0.2"
+  version: "5.5.1"
 
 - src: jdauphant.nginx
   version: master
@@ -134,7 +134,7 @@ We will prepare a file called `roles.graylog2.yml` with this definition:
 - name: Add java-jdk-8 ppa for Ubuntu trusty
   hosts: graylog2_servers
   become: yes
-  
+
   # You can specify a proxy_env var with your proxy settings here
   # check example: https://github.com/CoffeeITWorks/ansible-generic-help/blob/master/example1/group_vars/all/vars#L14
   #environment: "{{ proxy_env }}"
@@ -149,7 +149,7 @@ We will prepare a file called `roles.graylog2.yml` with this definition:
 - name: Apply roles for graylog2 servers
   hosts: graylog2_servers
   become: yes
-  
+
   # You can specify a proxy_env var with your proxy settings here
   # check example: https://github.com/CoffeeITWorks/ansible-generic-help/blob/master/example1/group_vars/all/vars#L14
   #environment: "{{ proxy_env }}"
@@ -160,7 +160,7 @@ We will prepare a file called `roles.graylog2.yml` with this definition:
       tags:
         - role::mongodb
         - graylog2_servers
-    
+
     # This step is important as described in waring above
     - role: geerlingguy.java
       when: ansible_distribution_release == 'trusty'
@@ -169,7 +169,7 @@ We will prepare a file called `roles.graylog2.yml` with this definition:
       tags:
         - role::elasticsearch
         - graylog2_servers
-    
+
     # This step is important as described in waring above
     - role: geerlingguy.java
       when: ansible_os_family == "RedHat" and ansible_lsb.major_release|int >= 7
@@ -178,7 +178,7 @@ We will prepare a file called `roles.graylog2.yml` with this definition:
       tags:
         - role::elasticsearch
         - graylog2_servers
-    
+
     # ensure you have installed 0.2 branch for elasticsearch 2.x
     - role: elastic.elasticsearch
       tags:
@@ -189,7 +189,7 @@ We will prepare a file called `roles.graylog2.yml` with this definition:
       tags:
         - role::nginx
         - graylog2_servers
-    
+
     # Here we will install graylog
     - role: graylog2.graylog
       tags:
@@ -201,16 +201,16 @@ We will prepare a file called `roles.graylog2.yml` with this definition:
 Preparing the variables
 -----------------------
 
-We have an **inventory** and a **playbook** to call the roles, but we must customize the [variables](http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) before running 
- the playbook. 
- 
+We have an **inventory** and a **playbook** to call the roles, but we must customize the [variables](http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) before running
+ the playbook.
+
 Here we will organize the variables files into the `group_vars` directory:
 
-    mkdir -p group_vars/graylog2_servers 
-    
-Then add a file to have organized the variables for **elasticsearch**. 
+    mkdir -p group_vars/graylog2_servers
 
-`group_vars/graylog2_servers/elasticsearch2_vars` file: 
+Then add a file to have organized the variables for **elasticsearch**.
+
+`group_vars/graylog2_servers/elasticsearch2_vars` file:
 
 In this file we will define **es cluster**, bind address, version, memory, etc.
 
@@ -225,22 +225,26 @@ es_templates: False
 es_version_lock: False
 es_heap_size: 1g
 
-# Graylog2 doesn't support elasticsearch 5, so must install elasticsearch 2.x
-es_major_version: "2.x"
-es_version: "2.4.4"
+# Graylog2.3 supports elasticsearch 5, so must install elasticsearch 5.x
+es_major_version: "5.x"
+es_version: "5.5.1"
+
+graylog_version: '2.3'
+# pin version is broken in: 2.3.0 of ansible_graylog2_role
+# hope will be fixed on future, you will need to delete /etc/apt/preferences.d/elasticsearch
+# see https://github.com/Graylog2/graylog-ansible-role/commit/4e24252bd71e4cc2bb53df0a069c617138dc09cd#commitcomment-25811249
+graylog_es_debian_pin_version: '5.*'
 
 es_config: {
   node.name: "graylog",
   cluster.name: "graylog",
-  discovery.zen.ping.unicast.hosts: "localhost:9301",
   http.port: 9200,
   transport.tcp.port: 9300,
   network.host: 0.0.0.0,
   node.data: true,
   node.master: true,
-  bootstrap.mlockall: false,
-  discovery.zen.ping.multicast.enabled: false
 }
+
 
 # Ensure to add this option if not added elastic.elasticsearch will install openjdk-7 that will break graylog2
 es_java_install:               False
@@ -249,7 +253,7 @@ es_java_install:               False
 
 Then add a file to have organized the variables for **graylog role**. 
 
-`group_vars/graylog2_servers/graylog2_vars` file: 
+`group_vars/graylog2_servers/graylog2_vars` file:
 
 ```yaml
 
@@ -266,10 +270,10 @@ graylog_install_java:          False
 graylog_is_master:          'True'
 
 # generate with: pwgen -s 96 1
-graylog_password_secret:    'putyourhashhere' 
+graylog_password_secret:    'putyourhashhere'
 
 # generate with: echo -n yourpassword | shasum -a 256
-graylog_root_password_sha2: 'putyourhashhere' 
+graylog_root_password_sha2: 'putyourhashhere'
 
 # Elasticsearch message retention
 # Specify your retention here
@@ -301,6 +305,9 @@ nginx_sites:
 
 # Setup per host on host_vars:
 graylog_web_endpoint_uri: 'http://{{ ansible_host }}:9000/api/'
+
+# Optionally for Ubuntu 14.04 you can use:
+mongodb_repository: "deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse"
 
 
 ```

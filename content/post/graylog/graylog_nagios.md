@@ -12,7 +12,7 @@ title: Graylog2 - 4 Nagios Services checks
 type: index
 ---
 
-After you have all the previous setup done, please don't forget to add additional checks to ensure graylog is always running, examples with nagios: 
+After you have all the previous setup done, please don't forget to add additional checks to ensure graylog is always running, examples with nagios:
 
 ```
 # file: graylog_servers_services.cfg
@@ -35,7 +35,7 @@ define service {
 
 ```
 
-Roles used on Nagios server to setup these commands: 
+Roles used on Nagios server to setup these commands:
 
 https://github.com/CoffeeITWorks/ansible_nagios4_server_plugins
 

@@ -45,16 +45,16 @@ Requirements Graylog2
 
 Here we need to add an input to receive the messages from **logstash**. 
 
-Go to System -> Inputs
+[Go to System -> Inputs](http://docs.graylog.org/en/latest/pages/sending_data.html#what-are-graylog-message-inputs)
 
 ![System_inputs](/img/graylog_system_input.png)
 
-* Select **GELF UDP INPUT**.  
+* Select **GELF UDP INPUT**.
 * We will use port 12201
-* save 
+* save
 * Start the input
 
-After done, you could see something like: 
+After done, you could see something like:
 
 ![graylog_input_gelf_udp](/img/graylog_input_gelf_udp.png)
 
