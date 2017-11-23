@@ -432,12 +432,13 @@ filtered (transformed) the data to json, we can us the if condition. See <a href
 
 <p>In this example the json data has <code>[status]</code> var to check, but you can also use without if condition to send nsca check always.</p>
 
-<p>We have also <code>ansible_nagios_graylog_main_server</code> and <code>ansible_nagios_graylog_host</code> vars, you can define here the <code>host</code> and <code>nagios_host</code>
-without vars.</p>
+<p>We have also <code>ansible_nagios_graylog_main_server</code> and <code>ansible_nagios_graylog_host</code> vars, you can define here the <code>host</code> and <code>nagios_host</code>.</p>
 
 <p>We will define also file with these two vars:</p>
 
 <p><code>group_vars/graylog2_servers/nagios_graylog</code>:</p>
+
+<p>If you have different servers for testing and production you could put these variables on the specific <code>host_vars/grayloghostname</code></p>
 
 <pre><code class="language-yaml">
 ---
@@ -464,11 +465,13 @@ ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
 
 <p>Then add file: <code>group_vars/nagios4_servers/nagios_graylog</code></p>
 
+<p>If you have different servers for testing and production you could put some of these variables on the specific <code>host_vars/nagioshostname</code></p>
+
 <pre><code class="language-yaml">ansible_nagios_graylog_setup_nagios_host: true
-ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'
+ansible_nagios_graylog_hostname: 'YOURGRAYLOGHOSTNAME'  # Your grayloghostname to setup the nagios service
 ansible_nagios_graylog_parents: 'FRB_CLUSTER'
-ansible_nagios_graylog_address: 'IP.ADD.RE.SS'
-ansible_nagios_graylog_template: 'servers_linux_template'  # Change it to your own template
+ansible_nagios_graylog_address: 'IP.ADD.RE.SS'  # Your graylog ip add to setup the nagios host
+ansible_nagios_graylog_template: 'servers_linux_template'  # Change it to your own template or use generic-service
 
 # nagios configuration (optional settings):
 ansible_nagios_graylog_setup_nagios_service: true
@@ -678,7 +681,7 @@ nagios_config_cfg_dir: &quot;{{ nagios_etc }}/conf.d&quot;
 
     <script src="https://pablodav.github.io/javascripts/application.js"></script>
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
     
