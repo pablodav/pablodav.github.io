@@ -51,8 +51,8 @@ Add/create your `requirements.yml` file:
 
 # graylog2 
 
-- src: graylog2.graylog
-  version: 2.3.0
+- src: graylog2.graylog-ansible-role
+  version: 2.4.0
 
 # graylog2 dependency
 
@@ -227,9 +227,9 @@ es_heap_size: 1g
 
 # Graylog2.3 supports elasticsearch 5, so must install elasticsearch 5.x
 es_major_version: "5.x"
-es_version: "5.5.1"
+es_version: "5.6.7"
 
-graylog_version: '2.3'
+graylog_version: '2.4'
 # pin version is broken in: 2.3.0 of ansible_graylog2_role
 # hope will be fixed on future, you will need to delete /etc/apt/preferences.d/elasticsearch
 # see https://github.com/Graylog2/graylog-ansible-role/commit/4e24252bd71e4cc2bb53df0a069c617138dc09cd#commitcomment-25811249
