@@ -1,4 +1,4 @@
-baseurl = "https://pablodav.github.io/"
+baseurl = "https://pablodav.github.io/blog/"
 languageCode = "en-us"
 title = "Pablo Estigarribia's docs"
 theme = "hugo-material-docs"
