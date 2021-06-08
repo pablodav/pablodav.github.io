@@ -1,0 +1,589 @@
+<!doctype html><html class=no-js><head lang=en-us><meta charset=utf-8><meta name=viewport content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1"><meta http-equiv=x-ua-compatible content="IE=10"><title>Pablo Estigarribia's docs</title><meta name=generator content="Hugo 0.83.1"><meta name=description content="Pablo Estigarribia's personal docs for sharing sysadmin and devops works"><link rel=canonical href=https://pablodav.github.io/><meta name=author content="pablodav"><meta property="og:url" content="https://pablodav.github.io/"><meta property="og:title" content="Pablo Estigarribia's docs"><meta name=apple-mobile-web-app-title content="Pablo Estigarribia's docs"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black-translucent"><link rel="shortcut icon" type=image/x-icon href=https://pablodav.github.io/images/favicon.ico><link rel=icon type=image/x-icon href=https://pablodav.github.io/images/favicon.ico><style>@font-face{font-family:icon;src:url(https://pablodav.github.io/fonts/icon.eot);src:url(https://pablodav.github.io/fonts/icon.eot)format('embedded-opentype'),url(https://pablodav.github.io/fonts/icon.woff)format('woff'),url(https://pablodav.github.io/fonts/icon.ttf)format('truetype'),url(https://pablodav.github.io/fonts/icon.svg)format('svg');font-weight:400;font-style:normal}</style><link rel=stylesheet href=https://pablodav.github.io/stylesheets/application.css><link rel=stylesheet href=https://pablodav.github.io/stylesheets/temporary.css><link rel=stylesheet href=https://pablodav.github.io/stylesheets/palettes.css><link rel=stylesheet href=https://pablodav.github.io/stylesheets/highlight/highlight.css><link rel=stylesheet href="//fonts.googleapis.com/css?family=Ubuntu:400,700|Ubuntu+mono"><style>body,input{font-family:ubuntu,Helvetica,Arial,sans-serif}pre,code{font-family:ubuntu mono,courier new,courier,monospace}</style><script src=https://pablodav.github.io/javascripts/modernizr.js></script><link href=https://pablodav.github.io/index.xml rel=alternate type=application/rss+xml title="Pablo Estigarribia's docs"><link href=https://pablodav.github.io/index.xml rel=feed type=application/rss+xml title="Pablo Estigarribia's docs"></head><body class="palette-primary-green palette-accent-teal"><div class=backdrop><div class=backdrop-paper></div></div><input class=toggle type=checkbox id=toggle-drawer>
+<input class=toggle type=checkbox id=toggle-search>
+<label class="toggle-button overlay" for=toggle-drawer></label><header class=header><nav aria-label=Header><div class="bar default"><div class="button button-menu" role=button aria-label=Menu><label class="toggle-button icon icon-menu" for=toggle-drawer><span></span></label></div><div class=stretch><div class=title>Pablo Estigarribia's docs</div></div><div class="button button-twitter" role=button aria-label=Twitter><a href=https://twitter.com/p4blod4v title="@p4blod4v on Twitter" target=_blank class="toggle-button icon icon-twitter"></a></div><div class="button button-github" role=button aria-label=GitHub><a href=https://github.com/pablodav title="@pablodav on GitHub" target=_blank class="toggle-button icon icon-github"></a></div></div><div class="bar search"><div class="button button-close" role=button aria-label=Close><label class="toggle-button icon icon-back" for=toggle-search></label></div><div class=stretch><div class=field><input class=query type=text placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck></div></div><div class="button button-reset" role=button aria-label=Search><button class="toggle-button icon icon-close" id=reset-search></button></div></div></nav></header><main class=main><div class=drawer><nav aria-label=Navigation><a href=https://github.com/pablodav/pablodav.github.io class=project><div class=banner><div class=name><strong>Pablo Estigarribia's docs</strong><br>pablodav/pablodav.github.io</div></div></a><div class=scrollable><div class=wrapper><ul class=repo><li class=repo-download><a href=https://github.com/pablodav/pablodav.github.io/archive/master.zip target=_blank title=Download data-action=download><i class="icon icon-download"></i> Download</a></li><li class=repo-stars><a href=https://github.com/pablodav/pablodav.github.io/stargazers target=_blank title=Stargazers data-action=star><i class="icon icon-star"></i> Stars
+<span class=count>&ndash;</span></a></li></ul><hr><div class=toc><ul><li><a title=License href=https://pablodav.github.io/license/>License</a></li><li><span class=section>Ansible</span><ul><a title="Ansible Vault ES" href=https://pablodav.github.io/es/post/ansible/ansible_help_vault/>Ansible Vault ES</a></ul></li><li><span class=section>Ansible_Win</span><ul><a title="Ansible win Update and Security patching" href=https://pablodav.github.io/post/ansible_win/ansible_win_updates_patch_security/>Ansible win Update and Security patching</a></ul></li><li><span class=section>Material</span><ul><a title="Graylog2 - 1 - with ansible" href=https://pablodav.github.io/post/graylog/graylog_ansible/>Graylog2 - 1 - with ansible</a>
+<a title="Graylog2 - 2 - logstash input http" href=https://pablodav.github.io/post/graylog/logstash_input/>Graylog2 - 2 - logstash input http</a>
+<a title="Graylog2 - 3 - Logstash nagios_nsca" href=https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/>Graylog2 - 3 - Logstash nagios_nsca</a>
+<a title="Graylog2 - 4 Nagios Services checks" href=https://pablodav.github.io/post/graylog/graylog_nagios/>Graylog2 - 4 Nagios Services checks</a></ul></li></ul><hr><span class=section>The author</span><ul><li><a href=https://twitter.com/p4blod4v target=_blank title="@p4blod4v on Twitter">@p4blod4v on Twitter</a></li><li><a href=https://github.com/pablodav target=_blank title="@pablodav on GitHub">@pablodav on GitHub</a></li><li><a href=mailto:pablodav@gmail.com title="Email of pablodav@gmail.com">Contact via email</a></li></ul></div></div></div></nav></div><article class=article><div class=wrapper><h1>Ansible Vault ES</h1><h1 id=vault-passwords>Vault passwords</h1><p>Test update
+Por seguridad utilizamos ansible-vault para guardar algunas contraseñas.</p><p>Referencias:</p><p><a href=http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html>http://www.linuxsysadmin.tk/2016/09/lanzando-playbooks-de-ansible-desde-jenkins.html</a></p><p><a href=http://docs.ansible.com/ansible/intro_windows.html>http://docs.ansible.com/ansible/intro_windows.html</a></p><h1 id=estructura-para-uso-de-vault_file>Estructura para uso de VAULT_FILE</h1><p>Utilizaremos archivos llamados SECRETS_XX, ej:</p><pre><code>.
+├── ansible.cfg
+├── group_vars
+│   ├── all
+│   │   ├── credentials_sql
+│   │   ├── SECRETS_SQL
+</code></pre><p>Los archivos @SECRETS_ALGO@ tienen las variables con las claves.</p><h2 id=variables-definidas-dentro-de-archivo-secrets_xx>Variables definidas dentro de archivo @SECRETS_XX@</h2><p>Las variables tendrán la nomenclatura:</p><pre><code>VAULT_NOMBRE_VAR
+</code></pre><p>De esta forma podemos utilizar la variable dentro de nuestras definiciones, en archivos no cifrados con vault para más facil acceso.</p><p>Ejemplo, el archivo credentials_sql contiene:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>---
+<span style=color:#75715e>#---ommited-lines---</span>
+<span style=color:#75715e># Default user and pass:</span>
+<span style=color:#f92672>ansible_sql_user</span>: <span style=color:#e6db74>&#34;usuario_sql&#34;</span>
+<span style=color:#f92672>ansible_sql_pass</span>: <span style=color:#e6db74>&#34;{{ VAULT_SQL_PASS }}&#34;</span>  <span style=color:#75715e># VAULT_SQL_PASS está dentro de archivo cifrado SECRETS_SQL</span>
+<span style=color:#75715e>#---ommited-lines---</span>
+</code></pre></div><p>Donde se puede notar claramente que el &ldquo;{{ VAULT_SQL_PASS }}&rdquo; es una variable definida dentro de uno de los archivos @SECRETS_XX@.</p><h2 id=configurar-ansiblecfg>Configurar @ansible.cfg@</h2><p>Deben tener dentro de <code>[defaults]</code> en el archivo <code>ansible.cfg</code>, la siguiente línea:</p><pre><code>vault_password_file = $HOME/.vault-passfile
+</code></pre><p>Conviene que <code>ansible.cfg</code> esté en el mismo directorio desde donde se ejecuta ansible-playbook, normalmente usando git lo ponemos en la raíz del repositorio. (Es más flexible que configurarlo por servidor)</p><h2 id=creando-el-vault-passfile>Creando el vault-passfile</h2><p>Este archivo tiene la contraseña del vault y se usa automáticamente (configurado en @ansible.cfg@), ejemplo:</p><pre><code>echo &quot;somepass&quot; &gt; /home/v744989/.vault-passfile
+</code></pre><p>También para los servidores que ejecutan ansible, ej jenkins:</p><pre><code>echo &quot;somepass&quot; &gt; /var/lib/jenkins_home/.vault-passfile
+</code></pre><p>Antes de ejecutarlo conviene cambiar a usuario jenkins, usando ej: @sudo su jenkins@
+Donde jenkins_home es el usuario, ejemplo jenkins</p><h2 id=cifrando-archivos>Cifrando archivos</h2><pre><code>ansible-vault encrypt group_vars/all/SECRETS_SQL
+</code></pre><p>Encryption successful</p><p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p><h2 id=editar-cifrado>Editar cifrado</h2><pre><code>ansible-vault edit group_vars/all/SECRETS_SQL
+</code></pre><p>Si ya tenemos el @vault-passfile@ creado no nos preguntará este.</p><h1>Graylog2 - 4 Nagios Services checks</h1><p>After you have all the previous setup done, please don&rsquo;t forget to add additional checks to ensure graylog is always running, examples with nagios:</p><pre><code># file: graylog_servers_services.cfg
+
+define service {
+    host_name               GRAYLOG_HOST
+    service_description     logstash_service_running
+    check_command           check_service_nrpe!logstash
+    use                     generic-service
+    notes                   Some important notes
+}
+
+define service {
+    host_name               GRAYLOG_HOST
+    service_description     graylog-server_service_running
+    check_command           check_service_nrpe!graylog-server
+    use                     generic-service
+    notes                   Some important notes
+}
+
+</code></pre><p>Roles used on Nagios server to setup these commands:</p><p><a href=https://github.com/CoffeeITWorks/ansible_nagios4_server_plugins>https://github.com/CoffeeITWorks/ansible_nagios4_server_plugins</a></p><p><a href=https://github.com/pablodav/ansible_nagios_common_nrpe>https://github.com/pablodav/ansible_nagios_common_nrpe</a></p><p><a href="https://github.com/search?utf8=%E2%9C%93&q=org%3ACoffeeITWorks+nagios&type=">https://github.com/search?utf8=%E2%9C%93&q=org%3ACoffeeITWorks+nagios&type=</a></p><h1>Graylog2 - 3 - Logstash nagios_nsca</h1><h2 id=introduction>Introduction</h2><p>Here we will explain howto add notifications to nagios using <strong>Graylog</strong> and <strong>logstash</strong>.</p><p>In this case we will send 2 notifications:</p><ul><li>from <strong>Graylog</strong> using <strong>Streams</strong> and <strong>commands plugin</strong>.</li><li>From <strong>Logstash</strong> using <strong><a href=https://www.elastic.co/guide/en/logstash/current/plugins-outputs-nagios_nsca.html>plugins-outpus-nagios-nsca</a></strong></li></ul><p><img src=https://pablodav.github.io/img/graylog_logstash_nagios_nsca.png alt=graylog_logstash_nagios_nsca.png></p><h2 id=requirements>Requirements</h2><p>Have read both articles:</p><ul><li><a href=https://pablodav.github.io/post/graylog/graylog_ansible/>Graylog_ansible</a></li><li><a href=https://pablodav.github.io/post/graylog/logstash_input/>Graylog_logstash_input</a></li></ul><p>We need also 2 new roles to have in our <code>ansible-control-machine</code>.</p><p>We will use <code>requirements.yml</code>, and follow same steps: <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#installing-roles>Graylog_ansible_installing_roles</a></p><p>So add these lines:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>- <span style=color:#f92672>src</span>: <span style=color:#ae81ff>https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca.git</span>
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>ansible_nagios_graylog2_nsca</span>
+
+- <span style=color:#f92672>src</span>: <span style=color:#ae81ff>https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios.git</span>
+  <span style=color:#f92672>name</span>: <span style=color:#ae81ff>ansible_nagios_graylog2_nsca_config_nagios</span>
+</code></pre></div><p>And install the roles with <code>ansible-galaxy install -r requirements.yml</code></p><h2 id=ansible-inventory>Ansible Inventory</h2><p>We will use same inventory as created at: at <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-inventory>Graylog_ansible_inventory</a></p><h2 id=preparing-the-variables>Preparing the variables</h2><p>The folder was created during the preparatives at: <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-variables>Graylog_ansible_variables</a></p><p>We will modify <code>group_vars/graylog2_servers/logstash_vars</code>:</p><p>Modify <code>logstash_custom_outputs</code> variable, so it will look like:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+<span style=color:#f92672>logstash_custom_outputs</span>:
+
+  - <span style=color:#f92672>output</span>: <span style=color:#e6db74>&#39;gelf&#39;</span>
+    <span style=color:#f92672>lines</span>:
+      - <span style=color:#e6db74>&#39;host =&gt; &#34;localhost&#34;&#39;</span>
+      - <span style=color:#e6db74>&#39;port =&gt; &#34;12201&#34;&#39;</span>
+
+  <span style=color:#75715e># https://www.elastic.co/guide/en/logstash/current/plugins-outputs-nagios_nsca.html</span>
+  - <span style=color:#f92672>output</span>: <span style=color:#e6db74>&#39;nagios_nsca&#39;</span>
+    <span style=color:#f92672>if_condition</span>: <span style=color:#e6db74>&#39;&#34;Resolved&#34; in [status]&#39;</span>
+    <span style=color:#f92672>lines</span>:
+      - <span style=color:#e6db74>&#39;host =&gt; &#34;{{ ansible_nagios_graylog_nagios_server }}&#34;&#39;</span>
+      - <span style=color:#e6db74>&#39;nagios_service =&gt; &#34;LOGSTASH&#34;&#39;</span>
+      - <span style=color:#e6db74>&#39;nagios_status =&gt; &#34;0&#34;&#39;</span>
+      - <span style=color:#e6db74>&#39;nagios_host =&gt; &#34;{{ ansible_nagios_graylog_hostname }}&#34;&#39;</span>
+
+  - <span style=color:#f92672>output</span>: <span style=color:#e6db74>&#39;nagios_nsca&#39;</span>
+    <span style=color:#f92672>if_condition</span>: <span style=color:#e6db74>&#39;&#34;Activated&#34; in [status]&#39;</span>
+    <span style=color:#f92672>lines</span>:
+      - <span style=color:#e6db74>&#39;host =&gt; &#34;{{ ansible_nagios_graylog_nagios_server }}&#34;&#39;</span>  <span style=color:#75715e># This is the nagios server</span>
+      - <span style=color:#e6db74>&#39;nagios_service =&gt; &#34;LOGSTASH&#34;&#39;</span>                        <span style=color:#75715e># This is the service to send status in nagios.</span>
+      - <span style=color:#e6db74>&#39;nagios_status =&gt; &#34;2&#34;&#39;</span>                                <span style=color:#75715e># The status to send to the service.</span>
+      - <span style=color:#e6db74>&#39;nagios_host =&gt; &#34;{{ ansible_nagios_graylog_hostname }}&#34;&#39;</span>  <span style=color:#75715e># This is the host to send status in nagios.</span>
+
+</code></pre></div><p>As noticed we added 2 output <code>nagios_nsca</code>, with conditions (One for Activated and other for Resolved in <code>[status]</code>). As we have
+filtered (transformed) the data to json, we can us the if condition. See <a href=https://pablodav.github.io/post/graylog/logstash_input/>Graylog_logstash_input</a>.</p><p>In this example the json data has <code>[status]</code> var to check, but you can also use without if condition to send nsca check always.</p><p>We have also <code>ansible_nagios_graylog_main_server</code> and <code>ansible_nagios_graylog_host</code> vars, you can define here the <code>host</code> and <code>nagios_host</code>.</p><p>We will define also file with these two vars:</p><p><code>group_vars/graylog2_servers/nagios_graylog</code>:</p><p>If you have different servers for testing and production you could put these variables on the specific <code>host_vars/grayloghostname</code></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+---
+
+<span style=color:#f92672>ansible_nagios_graylog_nagios_server</span>: <span style=color:#e6db74>&#39;YOURNAGIOSSERVER&#39;</span>
+
+<span style=color:#75715e># This variable will be used by ansible_nagios_graylog2_nsca role.</span>
+<span style=color:#75715e># Will create an script called  /usr/local/sbin/graylog2-alert.sh</span>
+<span style=color:#75715e># This script is by default defined in var ansible_nagios_graylog_nsca_script, but you don&#39;t need to change it.</span>
+<span style=color:#75715e># It&#39;s a list of nagios hosts to send the command nsca</span>
+<span style=color:#f92672>ansible_nagios_graylog_nagios_servers</span>:
+  - <span style=color:#e6db74>&#39;{{ ansible_nagios_graylog_nagios_server }}&#39;</span>
+
+<span style=color:#75715e># The hostname that will be created in nagios to</span>
+<span style=color:#75715e># setup nagios_services and then receive the alerts on these nagios_services</span>
+<span style=color:#f92672>ansible_nagios_graylog_hostname</span>: <span style=color:#e6db74>&#39;YOURGRAYLOGHOSTNAME&#39;</span>
+
+
+</code></pre></div><h2 id=preparing-variables-for-nagios_config>Preparing variables for nagios_config</h2><p>We will need to setup <code>inventory</code> with <code>nagios4_servers</code> group and add our nagios host here.</p><p>Then add file: <code>group_vars/nagios4_servers/nagios_graylog</code></p><p>If you have different servers for testing and production you could put some of these variables on the specific <code>host_vars/nagioshostname</code></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>ansible_nagios_graylog_setup_nagios_host</span>: <span style=color:#66d9ef>true</span>
+<span style=color:#f92672>ansible_nagios_graylog_hostname</span>: <span style=color:#e6db74>&#39;YOURGRAYLOGHOSTNAME&#39;</span>  <span style=color:#75715e># Your grayloghostname to setup the nagios service</span>
+<span style=color:#f92672>ansible_nagios_graylog_parents</span>: <span style=color:#e6db74>&#39;FRB_CLUSTER&#39;</span>
+<span style=color:#f92672>ansible_nagios_graylog_address</span>: <span style=color:#e6db74>&#39;IP.ADD.RE.SS&#39;</span>  <span style=color:#75715e># Your graylog ip add to setup the nagios host</span>
+<span style=color:#f92672>ansible_nagios_graylog_template</span>: <span style=color:#e6db74>&#39;servers_linux_template&#39;</span>  <span style=color:#75715e># Change it to your own template or use generic-service</span>
+
+<span style=color:#75715e># nagios configuration (optional settings):</span>
+<span style=color:#f92672>ansible_nagios_graylog_setup_nagios_service</span>: <span style=color:#66d9ef>true</span>
+
+<span style=color:#75715e># Nagios Service for each streams to configure:</span>
+<span style=color:#f92672>ansible_nagios_graylog_nagios_streams</span>:
+
+  - <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;Graylog2-Azure_streams&#34;</span>
+    <span style=color:#f92672>contact_group</span>: <span style=color:#e6db74>&#34;Graylog2-Azure_streams&#34;</span>
+
+  - <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;LOGSTASH&#34;</span>
+    <span style=color:#f92672>contact_group</span>: <span style=color:#e6db74>&#34;Graylog2-Azure_streams&#34;</span>
+
+<span style=color:#75715e># Nagios contact groups for each streams:</span>
+<span style=color:#f92672>ansible_nagios_graylog_nagios_streams_contactgroups</span>:
+
+  - <span style=color:#f92672>contact_group</span>: <span style=color:#e6db74>&#34;Graylog2-Azure_streams&#34;</span>
+    <span style=color:#f92672>members</span>: <span style=color:#e6db74>&#34;nagiosadmin&#34;</span>
+
+<span style=color:#75715e># nagios configuration options:</span>
+<span style=color:#f92672>nagios_etc</span>: <span style=color:#e6db74>&#39;/usr/local/nagios/etc&#39;</span>
+<span style=color:#75715e># Where we will add the nagios configuration</span>
+<span style=color:#f92672>nagios_config_cfg_dir</span>: <span style=color:#e6db74>&#34;{{ nagios_etc }}/conf.d&#34;</span>
+
+</code></pre></div><h2 id=preparing-the-playbook-to-run-the-roles>Preparing the playbook to run the roles</h2><p>Here we will add to <code>roles.graylog2.yml</code> as examplained at: <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles>Graylog_ansible_playbook</a></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Apply nagios_nsca for graylog2 servers</span>
+  <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>graylog2_servers</span>
+  <span style=color:#f92672>become</span>: <span style=color:#66d9ef>yes</span>
+  <span style=color:#75715e># environment: &#34;{{ proxy_env }}&#34;</span>
+  <span style=color:#f92672>roles</span>:
+
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>ansible_nagios_graylog2_nsca</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::ansible_nagios_graylog2_nsca</span>
+        - <span style=color:#ae81ff>graylog2_servers</span>
+
+
+- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Config nagios hosts service and host for graylog nsca stream services</span>
+  <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>nagios4_servers</span>
+  <span style=color:#f92672>become</span>: <span style=color:#66d9ef>yes</span>
+  <span style=color:#75715e># environment: &#34;{{ proxy_env }}&#34;</span>
+  <span style=color:#f92672>roles</span>:
+
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>ansible_nagios_graylog2_nsca_config_nagios</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::ansible_nagios_graylog2_nsca</span>
+        - <span style=color:#ae81ff>role::ansible_nagios_graylog2_nsca_config_nagios</span>
+
+</code></pre></div><h2 id=run-the-playbook>Run the playbook</h2><p>use same steps as described in: <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#run-the-playbook>Graylog_ansible_run</a></p><p>Or run only logstash role calling with tag:</p><pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags
+</code></pre><h2 id=what-we-have-done>What we have done</h2><ul><li>We have modified <strong>logstash</strong> vars, now we have two outputs sending nsca message to nagios service.</li><li>We have added role: <strong><a href=https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios>ansible_nagios_graylog2_nsca_config_nagios</a></strong>.
+** It will create our configuration in nagios.</li><li>We have added role: **<a href=https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca>ansible_nagios_graylog2_nsca</a>
+** It will add script: /usr/local/sbin/graylog2-alert.sh
+** Also will setup configure <a href=ttps://github.com/nksft/graylog2-plugin-exec>graylog2-plugin-exec</a></li></ul><p>You can use your own nagios config to setup the host and server, then not need to use ansible_nagios_graylog2_nsca_config_nagios role if
+you don&rsquo;t like it. But using this role will make things faster.</p><h2 id=configure-graylog-for-exec>Configure graylog for exec</h2><p>Now logstash is sending alerts, but we need to setup Graylog <strong>Alerts</strong> to use <strong>Exec callback plugin</strong></p><p>Checkout doc: <a href=https://github.com/nksft/graylog2-plugin-exec#usage>https://github.com/nksft/graylog2-plugin-exec#usage</a></p><p>First create a <strong><a href=http://docs.graylog.org/en/stable/pages/streams.html>Stream</a></strong></p><p>I will create 2 streams for Azure messages:</p><p><img src=https://pablodav.github.io/img/graylog_streams_azure_activated.png alt=graylog_streams_azure_activated></p><p>And add rule for it:</p><p><img src=https://pablodav.github.io/img/graylog_streams_azure_activated_rules.png alt=graylog_streams_azure_activated_rules.png></p><p>Now we will create **<a href=http://docs.graylog.org/en/stable/pages/getting_started/stream_alerts.html>Graylog_alert</a> For our stream</p><p>create new alert condition like:</p><p><img src=https://pablodav.github.io/img/graylog_new_alert_condition.png alt=graylog_new_alert_condition.png></p><p>Then add Notifications as <strong>Exec callback plugins</strong></p><p><img src=https://pablodav.github.io/img/graylog_new_notification.png alt=/img/graylog_new_notification.png></p><p>Add to your notification command:</p><ul><li><strong>Title:</strong> <code>Activated Graylog2-Azure-streams</code></li><li><strong>Command:</strong> <code>/usr/local/sbin/graylog2-alert.sh "Graylog2-Azure_streams http://YOURGRAYLOGIP/streams/589c62dedf4b0011fc1232e8/search"</code></li></ul><p>Where <code>Graylog2-Azure_streams</code> is the service name on nagios. And second parameter is a message to put in the check</p><p><code>589c62dedf4b0011fc1232e8</code> is the id for your stream.</p><p>You will then have and will be able to test directly from graylog:</p><p><img src=https://pablodav.github.io/img/graylog_notification_commands.png alt=/img/graylog_notification_commands.png></p><p>That&rsquo;s it.</p><p>Now you can add many streams and more nagios services for each of your streams with your own settings.</p><p>These examples are done with Azure alerts, but they apply to any other kind of alert.</p><h1>Graylog2 - 2 - logstash input http</h1><h2 id=introduction>Introduction</h2><ul><li>Configure <a href=http://docs.graylog.org/en/latest/pages/gelf.html><strong>GELF</strong></a> input in graylog.</li><li>Prepare <strong>logstash</strong> to input data from any <a href=https://www.elastic.co/blog/introducing-logstash-input-http-plugin>http</a> post.</li><li>Send data to <strong>GELF</strong> input in graylog using <a href=https://www.elastic.co/guide/en/logstash/current/plugins-outputs-gelf.html>plugins_output_gelf</a>.</li></ul><p><img src=https://pablodav.github.io/img/graylog_gelf_logstash.png alt=graylog_gelf_logstash></p><h2 id=requirements-ansible>Requirements Ansible</h2><p>As explained in <a href=https://github.com/CoffeeITWorks/ansible-generic-help#installing-roles>Generic-help installing roles</a>.
+And at <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#installing-roles>Graylog_ansible_installing_roles</a></p><p>We will use <code>requirements.yml</code> to add this:</p><pre><code>- src: mrlesmithjr.logstash
+  name: ansible-logstash
+  version: master
+</code></pre><p>Then install with <code>ansible-galaxy install -r requirements.yml</code></p><p>It will install the role with name <code>ansible-logstash</code>, we will use that name in our playbook.</p><h2 id=requirements-graylog2>Requirements Graylog2</h2><p>Here we need to add an input to receive the messages from <strong>logstash</strong>.</p><p><a href=http://docs.graylog.org/en/latest/pages/sending_data.html#what-are-graylog-message-inputs>Go to System -> Inputs</a></p><p><img src=https://pablodav.github.io/img/graylog_system_input.png alt=System_inputs></p><ul><li>Select <strong>GELF UDP INPUT</strong>.</li><li>We will use port 12201</li><li>save</li><li>Start the input</li></ul><p>After done, you could see something like:</p><p><img src=https://pablodav.github.io/img/graylog_input_gelf_udp.png alt=graylog_input_gelf_udp></p><div class="admonition warning"><p class=admonition-title>Port below 1024 will not work</p><p>Graylog2 is running as normal user, linux will not allow port below 1024</p></div><h2 id=ansible-inventory>Ansible Inventory</h2><p>We will use same inventory as created at: at <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-inventory>Graylog_ansible_inventory</a></p><h2 id=preparing-the-playbook-to-run-the-roles>Preparing the playbook to run the roles</h2><p>Here we will add to <code>roles.graylog2.yml</code> as examplained at: <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-playbook-to-run-the-roles>Graylog_ansible_playbook</a></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Apply logstash for graylog2 servers</span>
+  <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>graylog2_servers</span>
+  <span style=color:#f92672>become</span>: <span style=color:#66d9ef>yes</span>
+
+  <span style=color:#f92672>roles</span>:
+
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>ansible-logstash</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::logstash</span>
+        - <span style=color:#ae81ff>graylog2_servers</span>
+
+</code></pre></div><h2 id=preparing-the-variables>Preparing the variables</h2><p>We will create new file <code>group_vars/graylog2_servers/logstash_vars</code></p><p>The folder was created during the preparatives at: <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#preparing-the-variables>Graylog_ansible_variables</a></p><p>Variables:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+<span style=color:#75715e># logstash role:</span>
+
+<span style=color:#f92672>pri_domain_name</span>: <span style=color:#e6db74>&#39;example.com&#39;</span>
+<span style=color:#f92672>config_logstash</span>: <span style=color:#66d9ef>True</span>
+<span style=color:#f92672>logstash_install_java</span>: <span style=color:#66d9ef>false</span>
+
+<span style=color:#75715e># These are the files that will be used and will be created in `/etc/logstash/conf.d/`</span>
+<span style=color:#f92672>logstash_base_configs</span>:
+  - <span style=color:#e6db74>&#39;000_inputs&#39;</span>
+  - <span style=color:#e6db74>&#39;001_filters&#39;</span>
+  - <span style=color:#e6db74>&#39;999_outputs&#39;</span>
+
+<span style=color:#75715e># Plugins required by us</span>
+<span style=color:#f92672>logstash_plugins</span>:
+  - <span style=color:#e6db74>&#39;logstash-output-nagios_nsca&#39;</span>
+  - <span style=color:#e6db74>&#39;logstash-output-gelf&#39;</span>
+
+<span style=color:#75715e># see https://github.com/mrlesmithjr/ansible-logstash</span>
+<span style=color:#f92672>logstash_base_file_inputs</span>: []
+
+
+<span style=color:#75715e># We don&#39;t need it really, but will add anyway</span>
+<span style=color:#f92672>logstash_base_inputs</span>:  <span style=color:#75715e>#define inputs below to configure</span>
+  - <span style=color:#f92672>prot</span>: <span style=color:#e6db74>&#39;tcp&#39;</span>
+    <span style=color:#f92672>port</span>: <span style=color:#e6db74>&#39;10514&#39;</span>  <span style=color:#75715e>#gets around port &lt; 1024 (Note...Configure clients to send to 10514 instead of default 514)</span>
+    <span style=color:#f92672>type</span>: <span style=color:#e6db74>&#39;syslog&#39;</span>
+
+<span style=color:#75715e># Here we are creating one input, in this case we will add a tag to make it easier to filter</span>
+<span style=color:#75715e># example is with azure tag, but can be any other.</span>
+<span style=color:#f92672>logstash_custom_inputs</span>:
+  - <span style=color:#f92672>input</span>: <span style=color:#e6db74>&#39;http&#39;</span>
+    <span style=color:#f92672>lines</span>:
+      - <span style=color:#e6db74>&#39;port =&gt; &#34;51202&#34;&#39;</span>
+      - <span style=color:#e6db74>&#39;type =&gt; &#34;http&#34;&#39;</span>
+      - <span style=color:#e6db74>&#39;tags =&gt; &#34;azure&#34;&#39;</span>
+
+<span style=color:#75715e># Here we will use the tag to create a filter and apply json module to </span>
+<span style=color:#75715e># transform the message into json format</span>
+<span style=color:#f92672>logstash_custom_filters</span>:
+  - <span style=color:#f92672>lines</span>:
+      - <span style=color:#e6db74>&#39;if &#34;azure&#34; in [tags] {&#39;</span>
+      - <span style=color:#e6db74>&#39;  json {&#39;</span>
+      - <span style=color:#e6db74>&#39;    source =&gt; &#34;message&#34;&#39;</span>
+      - <span style=color:#e6db74>&#39;  }&#39;</span>
+      - <span style=color:#e6db74>&#39;}&#39;</span>
+
+<span style=color:#75715e># As we will not use any default output, we will leave it as empty list []</span>
+<span style=color:#f92672>logstash_base_outputs</span>: []
+
+<span style=color:#75715e># Here we will tell ansible role to configure the output to our GELF UDP input.</span>
+<span style=color:#f92672>logstash_custom_outputs</span>:
+
+  - <span style=color:#f92672>output</span>: <span style=color:#e6db74>&#39;gelf&#39;</span>
+    <span style=color:#f92672>lines</span>:
+      - <span style=color:#e6db74>&#39;host =&gt; &#34;localhost&#34;&#39;</span>
+      - <span style=color:#e6db74>&#39;port =&gt; &#34;12201&#34;&#39;</span>
+
+</code></pre></div><p>All these vars will tell what we exactly want from ansible role for logstash.</p><h2 id=run-the-playbook>Run the playbook</h2><p>use same steps as described in: <a href=https://pablodav.github.io/post/graylog/graylog_ansible/#run-the-playbook>Graylog_ansible_run</a></p><p>Or run only logstash role calling with tag:</p><pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become --tags role::logstash 
+</code></pre><h2 id=test-your-logstash-http-input>Test your logstash http input</h2><p>Test command:</p><pre><code>curl -XPOST http://yourhost:51202/ -p0 -d '{&quot;status&quot;: &quot;Activated&quot;, &quot;host&quot;:&quot;portal.azure.com&quot;, &quot;context&quot;: {&quot;portalLink&quot;: &quot;https://portal.azure.com/#resource/subscriptions/s1/resourceGroups/useast/providers/microsoft.foo/sites/mysite1&quot;},&quot;facility&quot;:&quot;test&quot;, &quot;_foo&quot;:&quot;bar&quot;}'
+</code></pre><h2 id=upgrading-logstash>Upgrading logstash</h2><p>Just use normal package upgrade from your distribution.</p><h2 id=receive-azure-alarms>Receive Azure alarms</h2><p>Just setup your <a href=https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts>azure alarms</a>,
+to your public IP and HTTP Port: <code>51201</code> as done at <a href=#preparing-the-variables>Preparing the variables</a></p><h1>Ansible win Update and Security patching</h1><h1 id=updating-windows-with-ansible>Updating windows with ansible</h1><p>Patching windows is a very time consuming task, but working with ansible you could
+reduce this time significantly.</p><p>Here I will share some playbooks that will help on these tasks.</p><p>First of all, you must ensure to keep all your windows servers updated:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>---
+<span style=color:#75715e># file: windows-updates-all.yml</span>
+
+- <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>all</span>
+  <span style=color:#f92672>any_errors_fatal</span>: <span style=color:#66d9ef>false</span>
+  <span style=color:#f92672>serial</span>:
+   - <span style=color:#ae81ff>1</span>
+   - <span style=color:#ae81ff>5</span><span style=color:#ae81ff>%</span>
+   - <span style=color:#ae81ff>25</span><span style=color:#ae81ff>%</span>
+  <span style=color:#f92672>max_fail_percentage</span>: <span style=color:#ae81ff>10</span><span style=color:#ae81ff>%</span>
+  <span style=color:#f92672>vars</span>:
+    <span style=color:#f92672>win_updates_categories</span>:
+      - <span style=color:#ae81ff>CriticalUpdates</span>
+      - <span style=color:#ae81ff>SecurityUpdates</span>
+  <span style=color:#f92672>tasks</span>:
+  <span style=color:#75715e># Check if there are missing updates</span>
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Check for missing updates.</span>
+    <span style=color:#f92672>win_updates</span>:
+      <span style=color:#f92672>state</span>: <span style=color:#ae81ff>searched</span>
+      <span style=color:#f92672>category_names</span>: <span style=color:#e6db74>&#34;{{ win_updates_categories }}&#34;</span>
+    <span style=color:#f92672>register</span>: <span style=color:#ae81ff>update_count</span>
+    <span style=color:#f92672>ignore_errors</span>: <span style=color:#66d9ef>yes</span>
+
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Reboot if needed</span>
+    <span style=color:#f92672>win_shell</span>: <span style=color:#ae81ff>Restart-Computer -Force</span>
+    <span style=color:#f92672>when</span>: <span style=color:#ae81ff>update_count.reboot_required</span>
+    <span style=color:#f92672>ignore_errors</span>: <span style=color:#66d9ef>yes</span>
+
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Install missing updates.</span>
+    <span style=color:#f92672>win_updates</span>:
+      <span style=color:#f92672>category_names</span>: <span style=color:#e6db74>&#34;{{ win_updates_categories }}&#34;</span>
+    <span style=color:#f92672>register</span>: <span style=color:#ae81ff>update_result</span>
+
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Reboot if needed</span>
+    <span style=color:#f92672>win_shell</span>: <span style=color:#ae81ff>Restart-Computer -Force</span>
+    <span style=color:#f92672>when</span>: <span style=color:#ae81ff>update_result.reboot_required</span>
+    <span style=color:#f92672>ignore_errors</span>: <span style=color:#66d9ef>yes</span>
+
+</code></pre></div><h2 id=audit-windows-patches-with-ansible>Audit windows patches with ansible</h2><p>Then you need to test if the important patch is installed.</p><p>We will use in this case the information about patches for ramsomeware, normally in windows this
+information is obtained in this way:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-powershell data-lang=powershell>
+<span style=color:#75715e># Windows7 win2008 ServicePack2:</span>
+get-hotfix -id <span style=color:#e6db74>&#34;kb4012598&#34;</span>
+
+<span style=color:#75715e># win2008R2 hotfix RAMSOMWARE MARCH 2017:</span>
+get-hotfix -id <span style=color:#e6db74>&#34;KB4012212&#34;</span>
+
+<span style=color:#75715e># win2012R2 hotfix RAMSOMEWARE MARCH 2017:</span>
+get-hotfix -id <span style=color:#e6db74>&#34;KB4012213&#34;</span>
+
+<span style=color:#75715e># Windows2012 hotfix RAMSOMEWARE MARCH 2017:</span>
+get-hotfix -id  <span style=color:#e6db74>&#34;KB4012214&#34;</span>
+
+<span style=color:#75715e># win2003 hotifx RAMWOMEWARE MARCH 2017:</span>
+<span style=color:#75715e># KB4012598</span>
+<span style=color:#75715e># Windows 2003 doesn&#39;t provide get-hotfix and can&#39;t be managed with winrm.</span>
+</code></pre></div><p>Then we will use this playbook to audit the servers:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>verify windows patches</span>
+  <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>all</span>
+  <span style=color:#f92672>any_errors_fatal</span>: <span style=color:#66d9ef>false</span>
+  <span style=color:#f92672>serial</span>:
+   - <span style=color:#ae81ff>100</span><span style=color:#ae81ff>%</span>
+  <span style=color:#f92672>max_fail_percentage</span>: <span style=color:#ae81ff>10</span><span style=color:#ae81ff>%</span>
+  <span style=color:#f92672>tasks</span>:
+  <span style=color:#75715e># Verify windows updates</span>
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>verify windows patch windows 2008 R2</span>
+    <span style=color:#f92672>win_shell</span>: <span style=color:#ae81ff>get-hotfix {{ item.id }}</span>
+    <span style=color:#f92672>when</span>: <span style=color:#e6db74>&#34;&#39;Windows Server 2008 R2&#39; in ansible_os_name&#34;</span>
+    <span style=color:#f92672>with_items</span>:
+      - <span style=color:#f92672>id</span>: <span style=color:#ae81ff>KB4012212</span>
+        <span style=color:#f92672>description</span>: <span style=color:#ae81ff>hotfix RAMSOMWARE MARCH 2017</span>
+    <span style=color:#f92672>changed_when</span>: <span style=color:#66d9ef>false</span>
+
+  <span style=color:#75715e># Verify windows updates</span>
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>verify windows patch windows 2008 Standard</span>
+    <span style=color:#f92672>win_shell</span>: <span style=color:#ae81ff>get-hotfix {{ item.id }}</span>
+    <span style=color:#f92672>when</span>: <span style=color:#e6db74>&#34;&#39;Windows Server 2008 Standard&#39; in ansible_os_name&#34;</span>
+    <span style=color:#f92672>with_items</span>:
+      - <span style=color:#f92672>id</span>: <span style=color:#ae81ff>kb4012598</span>
+        <span style=color:#f92672>description</span>: <span style=color:#ae81ff>hotfix RAMSOMWARE MARCH 2017</span>
+    <span style=color:#f92672>changed_when</span>: <span style=color:#66d9ef>false</span>
+
+  <span style=color:#75715e># Verify windows updates</span>
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>verify windows patch windows 2012 R2</span>
+    <span style=color:#f92672>win_shell</span>: <span style=color:#ae81ff>get-hotfix {{ item.id }}</span>
+    <span style=color:#f92672>when</span>: <span style=color:#e6db74>&#34;&#39;Windows Server 2012 R2&#39; in ansible_os_name&#34;</span>
+    <span style=color:#f92672>with_items</span>:
+      - <span style=color:#f92672>id</span>: <span style=color:#ae81ff>KB4012213</span>
+        <span style=color:#f92672>description</span>: <span style=color:#ae81ff>hotfix RAMSOMWARE MARCH 2017</span>
+    <span style=color:#f92672>changed_when</span>: <span style=color:#66d9ef>false</span>
+
+  <span style=color:#75715e># Verify windows updates</span>
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>verify windows patch windows 2012 Standard</span>
+    <span style=color:#f92672>win_shell</span>: <span style=color:#ae81ff>get-hotfix {{ item.id }}</span>
+    <span style=color:#f92672>when</span>: <span style=color:#e6db74>&#34;&#39;Windows Server 2012 Standard&#39; in ansible_os_name&#34;</span>
+    <span style=color:#f92672>with_items</span>:
+      - <span style=color:#f92672>id</span>: <span style=color:#ae81ff>KB4012214</span>
+        <span style=color:#f92672>description</span>: <span style=color:#ae81ff>hotfix RAMSOMWARE MARCH 2017</span>
+    <span style=color:#f92672>changed_when</span>: <span style=color:#66d9ef>false</span>
+
+</code></pre></div><h2 id=workaround-some-patches>Workaround some patches</h2><p>In some cases, patching windows is not enough or sometimes windows has some
+undesired errors that doesn&rsquo;t allow to install the KB.</p><p>For these cases we can workaround over windows, we can do this for example
+to a group or list of hosts.</p><p>I will add an example to workaround ramsomeware:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#75715e># https://technet.microsoft.com/en-us/library/security/ms17-010.aspx</span>
+
+- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Apply ramsomeware patch disable smb v1</span>
+  <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>group1,server,server2</span>
+  <span style=color:#f92672>tasks</span>:
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>apply ramsomeware patch disable smb v1</span>
+    <span style=color:#f92672>win_regedit</span>: <span style=color:#ae81ff>key={{ item.key }} value={{item.value}} data={{ item.data}} datatype={{ item.datatype }} state=present</span>
+    <span style=color:#f92672>with_items</span>:
+      - <span style=color:#f92672>key</span>: <span style=color:#e6db74>&#39;HKLM:\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters&#39;</span>
+        <span style=color:#f92672>value</span>: <span style=color:#e6db74>&#39;SMB1&#39;</span>
+        <span style=color:#f92672>datatype</span>: <span style=color:#e6db74>&#39;dword&#39;</span>
+        <span style=color:#f92672>data</span>: <span style=color:#e6db74>&#39;0&#39;</span>
+    <span style=color:#f92672>register</span>: <span style=color:#ae81ff>apply_patch_ramsomeware</span>
+
+  - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Reboot if needed</span>
+    <span style=color:#f92672>win_shell</span>: <span style=color:#ae81ff>Restart-Computer -Force</span>
+    <span style=color:#f92672>when</span>: <span style=color:#ae81ff>apply_patch_ramsomeware.changed</span>
+    <span style=color:#f92672>ignore_errors</span>: <span style=color:#66d9ef>yes</span>
+
+</code></pre></div><h1>Graylog2 - 1 - with ansible</h1><h2 id=introduction>Introduction</h2><p><a href=https://www.graylog.org/>Graylog2</a> is an excelent log management and server, with many features and nice GUI interface
+to use and configure streams, inputs, alerts, searchs, dashboards, etc.</p><p>This document will explain how setup <a href=https://github.com/Graylog2/graylog-ansible-role>graylog2 using ansible</a>.</p><p>This document will be base for future documents that explain how to add more
+customizations with other roles:</p><ul><li><a href=#upgrading-graylog>Upgrading practice example.</a></li><li>Input from <a href=https://github.com/mrlesmithjr/ansible-logstash>logstash</a>. Done at: <a href=https://pablodav.github.io/post/graylog/logstash_input/>Graylog_ansible_logstash_input</a></li><li>Receive <a href=https://docs.microsoft.com/en-us/azure/monitoring-and-diagnostics/insights-webhooks-alerts>azure alarms</a>. Done at: <a href=https://pablodav.github.io/post/graylog/logstash_input/>Graylog_ansible_logstash_input</a></li><li>Configure commands to send alarms to <a href=https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca>nagios with nsca</a>. Done: <a href=https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/>Graylog_ansible_logstash_nagios_nsca</a></li><li><a href=https://github.com/CoffeeITWorks/ansible_nagios_graylog2_nsca_config_nagios>Configure nagios</a> to receive them. Done: <a href=https://pablodav.github.io/post/graylog/graylog_logstash_nagios_nsca/>Graylog_ansible_logstash_nagios_nsca</a></li><li>Explain more about graylog with more links to graylog documentation. <strong>TODO</strong></li></ul><h2 id=requirements>Requirements</h2><p>You need to know some basics from <a href=http://docs.ansible.com/ansible/quickstart.html>ansible</a>, and ofcourse <a href=http://docs.ansible.com/ansible/intro_installation.html>install ansible</a></p><p>Don&rsquo;t be scared about it, ansible is the most simple IT automation tool and you will get benefits learing this to manage
+any other thing on your servers. Check also <a href=https://www.ansible.com/how-ansible-works>how ansible works</a>, and <a href=https://www.ansible.com/get-started>get-started</a></p><h2 id=installing-roles>Installing roles</h2><p>Before starting to define the usage of our roles, we need them installed on our
+<strong><a href=http://docs.ansible.com/ansible/intro_installation.html#control-machine-requirements>ansible-control-machine</a></strong>.
+As we will use this machine to actively connect and push configurations to our <strong>graylog2 server</strong>.</p><p>We will use <code>requirements.yml</code> file to make the installation of roles faster.</p><p>Add/create your <code>requirements.yml</code> file:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+<span style=color:#75715e># graylog2 </span>
+
+- <span style=color:#f92672>src</span>: <span style=color:#ae81ff>graylog2.graylog-ansible-role</span>
+  <span style=color:#f92672>version</span>: <span style=color:#ae81ff>2.4.0</span>
+
+<span style=color:#75715e># graylog2 dependency</span>
+
+- <span style=color:#f92672>src</span>: <span style=color:#ae81ff>lesmyrmidons.mongodb</span>
+  <span style=color:#f92672>version</span>: <span style=color:#ae81ff>v1.2.8</span>
+
+- <span style=color:#f92672>src</span>: <span style=color:#ae81ff>geerlingguy.java</span>
+  <span style=color:#f92672>version</span>: <span style=color:#ae81ff>master</span>
+
+<span style=color:#75715e># 0.2 is required version to use elasticsearch 2.x</span>
+- <span style=color:#f92672>src</span>: <span style=color:#ae81ff>elastic.elasticsearch</span>
+  <span style=color:#f92672>version</span>: <span style=color:#e6db74>&#34;5.5.1&#34;</span>
+
+- <span style=color:#f92672>src</span>: <span style=color:#ae81ff>jdauphant.nginx</span>
+  <span style=color:#f92672>version</span>: <span style=color:#ae81ff>master</span>
+</code></pre></div><p>As written in the <code>requirements.yml</code> file, <strong>elasticsearch</strong> must be version <strong>2</strong>. So we need to use the branch for 0.2 of the role.</p><h3 id=install-from-requirementsyml>Install from <code>requirements.yml</code></h3><pre><code>sudo ansible-galaxy install -r requirements.yml
+</code></pre><div class="admonition note"><p class=admonition-title>Note</p><p>The <strong>graylog2 server</strong> can be also your <strong>ansible-control-machine</strong> if you don&rsquo;t have other,
+using <strong>localhost</strong> as node in your <strong>inventory</strong> as shown below.</p></div><div class="admonition warning"><p class=admonition-title>Elasticsearch and java version matters</p><p>You must ensure to be using elasticsearch 2, and java from openjdk-8, we will cover these
+steps below, but this note will help you to know and remmember that.</p></div><h2 id=preparing-the-inventory>Preparing the inventory</h2><p>We will setup a group called <strong>graylog2_servers</strong> with the hosts added to it.</p><p>You need to create/edit your <a href=http://docs.ansible.com/ansible/intro_inventory.html>inventory</a> to tell ansible which server is on <strong>graylog2_servers</strong> group.</p><p>We will create a folder called <code>inventory</code> and a file called <code>production</code> on it.</p><p>file: <code>inventory/production</code></p><p>content:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-ini data-lang=ini><span style=color:#66d9ef>[location1]</span>
+<span style=color:#a6e22e>server1     ansible_host</span><span style=color:#f92672>=</span><span style=color:#e6db74>192.168.1.50</span>
+
+<span style=color:#66d9ef>[graylog2_servers]</span>
+<span style=color:#a6e22e>server1</span>
+</code></pre></div><p>In this example I have added <code>server1</code> to groups <strong>location1</strong> and <strong>graylog2_servers</strong>.
+Note also I have added <code>ansible_host</code> variable with the IP address of <code>server1</code>, so ansible will use automatically this
+to connect to the host.</p><p>other generic example: <a href=https://github.com/CoffeeITWorks/ansible-generic-help/blob/master/example1/inventory/test>example1/inventory/test</a></p><h2 id=preparing-the-playbook-to-run-the-roles>Preparing the playbook to run the roles</h2><p>We will define a playbook to include our <a href=http://docs.ansible.com/ansible/playbooks_roles.html#roles>roles</a>.</p><p>We will prepare a file called <code>roles.graylog2.yml</code> with this definition:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+---
+<span style=color:#75715e># This --- defines that this yaml file will have 2 spaces for indentation.</span>
+
+
+<span style=color:#75715e># In case you use Ubuntu trusty we will add ppa for java-jdk8</span>
+<span style=color:#75715e># as noticed on warning above we need to take care of it. </span>
+
+- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Add java-jdk-8 ppa for Ubuntu trusty</span>
+  <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>graylog2_servers</span>
+  <span style=color:#f92672>become</span>: <span style=color:#66d9ef>yes</span>
+
+  <span style=color:#75715e># You can specify a proxy_env var with your proxy settings here</span>
+  <span style=color:#75715e># check example: https://github.com/CoffeeITWorks/ansible-generic-help/blob/master/example1/group_vars/all/vars#L14</span>
+  <span style=color:#75715e>#environment: &#34;{{ proxy_env }}&#34;</span>
+
+  <span style=color:#f92672>tasks</span>:
+    - <span style=color:#f92672>name</span>: <span style=color:#ae81ff>installing repo for Java 8 in Ubuntu 14.04</span>
+      <span style=color:#f92672>apt_repository</span>: <span style=color:#ae81ff>repo=&#39;ppa:openjdk-r/ppa&#39;</span>
+      <span style=color:#f92672>when</span>: <span style=color:#ae81ff>ansible_distribution_release == &#39;trusty&#39;</span>
+
+<span style=color:#75715e># Now we will apply all roles to our graylog2_servers:</span>
+
+- <span style=color:#f92672>name</span>: <span style=color:#ae81ff>Apply roles for graylog2 servers</span>
+  <span style=color:#f92672>hosts</span>: <span style=color:#ae81ff>graylog2_servers</span>
+  <span style=color:#f92672>become</span>: <span style=color:#66d9ef>yes</span>
+
+  <span style=color:#75715e># You can specify a proxy_env var with your proxy settings here</span>
+  <span style=color:#75715e># check example: https://github.com/CoffeeITWorks/ansible-generic-help/blob/master/example1/group_vars/all/vars#L14</span>
+  <span style=color:#75715e>#environment: &#34;{{ proxy_env }}&#34;</span>
+
+  <span style=color:#f92672>roles</span>:
+
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>lesmyrmidons.mongodb</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::mongodb</span>
+        - <span style=color:#ae81ff>graylog2_servers</span>
+
+    <span style=color:#75715e># This step is important as described in waring above</span>
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>geerlingguy.java</span>
+      <span style=color:#f92672>when</span>: <span style=color:#ae81ff>ansible_distribution_release == &#39;trusty&#39;</span>
+      <span style=color:#f92672>java_packages</span>:
+        - <span style=color:#ae81ff>openjdk-8-jdk</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::elasticsearch</span>
+        - <span style=color:#ae81ff>graylog2_servers</span>
+
+    <span style=color:#75715e># This step is important as described in waring above</span>
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>geerlingguy.java</span>
+      <span style=color:#f92672>when</span>: <span style=color:#ae81ff>ansible_os_family == &#34;RedHat&#34; and ansible_lsb.major_release|int &gt;= 7</span>
+      <span style=color:#f92672>java_packages</span>:
+        - <span style=color:#ae81ff>java-1.8-openjdk</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::elasticsearch</span>
+        - <span style=color:#ae81ff>graylog2_servers</span>
+
+    <span style=color:#75715e># ensure you have installed 0.2 branch for elasticsearch 2.x</span>
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>elastic.elasticsearch</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::elasticsearch</span>
+        - <span style=color:#ae81ff>graylog2_servers</span>
+
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>jdauphant.nginx</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::nginx</span>
+        - <span style=color:#ae81ff>graylog2_servers</span>
+
+    <span style=color:#75715e># Here we will install graylog</span>
+    - <span style=color:#f92672>role</span>: <span style=color:#ae81ff>graylog2.graylog</span>
+      <span style=color:#f92672>tags</span>:
+        - <span style=color:#ae81ff>role::graylog</span>
+        - <span style=color:#ae81ff>graylog2_servers</span>
+
+</code></pre></div><h2 id=preparing-the-variables>Preparing the variables</h2><p>We have an <strong>inventory</strong> and a <strong>playbook</strong> to call the roles, but we must customize the <a href=http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable>variables</a> before running
+the playbook.</p><p>Here we will organize the variables files into the <code>group_vars</code> directory:</p><pre><code>mkdir -p group_vars/graylog2_servers
+</code></pre><p>Then add a file to have organized the variables for <strong>elasticsearch</strong>.</p><p><code>group_vars/graylog2_servers/elasticsearch2_vars</code> file:</p><p>In this file we will define <strong>es cluster</strong>, bind address, version, memory, etc.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+---
+<span style=color:#75715e># https://github.com/Graylog2/graylog-ansible-role</span>
+
+<span style=color:#f92672>es_instance_name</span>: <span style=color:#e6db74>&#39;graylog&#39;</span>
+<span style=color:#f92672>es_scripts</span>: <span style=color:#66d9ef>False</span>
+<span style=color:#f92672>es_templates</span>: <span style=color:#66d9ef>False</span>
+<span style=color:#f92672>es_version_lock</span>: <span style=color:#66d9ef>False</span>
+<span style=color:#f92672>es_heap_size</span>: <span style=color:#ae81ff>1g</span>
+
+<span style=color:#75715e># Graylog2.3 supports elasticsearch 5, so must install elasticsearch 5.x</span>
+<span style=color:#f92672>es_major_version</span>: <span style=color:#e6db74>&#34;5.x&#34;</span>
+<span style=color:#f92672>es_version</span>: <span style=color:#e6db74>&#34;5.6.7&#34;</span>
+
+<span style=color:#f92672>graylog_version</span>: <span style=color:#e6db74>&#39;2.4&#39;</span>
+<span style=color:#75715e># pin version is broken in: 2.3.0 of ansible_graylog2_role</span>
+<span style=color:#75715e># hope will be fixed on future, you will need to delete /etc/apt/preferences.d/elasticsearch</span>
+<span style=color:#75715e># see https://github.com/Graylog2/graylog-ansible-role/commit/4e24252bd71e4cc2bb53df0a069c617138dc09cd#commitcomment-25811249</span>
+<span style=color:#f92672>graylog_es_debian_pin_version</span>: <span style=color:#e6db74>&#39;5.*&#39;</span>
+
+<span style=color:#f92672>es_config</span>: {
+  <span style=color:#f92672>node.name</span>: <span style=color:#e6db74>&#34;graylog&#34;</span>,
+  <span style=color:#f92672>cluster.name</span>: <span style=color:#e6db74>&#34;graylog&#34;</span>,
+  <span style=color:#f92672>http.port</span>: <span style=color:#ae81ff>9200</span>,
+  <span style=color:#f92672>transport.tcp.port</span>: <span style=color:#ae81ff>9300</span>,
+  <span style=color:#f92672>network.host</span>: <span style=color:#ae81ff>0.0.0.0</span>,
+  <span style=color:#f92672>node.data</span>: <span style=color:#66d9ef>true</span>,
+  <span style=color:#f92672>node.master</span>: <span style=color:#66d9ef>true</span>,
+}
+
+
+<span style=color:#75715e># Ensure to add this option if not added elastic.elasticsearch will install openjdk-7 that will break graylog2</span>
+<span style=color:#f92672>es_java_install</span>:               <span style=color:#66d9ef>False</span>
+
+</code></pre></div><p>Then add a file to have organized the variables for <strong>graylog role</strong>.</p><p><code>group_vars/graylog2_servers/graylog2_vars</code> file:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+---
+
+<span style=color:#75715e># Disable autoinstall of elasticsearch, java, mongodb, etc, as we will use our own playbook to call the roles:</span>
+<span style=color:#75715e># And ensure correct java version is installed in this way</span>
+<span style=color:#f92672>graylog_install_elasticsearch</span>: <span style=color:#66d9ef>False</span>
+<span style=color:#f92672>graylog_install_mongodb</span>:       <span style=color:#66d9ef>False</span>
+<span style=color:#f92672>graylog_install_nginx</span>:         <span style=color:#66d9ef>False</span>
+<span style=color:#f92672>graylog_install_java</span>:          <span style=color:#66d9ef>False</span>
+
+<span style=color:#75715e># Basic server settings (seems that this should go per host)</span>
+<span style=color:#f92672>graylog_is_master</span>:          <span style=color:#e6db74>&#39;True&#39;</span>
+
+<span style=color:#75715e># generate with: pwgen -s 96 1</span>
+<span style=color:#f92672>graylog_password_secret</span>:    <span style=color:#e6db74>&#39;putyourhashhere&#39;</span>
+
+<span style=color:#75715e># generate with: echo -n yourpassword | shasum -a 256</span>
+<span style=color:#f92672>graylog_root_password_sha2</span>: <span style=color:#e6db74>&#39;putyourhashhere&#39;</span>
+
+<span style=color:#75715e># Elasticsearch message retention</span>
+<span style=color:#75715e># Specify your retention here</span>
+<span style=color:#f92672>graylog_elasticsearch_max_docs_per_index</span>:    <span style=color:#ae81ff>20000000</span>
+<span style=color:#f92672>graylog_elasticsearch_max_number_of_indices</span>: <span style=color:#ae81ff>20</span>
+<span style=color:#f92672>graylog_elasticsearch_shards</span>:                <span style=color:#ae81ff>4</span>
+<span style=color:#f92672>graylog_elasticsearch_replicas</span>:              <span style=color:#ae81ff>0</span>
+
+<span style=color:#f92672>graylog_rest_listen_uri</span>:  <span style=color:#e6db74>&#39;http://0.0.0.0:9000/api/&#39;</span>
+<span style=color:#f92672>graylog_web_listen_uri</span>:   <span style=color:#e6db74>&#39;http://0.0.0.0:9000/&#39;</span>
+
+<span style=color:#f92672>nginx_sites</span>:
+
+  <span style=color:#f92672>graylog</span>:
+    - <span style=color:#ae81ff>listen 80</span>
+    - <span style=color:#ae81ff>server_name graylog</span>
+    - <span style=color:#ae81ff>location / {</span>
+      <span style=color:#ae81ff>proxy_pass http://localhost:9000/;</span>
+      <span style=color:#ae81ff>proxy_set_header Host $host;</span>
+      <span style=color:#ae81ff>proxy_set_header X-Real-IP $remote_addr;</span>
+      <span style=color:#ae81ff>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span>
+      <span style=color:#ae81ff>proxy_pass_request_headers on;</span>
+      <span style=color:#ae81ff>proxy_connect_timeout 150;</span>
+      <span style=color:#ae81ff>proxy_send_timeout 100;</span>
+      <span style=color:#ae81ff>proxy_read_timeout 100;</span>
+      <span style=color:#ae81ff>proxy_buffers 4 32k;</span>
+      <span style=color:#ae81ff>client_max_body_size 8m;</span>
+      <span style=color:#ae81ff>client_body_buffer_size 128k; }</span>
+
+<span style=color:#75715e># Setup per host on host_vars:</span>
+<span style=color:#f92672>graylog_web_endpoint_uri</span>: <span style=color:#e6db74>&#39;http://{{ ansible_host }}:9000/api/&#39;</span>
+
+<span style=color:#75715e># Optionally for Ubuntu 14.04 you can use:</span>
+<span style=color:#f92672>mongodb_repository</span>: <span style=color:#e6db74>&#34;deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse&#34;</span>
+
+
+</code></pre></div><p>Not all the variables are required, but I prefer to be explicit on these settings. The documentation of these vars are
+on the readme of each role, also the defaults used are on the <code>defaults/main.yml file</code> of each role (we are overriding the
+defaults when assigning the vars on <code>group_vars</code>).</p><p>See <a href=http://docs.ansible.com/ansible/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable>playbook_variables</a>
+for more information</p><h2 id=review-whats-done-until-now>Review what&rsquo;s done until now</h2><p>We have created:</p><ul><li><code>requirements.yml</code> file</li><li><code>inventory/production</code> file</li><li><code>roles.graylog2.yml</code> file</li><li><code>group_vars/graylog2_servers</code> dir with <code>elasticsearch_vars</code> and <code>graylog2_vars</code> files</li></ul><p>So, our tree looks:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>├── requirements.yml
+├── group_vars
+│   ├── graylog2_servers
+│   │   ├── graylog2_vars
+│   │   ├── elasticsearch_vars
+├── inventory
+│   ├── production
+├── roles.graylog2.yml
+
+</code></pre></div><p>With this structure we have all required to call our roles with correct parameters.
+As seen on the roles.graylog2.yml, we have associated the roles to run to <strong>graylog2_servers</strong> group.</p><h2 id=run-the-playbook>Run the playbook</h2><p>We will execute here:</p><pre><code>ansible-playbook -i inventory roles.graylog2.yml --limit graylog2_servers -u user -k -K --become
+</code></pre><p>To understand some of the parameters used here:</p><pre><code>-l SUBSET, --limit=SUBSET
+                    further limit selected hosts to an additional pattern
+-i PATH, --inventory=PATH
+                    The PATH to the inventory hosts file, which defaults to /etc/ansible/hosts. 
+-k, --ask-pass
+                    Prompt for the SSH password instead of assuming key-based authentication with ssh-agent. 
+-K, --ask-sudo-pass
+                    Prompt for the password to use for playbook plays that request sudo access, if any. 
+-b, --become
+                    run operations with become (does not imply password prompting) 
+-u USERNAME, --remote-user=USERNAME
+                    Use this remote user name on playbook steps that do not indicate a user name to run as. 
+</code></pre><p>As seen on the command, we use <code>-i inventory</code> directory instead of the file, you can change it to point to the file directly.</p><p>You can also check <a href=http://docs.ansible.com/ansible/playbooks_vault.html>ansible-vault</a> to save password.</p><p>You can also check variables to use in <code>group_vars/all</code> or some other group using <a href=http://docs.ansible.com/ansible/intro_inventory.html#list-of-behavioral-inventory-parameters>inventory_parameters</a></p><p>Ansible connections are done by default with ssh, you can change them using <code>inventory_parameters</code> and also disable <a href=http://docs.ansible.com/ansible/intro_getting_started.html#host-key-checking>host-key-checking</a>.
+Create ansible.cfg file on same dir where you run <code>ansible-playbook</code> command and it will read that parameters.</p><h2 id=upgrading-graylog>Upgrading Graylog</h2><p>As ansible role is updated every time graylog is update too (check <a href=https://github.com/Graylog2/graylog-ansible-role/blob/master/defaults/main.yml#L8>graylog_version</a>).
+You only need to update the role installed, ex:</p><pre><code>sudo rm -rf /etc/ansible/roles/graylog2.graylog
+sudo ansible-galaxy install -r requirements.yml 
+</code></pre><p>Then <a href=#run-the-playbook>run the playbook</a> again.</p><p>This will update your graylog repository, for example in my output I have:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>TASK <span style=color:#f92672>[</span>graylog2.graylog : Graylog repository package should be downloaded<span style=color:#f92672>]</span> ******
+changed: <span style=color:#f92672>[</span>server1<span style=color:#f92672>]</span> <span style=color:#f92672>=</span>&gt; <span style=color:#f92672>{</span><span style=color:#e6db74>&#34;changed&#34;</span>: true, <span style=color:#e6db74>&#34;checksum_dest&#34;</span>: null, <span style=color:#e6db74>&#34;checksum_src&#34;</span>: <span style=color:#e6db74>&#34;ddc77cda9473f6556844c19d68c2c8de05d9dedc&#34;</span>, <span style=color:#e6db74>&#34;dest
+</span><span style=color:#e6db74>&#34;</span>: <span style=color:#e6db74>&#34;/tmp/graylog_repository.deb&#34;</span>, <span style=color:#e6db74>&#34;gid&#34;</span>: 0, <span style=color:#e6db74>&#34;group&#34;</span>: <span style=color:#e6db74>&#34;root&#34;</span>, <span style=color:#e6db74>&#34;md5sum&#34;</span>: <span style=color:#e6db74>&#34;df0ded30076548179772cd23bfff869f&#34;</span>, <span style=color:#e6db74>&#34;mode&#34;</span>: <span style=color:#e6db74>&#34;0644&#34;</span>, <span style=color:#e6db74>&#34;msg&#34;</span>:
+<span style=color:#e6db74>&#34;OK (2056 bytes)&#34;</span>, <span style=color:#e6db74>&#34;owner&#34;</span>: <span style=color:#e6db74>&#34;root&#34;</span>, <span style=color:#e6db74>&#34;size&#34;</span>: 2056, <span style=color:#e6db74>&#34;src&#34;</span>: <span style=color:#e6db74>&#34;/tmp/tmpjrGQFl&#34;</span>, <span style=color:#e6db74>&#34;state&#34;</span>: <span style=color:#e6db74>&#34;file&#34;</span>, <span style=color:#e6db74>&#34;uid&#34;</span>: 0, <span style=color:#e6db74>&#34;url&#34;</span>: <span style=color:#e6db74>&#34;https://packages.gra
+</span><span style=color:#e6db74>ylog2.org/repo/packages/graylog-2.2-repository_latest.deb&#34;</span><span style=color:#f92672>}</span>
+</code></pre></div><p>Then just upgrade on your server:</p><pre><code>sudo apt-get upgrade
+</code></pre><p>Or with yum:</p><pre><code>sudo yum update
+</code></pre><p>If for some reason the role is not updated, you can add to your <code>group_vars/graylog2_servers/graylog2_vars</code>, ex:</p><pre><code>graylog_version: 2.2
+</code></pre><p>It should make same effect but without the fixes and improvements added to the role.
+<strong>It&rsquo;s recommended to update the role</strong>, and also <strong>check the release notes</strong> of both: role and graylog2.</p><p>Ensure you are not upgrading elasticsearch to 5.x, to not break graylog. (should not do that if you did all steps in this page)</p><aside class=copyright role=note>&copy; 2021 Released under the MIT license with content licensed with CC BY &ndash;
+Documentation built with
+<a href=https://www.gohugo.io target=_blank>Hugo</a>
+using the
+<a href=http://github.com/digitalcraftsman/hugo-material-docs target=_blank>Material</a> theme.</aside><footer class=footer><nav class=pagination aria-label=Footer><div class=previous></div><div class=next><a href=https://pablodav.github.io/getting-started/ title="Getting started"><span class=direction>Next</span><div class=page><div class=stretch><div class=title>Getting started</div></div><div class="button button-next" role=button aria-label=Next><i class="icon icon-forward"></i></div></div></a></div></nav></footer></div></article><div class=results role=status aria-live=polite><div class=scrollable><div class=wrapper><div class=meta></div><div class=list></div></div></div></div></main><script>var base_url='https://pablodav.github.io/',repo_id='pablodav/pablodav.github.io'</script><script src=https://pablodav.github.io/javascripts/application.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js></script><script>var headers=document.getElementsByTagName("h2"),scrollspy=document.getElementById('scrollspy'),i,li,a;if(scrollspy){if(headers.length>0)for(i=0;i<headers.length;i++)li=document.createElement("li"),li.setAttribute("class","anchor"),a=document.createElement("a"),a.setAttribute("href","#"+headers[i].id),a.setAttribute("title",headers[i].innerHTML),a.innerHTML=headers[i].innerHTML,li.appendChild(a),scrollspy.appendChild(li);else scrollspy.parentElement.removeChild(scrollspy);headers=document.querySelectorAll("h1, h2, h3, h4, h5, h6");for(i=0;i<headers.length;i++)a=document.createElement("a"),a.setAttribute("class","headerlink"),a.setAttribute("href","#"+headers[i].id),a.setAttribute("title","Permanent link"),a.innerHTML="#",headers[i].appendChild(a)}</script><script>var buttons,query;(function(a,e,f,g,b,c,d){a.GoogleAnalyticsObject=b,a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)},a[b].l=1*new Date,c=e.createElement(f),d=e.getElementsByTagName(f)[0],c.async=1,c.src=g,d.parentNode.insertBefore(c,d)})(window,document,'script','//www.google-analytics.com/analytics.js','ga'),ga('create','UA-93334116-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'),buttons=document.querySelectorAll('a'),Array.prototype.map.call(buttons,function(a){a.host!=document.location.host&&a.addEventListener('click',function(){var b=a.getAttribute('data-action')||'follow';ga('send','event','outbound',b,a.href)})}),query=document.querySelector('.query'),query.addEventListener('blur',function(){if(this.value){var a=document.location.pathname;ga('send','pageview',a+'?q='+this.value)}})</script><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js></script><script>hljs.initHighlightingOnLoad()</script></body></html>
